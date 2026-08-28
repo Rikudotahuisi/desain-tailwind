@@ -10,10 +10,9 @@
             Informasi <span class="text-teal-600">Kesehatan</span>
           </h2>
         </div>
-        <a href="#" class="inline-flex items-center gap-2 text-sm font-semibold text-teal-600 transition hover:text-teal-700">
+        <router-link to="/articles" class="inline-flex items-center gap-2 rounded-full bg-teal-500 px-6 py-3 font-semibold text-white transition hover:bg-teal-600 hover:-translate-y-0.5"> 
           Semua Artikel
-          <i class="fas fa-arrow-right"></i>
-        </a>
+        </router-link>
       </div>
 
       <div class="grid grid-cols-1 gap-6 md:grid-cols-3">

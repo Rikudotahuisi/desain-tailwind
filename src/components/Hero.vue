@@ -140,7 +140,7 @@
                   Dapatkan informasi kesehatan terbaru, tips hidup sehat, dan berita dari rumah sakit kami.
                 </p>
                 <div class="mt-10 flex flex-wrap items-center gap-4">
-                  <a href="#articles" class="group relative overflow-hidden rounded-full bg-teal-500 px-8 py-4 text-sm font-semibold text-white shadow-xl shadow-teal-500/30 transition-all hover:-translate-y-1 hover:shadow-2xl">
+                  <a href="/articles" class="group relative overflow-hidden rounded-full bg-teal-500 px-8 py-4 text-sm font-semibold text-white shadow-xl shadow-teal-500/30 transition-all hover:-translate-y-1 hover:shadow-2xl">
                     <span class="relative z-10"><i class="fas fa-book-open mr-2"></i>Baca Artikel</span>
                     <span class="absolute inset-0 bg-teal-400 transition-transform duration-300 group-hover:scale-100 scale-0"></span>
                   </a>
