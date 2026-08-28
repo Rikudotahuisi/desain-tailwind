@@ -1,0 +1,182 @@
+<template>
+  <div class="min-h-screen bg-white flex" style="padding-top: 85px;">
+    <!-- Left Side - Image -->
+    <div class="hidden lg:flex flex-1 bg-gradient-to-br from-teal-600 to-teal-700 items-center justify-center p-12 relative overflow-hidden">
+      <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
+      <div class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-white/5 blur-2xl"></div>
+      
+      <div class="relative z-10 text-center text-white">
+        <div class="w-24 h-24 rounded-3xl bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-8">
+          <i class="fas fa-plus text-4xl font-bold text-white"></i>
+        </div>
+        <h2 class="text-3xl font-bold mb-4">Join Us Today!</h2>
+        <p class="text-white/80 max-w-sm mx-auto leading-relaxed">
+          Create your account and start your journey towards better health with Medicare Hospital.
+        </p>
+        <div class="mt-8 flex items-center justify-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-white/60"></span>
+          <span class="w-2 h-2 rounded-full bg-white/30"></span>
+          <span class="w-2 h-2 rounded-full bg-white/30"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side - Form -->
+    <div class="flex-1 flex items-center justify-center px-6 py-10">
+      <div class="w-full max-w-md">
+        <div class="mb-8">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-teal-500 flex items-center justify-center text-white shadow-lg shadow-teal-500/30">
+              <i class="fas fa-plus text-lg font-bold"></i>
+            </div>
+            <span class="text-xl font-bold text-slate-900">Medicare</span>
+          </div>
+          <h1 class="text-3xl font-bold text-slate-900">Sign up</h1>
+          <p class="mt-2 text-sm text-slate-500">Create your account</p>
+        </div>
+
+        <form @submit.prevent="handleSubmit" class="space-y-5">
+          <div>
+            <label class="mb-1.5 block text-sm font-medium text-slate-700">Full Name</label>
+            <input
+              v-model="form.name"
+              type="text"
+              required
+              placeholder="John Doe"
+              class="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3.5 text-sm transition-all focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20 placeholder:text-slate-400"
+            />
+          </div>
+
+          <div>
+            <label class="mb-1.5 block text-sm font-medium text-slate-700">Email</label>
+            <input
+              v-model="form.email"
+              type="email"
+              required
+              placeholder="john@readymadeui.com"
+              class="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3.5 text-sm transition-all focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20 placeholder:text-slate-400"
+            />
+          </div>
+
+          <div>
+            <label class="mb-1.5 block text-sm font-medium text-slate-700">Password</label>
+            <div class="relative">
+              <input
+                v-model="form.password"
+                :type="showPassword ? 'text' : 'password'"
+                required
+                placeholder="**********"
+                class="w-full rounded-xl border border-slate-200 bg-slate-50/50 pl-4 pr-12 py-3.5 text-sm transition-all focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20 placeholder:text-slate-400"
+              />
+              <button
+                type="button"
+                @click="showPassword = !showPassword"
+                class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-teal-600 transition-colors"
+              >
+                <i :class="showPassword ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
+              </button>
+            </div>
+            <div class="mt-1.5 flex items-center gap-2">
+              <div class="flex-1 h-1 rounded-full bg-slate-200 overflow-hidden">
+                <div class="h-full rounded-full bg-gradient-to-r from-teal-400 to-teal-600 transition-all duration-500" :style="{ width: passwordStrength }"></div>
+              </div>
+              <span class="text-[10px] font-medium text-slate-400">{{ passwordStrengthText }}</span>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-2.5">
+            <input
+              v-model="form.agree"
+              type="checkbox"
+              required
+              class="mt-1 h-4 w-4 rounded border-slate-300 text-teal-500 focus:ring-2 focus:ring-teal-500/20 focus:ring-offset-0"
+            />
+            <label class="text-sm text-slate-600">
+              I agree to the 
+              <a href="#" class="text-teal-600 hover:underline">Terms of Service</a>
+              and
+              <a href="#" class="text-teal-600 hover:underline">Privacy Policy</a>
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            :disabled="loading"
+            class="w-full rounded-xl bg-teal-600 py-3.5 font-semibold text-white shadow-lg shadow-teal-600/20 transition-all hover:bg-teal-700 hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
+          >
+            <i v-if="loading" class="fas fa-spinner fa-spin mr-2"></i>
+            <i v-else class="fas fa-user-plus mr-2"></i>
+            {{ loading ? 'Processing...' : 'Sign up' }}
+          </button>
+        </form>
+
+        <div class="relative my-6">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-slate-200"></div>
+          </div>
+          <div class="relative flex justify-center text-sm">
+            <span class="bg-white px-4 text-slate-400">or</span>
+          </div>
+        </div>
+
+        <p class="text-center text-sm text-slate-600">
+          Already have an account? 
+          <router-link to="/login" class="font-semibold text-teal-600 hover:text-teal-700 hover:underline transition">
+            Sign in
+          </router-link>
+        </p>
+
+        <p class="mt-6 text-center text-xs text-slate-400 leading-relaxed">
+          Join our private network to discover job opportunities and connect with professionals.
+        </p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const loading = ref(false)
+const showPassword = ref(false)
+
+const form = ref({
+  name: '',
+  email: '',
+  password: '',
+  agree: false
+})
+
+const passwordStrength = computed(() => {
+  const len = form.value.password.length
+  if (len === 0) return '0%'
+  if (len < 4) return '25%'
+  if (len < 6) return '50%'
+  if (len < 8) return '75%'
+  return '100%'
+})
+
+const passwordStrengthText = computed(() => {
+  const len = form.value.password.length
+  if (len === 0) return ''
+  if (len < 4) return 'Weak'
+  if (len < 6) return 'Medium'
+  if (len < 8) return 'Strong'
+  return 'Very Strong'
+})
+
+const handleSubmit = () => {
+  loading.value = true
+  
+  setTimeout(() => {
+    console.log('Data Registrasi:', form.value)
+    alert('✅ Registration successful! Please login to continue.')
+    loading.value = false
+    form.value = { name: '', email: '', password: '', agree: false }
+    router.push('/login')
+  }, 1500)
+}
+</script>
