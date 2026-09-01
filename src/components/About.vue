@@ -23,15 +23,15 @@
             <i class="fas fa-hospital mr-2"></i>Tentang Kami
           </span>
           <h2 class="mt-2 text-4xl font-bold text-slate-900 lg:text-5xl">
-            Medicare Hospital
+            Assyifa Hospital
           </h2>
           <h3 class="mt-2 text-xl text-teal-600">
             Fasilitas Kesehatan dengan Pengalaman Tak Tertandingi
           </h3>
           <div class="mt-6 space-y-4 text-slate-600 leading-relaxed">
             <p>
-              Medicare Hospital adalah fasilitas kesehatan terdaftar di bawah perusahaan terkemuka 
-              <strong class="text-slate-900">'Kodungallur Medicare Pvt Ltd.'</strong>
+              Assyifa Hospital adalah fasilitas kesehatan terdaftar di bawah perusahaan terkemuka
+              <strong class="text-slate-900">'Kodungallur Assyifa Pvt Ltd.'</strong>
             </p>
             <p>
               Kami berkomitmen untuk menyediakan layanan kesehatan yang <strong class="text-slate-900">ekonomis dan komprehensif</strong>, 

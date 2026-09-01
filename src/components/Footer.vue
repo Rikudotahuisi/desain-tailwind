@@ -8,7 +8,7 @@
               <i class="fas fa-plus text-xl font-bold"></i>
             </div>
             <div>
-              <div class="text-lg font-bold">MEDICARE</div>
+              <div class="text-lg font-bold">Assyiffa</div>
               <div class="text-xs font-medium tracking-[3px] text-white/40">HOSPITAL</div>
             </div>
           </div>
@@ -48,14 +48,14 @@
           <ul class="mt-4 space-y-3 text-sm text-white/60">
             <li><i class="fas fa-map-marker-alt mr-3 text-teal-400"></i>Jl. Kesehatan No. 123, Jakarta</li>
             <li><i class="fas fa-phone mr-3 text-teal-400"></i>1600-MED (633)</li>
-            <li><i class="fas fa-envelope mr-3 text-teal-400"></i>info@medicarehospital.com</li>
+            <li><i class="fas fa-envelope mr-3 text-teal-400"></i>info@Assyiffahospital.com</li>
             <li><i class="fas fa-clock mr-3 text-teal-400"></i>24 Jam Nonstop</li>
           </ul>
         </div>
       </div>
 
       <div class="mt-12 border-t border-white/10 pt-8 text-center text-sm text-white/40">
-        <i class="far fa-copyright mr-1"></i> 2026 MEDICARE Hospital. All rights reserved.
+        <i class="far fa-copyright mr-1"></i> 2026 Assyiffa Hospital. All rights reserved.
       </div>
     </div>
   </footer>

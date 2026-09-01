@@ -81,7 +81,7 @@
             <div class="text-[14px] font-bold tracking-[0.5px] transition-colors duration-300"
               :class="[isScrolled || isAuthPage ? 'text-slate-900' : 'text-white']"
             >
-              MEDICARE
+              Assyifa
             </div>
             <div class="mt-0.5 text-[8px] font-medium tracking-[3px] transition-colors duration-300"
               :class="[isScrolled || isAuthPage ? 'text-slate-400' : 'text-white/40']"

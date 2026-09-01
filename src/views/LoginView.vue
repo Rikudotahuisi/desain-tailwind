@@ -12,7 +12,7 @@
         </div>
         <h2 class="text-3xl font-bold mb-4">Welcome Back!</h2>
         <p class="text-white/80 max-w-sm mx-auto leading-relaxed">
-          Sign in to access your account and continue your journey with Medicare Hospital.
+          Sign in to access your account and continue your journey with Assyiffa Hospital.
         </p>
         <div class="mt-8 flex items-center justify-center gap-2">
           <span class="w-2 h-2 rounded-full bg-white/60"></span>
