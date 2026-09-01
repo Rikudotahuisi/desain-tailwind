@@ -30,7 +30,7 @@
             <div class="w-10 h-10 rounded-xl bg-teal-500 flex items-center justify-center text-white shadow-lg shadow-teal-500/30">
               <i class="fas fa-plus text-lg font-bold"></i>
             </div>
-            <span class="text-xl font-bold text-slate-900">Medicare</span>
+            <span class="text-xl font-bold text-slate-900">Assyiffa Hospital</span>
           </div>
           <h1 class="text-3xl font-bold text-slate-900">Sign in</h1>
           <p class="mt-2 text-sm text-slate-500">Welcome Back</p>
@@ -110,6 +110,14 @@
         <p class="mt-6 text-center text-xs text-slate-400 leading-relaxed">
           Join our private network to discover job opportunities and connect with professionals.
         </p>
+
+        <!-- Info Admin -->
+        <div class="mt-4 p-3 bg-amber-50 rounded-xl border border-amber-200">
+          <p class="text-xs text-amber-700 text-center">
+            <i class="fas fa-info-circle mr-1"></i>
+            Admin: admin@assyiffahospital.com / admin123
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -133,10 +141,34 @@ const handleLogin = () => {
   loading.value = true
   
   setTimeout(() => {
-    console.log('Data Login:', form.value)
-    alert('✅ Login berhasil! Selamat datang kembali.')
-    loading.value = false
-    router.push('/')
+    // Cek apakah login sebagai admin
+    if (form.value.email === 'admin@assyiffahospital.com' && form.value.password === 'admin123') {
+      localStorage.setItem('isAdmin', 'true')
+      localStorage.setItem('user', JSON.stringify({ 
+        name: 'Admin', 
+        email: form.value.email,
+        role: 'admin'
+      }))
+      alert('✅ Login berhasil! Selamat datang Admin.')
+      loading.value = false
+      router.push('/admin')
+      return
+    }
+
+    // Login biasa (user)
+    if (form.value.email && form.value.password.length >= 6) {
+      localStorage.setItem('user', JSON.stringify({ 
+        name: 'User', 
+        email: form.value.email,
+        role: 'user'
+      }))
+      alert('✅ Login berhasil! Selamat datang.')
+      loading.value = false
+      router.push('/')
+    } else {
+      alert('❌ Email atau password salah!')
+      loading.value = false
+    }
   }, 1500)
 }
 </script>

@@ -147,29 +147,40 @@
           >
             Promo
           </router-link>
-        </nav>
+           </nav>
 
         <div class="flex items-center gap-3">
-          <!-- Login & Register -->
           <div class="hidden items-center gap-2 lg:flex">
-            <router-link to="/login" class="rounded-full px-4 py-2 text-sm font-medium transition-all duration-200"
-              :class="[
-                isScrolled || isAuthPage
-                  ? 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' 
-                  : 'text-white/70 hover:bg-white/10 hover:text-white'
-              ]"
-            >
-              Login
-            </router-link>
-            <router-link to="/register" class="rounded-full bg-teal-500 px-5 py-2 text-sm font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5"
-              :class="[
-                isScrolled || isAuthPage
-                  ? 'shadow-teal-500/30 hover:bg-teal-600' 
-                  : 'shadow-teal-500/20 hover:bg-teal-400'
-              ]"
-            >
-              <i class="fas fa-user-plus mr-2"></i>Daftar
-            </router-link>
+            <!-- Jika sudah login sebagai admin -->
+            <template v-if="isAdmin">
+              <router-link to="/admin" class="rounded-full px-4 py-2 text-sm font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 transition">
+                <i class="fas fa-user-shield mr-1"></i> Dashboard
+              </router-link>
+              <button @click="logout" class="rounded-full px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 transition">
+                <i class="fas fa-sign-out-alt mr-1"></i> Logout
+              </button>
+            </template>
+            <!-- Jika belum login -->
+            <template v-else>
+              <router-link to="/login" class="rounded-full px-4 py-2 text-sm font-medium transition-all duration-200"
+                :class="[
+                  isScrolled || isAuthPage
+                    ? 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' 
+                    : 'text-white/70 hover:bg-white/10 hover:text-white'
+                ]"
+              >
+                Login
+              </router-link>
+              <router-link to="/register" class="rounded-full bg-teal-500 px-5 py-2 text-sm font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5"
+                :class="[
+                  isScrolled || isAuthPage
+                    ? 'shadow-teal-500/30 hover:bg-teal-600' 
+                    : 'shadow-teal-500/20 hover:bg-teal-400'
+                ]"
+              >
+                <i class="fas fa-user-plus mr-2"></i>Daftar
+              </router-link>
+            </template>
           </div>
           <button class="flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-200 lg:hidden"
             :class="[
@@ -188,13 +199,14 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
+const router = useRouter()
 const currentLanguage = ref<'id' | 'en'>('id')
 const isScrolled = ref(false)
+const isAdmin = ref(false)
 
-// Cek apakah halaman auth (login/register)
 const isAuthPage = computed(() => {
   return route.path === '/login' || route.path === '/register'
 })
@@ -219,9 +231,23 @@ const handleScroll = () => {
   isScrolled.value = window.scrollY > 50
 }
 
+const checkAdmin = () => {
+  isAdmin.value = localStorage.getItem('isAdmin') === 'true'
+}
+
+const logout = () => {
+  if (confirm('Apakah Anda yakin ingin logout?')) {
+    localStorage.removeItem('isAdmin')
+    localStorage.removeItem('user')
+    isAdmin.value = false
+    router.push('/')
+  }
+}
+
 onMounted(() => {
   loadLanguage()
   window.addEventListener('scroll', handleScroll)
+  checkAdmin()
 })
 
 onBeforeUnmount(() => {

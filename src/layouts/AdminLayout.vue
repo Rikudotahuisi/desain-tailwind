@@ -8,7 +8,7 @@
           <i class="fas fa-plus text-lg font-bold"></i>
         </div>
         <div>
-          <div class="text-sm font-bold text-slate-900">MEDICARE</div>
+          <div class="text-sm font-bold text-slate-900">Assyiffa</div>
           <div class="text-[8px] font-medium tracking-[3px] text-slate-400">HOSPITAL</div>
         </div>
       </div>
@@ -97,6 +97,7 @@ const menuItems = [
   { path: '/admin/patients', label: 'Pasien', icon: 'fas fa-users' },
   { path: '/admin/doctors', label: 'Dokter', icon: 'fas fa-user-md' },
   { path: '/admin/appointments', label: 'Jadwal', icon: 'fas fa-calendar-check' },
+  { path: '/', label: 'Kembali ke Home', icon: 'fas fa-home' },
 ]
 
 const pageTitle = computed(() => {
