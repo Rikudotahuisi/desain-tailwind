@@ -1,10 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import DefaultLayout from '../layouts/DefaultLayout.vue'
+import AdminLayout from '../layouts/AdminLayout.vue'
+
+// Public Pages
 import HomeView from '../views/HomeView.vue'
 import ArticlesView from '../views/ArticlesView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import LoginView from '../views/LoginView.vue'
-import AdminLayout from '../layouts/AdminLayout.vue'
+
+// Admin Pages
 import AdminDashboard from '../views/admin/AdminDashboard.vue'
 import AdminPatients from '../views/admin/AdminPatients.vue'
 import AdminDoctors from '../views/admin/AdminDoctors.vue'
@@ -15,31 +19,32 @@ const routes = [
     path: '/',
     component: DefaultLayout,
     children: [
-    {
-    path: '',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/articles',
-    name: 'articles',
-    component: ArticlesView
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: RegisterView
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: LoginView
-  }
+      {
+        path: '',
+        name: 'home',
+        component: HomeView
+      },
+      {
+        path: 'articles',
+        name: 'articles',
+        component: ArticlesView
+      },
+      {
+        path: 'register',
+        name: 'register',
+        component: RegisterView
+      },
+      {
+        path: 'login',
+        name: 'login',
+        component: LoginView
+      }
     ]
   },
   {
     path: '/admin',
     component: AdminLayout,
+    meta: { requiresAuth: true },
     children: [
       {
         path: '',
@@ -68,6 +73,20 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+// Guard untuk proteksi admin
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    const isAdmin = localStorage.getItem('isAdmin')
+    if (isAdmin === 'true') {
+      next()
+    } else {
+      next('/login')
+    }
+  } else {
+    next()
+  }
 })
 
 export default router
