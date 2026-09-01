@@ -111,6 +111,8 @@ const toggleSidebar = () => {
 
 const logout = () => {
   if (confirm('Apakah Anda yakin ingin logout?')) {
+    localStorage.removeItem('isAdmin')
+    localStorage.removeItem('user')
     router.push('/login')
   }
 }

@@ -115,7 +115,7 @@
         <div class="mt-4 p-3 bg-amber-50 rounded-xl border border-amber-200">
           <p class="text-xs text-amber-700 text-center">
             <i class="fas fa-info-circle mr-1"></i>
-            Admin: admin@assyiffahospital.com / admin123
+            Admin: admin@gmail.com / admin123
           </p>
         </div>
       </div>
@@ -142,7 +142,7 @@ const handleLogin = () => {
   
   setTimeout(() => {
     // Cek apakah login sebagai admin
-    if (form.value.email === 'admin@assyiffahospital.com' && form.value.password === 'admin123') {
+    if (form.value.email === 'admin@gmail.com' && form.value.password === 'admin123') {
       localStorage.setItem('isAdmin', 'true')
       localStorage.setItem('user', JSON.stringify({ 
         name: 'Admin', 
