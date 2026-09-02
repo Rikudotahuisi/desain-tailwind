@@ -8,7 +8,7 @@
           <i class="fas fa-plus text-lg font-bold"></i>
         </div>
         <div>
-          <div class="text-sm font-bold text-slate-900">Assyiffa</div>
+          <div class="text-sm font-bold text-slate-900">Assyifa</div>
           <div class="text-[8px] font-medium tracking-[3px] text-slate-400">HOSPITAL</div>
         </div>
       </div>

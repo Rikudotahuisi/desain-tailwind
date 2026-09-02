@@ -30,7 +30,7 @@
               <span class="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-400 ring-2 ring-white animate-pulse"></span>
             </div>
             <div>
-              <h3 class="font-semibold tracking-wide">Assyiffa Bot</h3>
+              <h3 class="font-semibold tracking-wide">Assyifa Bot</h3>
               <p class="text-xs text-teal-100">Online • Siap membantu</p>
             </div>
           </div>
@@ -175,7 +175,7 @@ const formatMessage = (text: string) => {
 const messages = ref<Message[]>([
   {
     sender: 'bot',
-    text: 'Halo! Selamat datang di **Assyiffa Hospital**.\n\nSaya siap membantu Anda dengan:\n- Medical Check Up\n- Jadwal Dokter\n- Informasi Rumah Sakit\n- Booking Online\n- Kontak Kami\n\nSilakan pilih menu di bawah atau ketik pertanyaan Anda.'
+    text: 'Halo! Selamat datang di **Assyifa Hospital**.\n\nSaya siap membantu Anda dengan:\n- Medical Check Up\n- Jadwal Dokter\n- Informasi Rumah Sakit\n- Booking Online\n- Kontak Kami\n\nSilakan pilih menu di bawah atau ketik pertanyaan Anda.'
   }
 ])
 

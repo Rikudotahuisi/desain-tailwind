@@ -4,7 +4,7 @@
     <div class="flex items-center justify-between mb-6">
       <div>
         <h2 class="text-2xl font-bold text-slate-900">Data Dokter</h2>
-        <p class="text-sm text-slate-500">Kelola data dokter di Assyiffa Hospital</p>
+        <p class="text-sm text-slate-500">Kelola data dokter di Assyifa Hospital</p>
       </div>
       <button 
         @click="showModal = true" 
@@ -328,7 +328,7 @@ const doctors = ref([
     id: 1,
     name: 'dr. Andi Pratama, Sp.JP',
     specialty: 'Spesialis Jantung (Sp.JP)',
-    email: 'andi@assyiffa.com',
+    email: 'andi@assyifa.com',
     phone: '0812-3456-7890',
     joinDate: '2020-01-15',
     status: 'Aktif',
@@ -342,7 +342,7 @@ const doctors = ref([
     id: 2,
     name: 'dr. Siti Rahayu, Sp.OG',
     specialty: 'Spesialis Kandungan (Sp.OG)',
-    email: 'siti@assyiffa.com',
+    email: 'siti@assyifa.com',
     phone: '0813-4567-8901',
     joinDate: '2019-06-20',
     status: 'Aktif',
@@ -356,7 +356,7 @@ const doctors = ref([
     id: 3,
     name: 'dr. Maya Sari, Sp.A',
     specialty: 'Spesialis Anak (Sp.A)',
-    email: 'maya@assyiffa.com',
+    email: 'maya@assyifa.com',
     phone: '0814-5678-9012',
     joinDate: '2021-03-10',
     status: 'Libur',
@@ -370,7 +370,7 @@ const doctors = ref([
     id: 4,
     name: 'dr. Budi Santoso, Sp.PD',
     specialty: 'Spesialis Penyakit Dalam (Sp.PD)',
-    email: 'budi@assyiffa.com',
+    email: 'budi@assyifa.com',
     phone: '0815-6789-0123',
     joinDate: '2018-11-01',
     status: 'Aktif',
@@ -384,7 +384,7 @@ const doctors = ref([
     id: 5,
     name: 'dr. Rina Wati, Sp.N',
     specialty: 'Spesialis Saraf (Sp.N)',
-    email: 'rina@assyiffa.com',
+    email: 'rina@assyifa.com',
     phone: '0816-7890-1234',
     joinDate: '2022-01-05',
     status: 'Aktif',
