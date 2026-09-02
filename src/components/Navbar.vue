@@ -81,7 +81,7 @@
             <div class="text-[14px] font-bold tracking-[0.5px] transition-colors duration-300"
               :class="[isScrolled || isAuthPage || isArticlesPage || isAboutPage ? 'text-slate-900' : 'text-white']"
             >
-              Assyifa
+              ASSYIFA
             </div>
             <div class="mt-0.5 text-[8px] font-medium tracking-[3px] transition-colors duration-300"
               :class="[isScrolled || isAuthPage || isArticlesPage || isAboutPage ? 'text-slate-400' : 'text-white/40']"
@@ -93,15 +93,20 @@
 
         <!-- Nav Links -->
         <nav class="hidden items-center gap-0.5 lg:flex">
+          <!-- Tentang Kami -->
           <router-link to="/about" class="rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200"
             :class="[
-              isScrolled || isAuthPage || isArticlesPage || isAboutPage
-                ? 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' 
-                : 'text-white/70 hover:bg-white/10 hover:text-white'
+              $route.path === '/about'
+                ? 'text-teal-600 bg-teal-50 hover:bg-teal-100'
+                : isScrolled || isAuthPage || isArticlesPage || isAboutPage
+                  ? 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                  : 'text-white/70 hover:bg-white/10 hover:text-white'
             ]"
           >
             Tentang Kami
           </router-link>
+
+          <!-- Jadwal Dokter -->
           <router-link to="/#doctors" class="rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200"
             :class="[
               isScrolled || isAuthPage || isArticlesPage || isAboutPage
@@ -111,6 +116,8 @@
           >
             Jadwal Dokter
           </router-link>
+
+          <!-- Medical Check Up -->
           <router-link to="/#medical-checkup" class="rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200"
             :class="[
               isScrolled || isAuthPage || isArticlesPage || isAboutPage
@@ -120,15 +127,21 @@
           >
             Medical Check Up
           </router-link>
+
+          <!-- Artikel -->
           <router-link to="/articles" class="rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200"
             :class="[
-              isScrolled || isAuthPage || isArticlesPage || isAboutPage
-                ? 'text-teal-600 bg-teal-50 hover:bg-teal-100' 
-                : 'text-white bg-white/10 hover:bg-white/20'
+              $route.path === '/articles'
+                ? 'text-teal-600 bg-teal-50 hover:bg-teal-100'
+                : isScrolled || isAuthPage || isArticlesPage || isAboutPage
+                  ? 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                  : 'text-white/70 hover:bg-white/10 hover:text-white'
             ]"
           >
             Artikel
           </router-link>
+
+          <!-- Pelayanan -->
           <router-link to="#" class="rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200"
             :class="[
               isScrolled || isAuthPage || isArticlesPage || isAboutPage
@@ -138,6 +151,8 @@
           >
             Pelayanan
           </router-link>
+
+          <!-- Promo -->
           <router-link to="#" class="rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200"
             :class="[
               isScrolled || isAuthPage || isArticlesPage || isAboutPage
@@ -147,7 +162,7 @@
           >
             Promo
           </router-link>
-           </nav>
+        </nav>
 
         <div class="flex items-center gap-3">
           <div class="hidden items-center gap-2 lg:flex">
@@ -156,7 +171,7 @@
               <router-link to="/admin" class="rounded-full px-4 py-2 text-sm font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 transition">
                 <i class="fas fa-user-shield mr-1"></i> Dashboard
               </router-link>
-              <button @click="logout" class="rounded-full px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 transition">
+              <button @click="handleLogout" class="rounded-full px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 transition">
                 <i class="fas fa-sign-out-alt mr-1"></i> Logout
               </button>
             </template>
@@ -198,7 +213,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
+import { ref, onMounted, onBeforeUnmount, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
@@ -218,6 +233,7 @@ const isArticlesPage = computed(() => {
 const isAboutPage = computed(() => {
   return route.path === '/about'
 })
+
 const setLanguage = (lang: 'id' | 'en') => {
   currentLanguage.value = lang
   localStorage.setItem('preferred-language', lang)
@@ -242,14 +258,18 @@ const checkAdmin = () => {
   isAdmin.value = localStorage.getItem('isAdmin') === 'true'
 }
 
-const logout = () => {
+const handleLogout = () => {
   if (confirm('Apakah Anda yakin ingin logout?')) {
     localStorage.removeItem('isAdmin')
     localStorage.removeItem('user')
     isAdmin.value = false
-    router.push('/')
+    router.push('/login')
   }
 }
+
+watch(() => route.path, () => {
+  checkAdmin()
+})
 
 onMounted(() => {
   loadLanguage()
