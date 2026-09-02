@@ -32,7 +32,7 @@
           <div class="mt-6 space-y-4 text-slate-600 leading-relaxed">
             <p>
               Assyifa Hospital adalah fasilitas kesehatan terdaftar di bawah perusahaan terkemuka 
-              <strong class="text-slate-900">'Kodungallur Asyiffa Pvt Ltd.'</strong>
+              <strong class="text-slate-900">'Kodungallur Assyifa Pvt Ltd.'</strong>
             </p>
             <p>
               Kami berkomitmen untuk menyediakan layanan kesehatan yang <strong class="text-slate-900">ekonomis dan komprehensif</strong>, 
