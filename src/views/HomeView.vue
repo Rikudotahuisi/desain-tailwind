@@ -4,6 +4,7 @@
     <MedicalCheckup />
     <About />
     <Doctors />
+    <Articles />
     
   </div>
 </template>

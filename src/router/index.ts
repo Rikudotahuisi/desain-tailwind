@@ -4,6 +4,7 @@ import AdminLayout from '../layouts/AdminLayout.vue'
 
 // Public Pages
 import HomeView from '../views/HomeView.vue'
+import AboutView from '../views/AboutView.vue'
 import ArticlesView from '../views/ArticlesView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import LoginView from '../views/LoginView.vue'
@@ -28,6 +29,11 @@ const routes = [
         path: 'articles',
         name: 'articles',
         component: ArticlesView
+      },
+      {
+        path: 'about',
+        name: 'about',
+        component: AboutView
       },
       {
         path: 'register',

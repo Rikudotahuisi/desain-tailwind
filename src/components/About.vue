@@ -63,7 +63,7 @@
             </div>
           </div>
 
-          <a href="#" class="mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-teal-500 px-8 py-3 font-semibold text-white transition hover:bg-teal-600">
+          <a href="about" class="mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-teal-500 px-8 py-3 font-semibold text-white transition hover:bg-teal-600">
             <i class="fas fa-info-circle mr-2"></i>Ketahui Lebih
           </a>
         </div>
