@@ -1,61 +1,7 @@
 <template>
-  <div class="min-h-screen bg-slate-50">
-    <!-- ===== HERO HEADER ===== -->
-    <section class="relative overflow-hidden bg-gradient-to-br from-teal-700 via-teal-600 to-cyan-700" style="padding-top: 85px;">
-      <!-- Background Decoration -->
-      <div class="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/10 blur-3xl"></div>
-      <div class="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-teal-400/10 blur-3xl"></div>
-      <div class="absolute right-1/4 top-1/4 h-32 w-32 rounded-full bg-cyan-300/10 blur-2xl"></div>
-      <div class="absolute left-1/3 bottom-1/4 h-40 w-40 rounded-full bg-white/5 blur-2xl"></div>
-      
-      <!-- Content -->
-      <div class="relative z-10 mx-auto max-w-[1400px] px-6 py-10 lg:px-16 lg:py-14">
-        <div class="flex flex-col items-center text-center">
-          <!-- Badge -->
-          <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-2 backdrop-blur-sm">
-            <span class="h-2 w-2 rounded-full bg-white animate-pulse"></span>
-            <span class="text-xs font-semibold tracking-wider text-white/90 uppercase">
-              <i class="fas fa-newspaper mr-2"></i>Artikel & Berita
-            </span>
-          </div>
-          
-          <!-- Title -->
-          <h1 class="text-3xl font-bold text-white lg:text-5xl">
-            Informasi Kesehatan
-            <br class="hidden sm:block" />
-            <span class="text-teal-200">Terkini & Terpercaya</span>
-          </h1>
-          
-          <!-- Description -->
-          <p class="mt-4 max-w-2xl text-base text-white/80 lg:text-lg">
-            Dapatkan informasi kesehatan terbaru, tips hidup sehat, dan berita dari rumah sakit kami.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== STATS BAR - Ditempatkan di sini ===== -->
-    <div class="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-16 -mt-6">
-      <div class="grid grid-cols-2 gap-3 rounded-2xl bg-white p-5 shadow-xl md:grid-cols-4 md:p-6">
-        <div class="text-center">
-          <p class="text-2xl font-bold text-teal-600 md:text-3xl">{{ articles.length }}</p>
-          <p class="text-xs text-slate-500">Total Artikel</p>
-        </div>
-        <div class="text-center">
-          <p class="text-2xl font-bold text-teal-600 md:text-3xl">{{ categories.length - 1 }}</p>
-          <p class="text-xs text-slate-500">Kategori</p>
-        </div>
-        <div class="text-center">
-          <p class="text-2xl font-bold text-teal-600 md:text-3xl">98%</p>
-          <p class="text-xs text-slate-500">Kepuasan Pembaca</p>
-        </div>
-        <div class="text-center">
-          <p class="text-2xl font-bold text-teal-600 md:text-3xl">24/7</p>
-          <p class="text-xs text-slate-500">Akses Gratis</p>
-        </div>
-      </div>
-    </div>
-
+  <div class="min-h-screen bg-slate-50" style="padding-top: 120px;">
+    <!-- <div class="h-20" bg-white flex style="padding-top: 120px;"></div> -->
+    
     <!-- ===== CONTENT ===== -->
     <div class="mx-auto max-w-[1400px] px-6 lg:px-16 mt-6">
       <!-- Filter & Search Bar -->

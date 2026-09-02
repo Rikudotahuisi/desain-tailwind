@@ -203,8 +203,8 @@ const getResponseByMenu = (message: string): string => {
   }
 
   // Tentang Kami
-  if (lowerMsg.includes('tentang kami') || lowerMsg.includes('rumah sakit') || lowerMsg.includes('medicare')) {
-    return `**Medicare Hospital**\n\nMedicare Hospital adalah fasilitas kesehatan terdaftar di bawah perusahaan **"Kodungallur Medicare Pvt Ltd"**.\n\n**Komitmen Kami:**\n- 20+ tahun pengalaman\n- Layanan kesehatan ekonomis & komprehensif\n- 50.000+ pasien puas\n- 20+ spesialisasi\n\nJl. Kesehatan No. 123, Jakarta\nTelepon: 1600-MED (633)\n\n[Tentang Kami](https://www.whatdokewh.com/)\n[Activate Pad Web Dorkers](https://www.whatdokewh.com/)\n[Go to Settings to activate Windows.](https://www.whatdokewh.com/)`
+  if (lowerMsg.includes('tentang kami') || lowerMsg.includes('rumah sakit') || lowerMsg.includes('assyifa')) {
+    return `**Assyifa Hospital**\n\nAssyifa Hospital adalah fasilitas kesehatan terdaftar di bawah perusahaan **"Kodungallur Assyifa Pvt Ltd"**.\n\n**Komitmen Kami:**\n- 20+ tahun pengalaman\n- Layanan kesehatan ekonomis & komprehensif\n- 50.000+ pasien puas\n- 20+ spesialisasi\n\nJl. Kesehatan No. 123, Jakarta\nTelepon: 1600-MED (633)\n\n[Tentang Kami](https://www.whatdokewh.com/)\n[Activate Pad Web Dorkers](https://www.whatdokewh.com/)\n[Go to Settings to activate Windows.](https://www.whatdokewh.com/)`
   }
 
   // Booking Online
@@ -214,12 +214,12 @@ const getResponseByMenu = (message: string): string => {
 
   // Kontak
   if (lowerMsg.includes('kontak') || lowerMsg.includes('telepon') || lowerMsg.includes('hubungi') || lowerMsg.includes('call')) {
-    return `**Kontak Medicare Hospital**\n\nJl. Kesehatan No. 123, Jakarta\nTelepon: 1600-MED (633)\nEmail: info@medicarehospital.com\nBuka: 24 Jam Nonstop\n\nChat WhatsApp: 0812-3456-7890\n\n[Website](https://www.whatdokewh.com/)\n[Medical Check Up](https://www.whatdokewh.com/)\n[Activate Pad Web Dorkers](https://www.whatdokewh.com/)`
+    return `**Kontak Assyifa Hospital**\n\nJl. Kesehatan No. 123, Jakarta\nTelepon: 1600-MED (633)\nEmail: info@assyifahospital.com\nBuka: 24 Jam Nonstop\n\nChat WhatsApp: 0812-3456-7890\n\n[Website](https://www.whatdokewh.com/)\n[Medical Check Up](https://www.whatdokewh.com/)\n[Activate Pad Web Dorkers](https://www.whatdokewh.com/)`
   }
 
   // Halo / Salam
   if (lowerMsg.includes('halo') || lowerMsg.includes('hai') || lowerMsg.includes('hi') || lowerMsg.includes('selamat') || lowerMsg.includes('pagi') || lowerMsg.includes('siang')) {
-    return `Halo! Selamat datang di **Medicare Hospital**.\n\nAda yang bisa saya bantu hari ini?\n\nSilakan pilih menu di atas atau tanyakan apa saja tentang layanan kami.`
+    return `Halo! Selamat datang di **Assyifa Hospital**.\n\nAda yang bisa saya bantu hari ini?\n\nSilakan pilih menu di atas atau tanyakan apa saja tentang layanan kami.`
   }
 
   // Terima kasih
@@ -267,7 +267,7 @@ const resetChat = () => {
   messages.value = [
     {
       sender: 'bot',
-      text: 'Halo! Selamat datang di **Medicare Hospital**.\n\nAda yang bisa saya bantu? Silakan pilih menu di bawah.'
+      text: 'Halo! Selamat datang di **Assyifa Hospital**.\n\nAda yang bisa saya bantu? Silakan pilih menu di bawah.'
     }
   ]
   userInput.value = ''
