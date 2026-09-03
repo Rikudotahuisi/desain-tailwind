@@ -8,6 +8,7 @@ import AboutView from '../views/AboutView.vue'
 import ArticlesView from '../views/ArticlesView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import LoginView from '../views/LoginView.vue'
+import ContactView from '../views/ContactView.vue'  // ← BARU
 
 // Admin Pages
 import AdminDashboard from '../views/admin/AdminDashboard.vue'
@@ -44,7 +45,14 @@ const routes = [
         path: 'login',
         name: 'login',
         component: LoginView
+      },
+      // ===== ROUTE CONTACT (BARU) =====
+      {
+        path: 'contact',
+        name: 'contact',
+        component: ContactView
       }
+      // =================================
     ]
   },
   {
