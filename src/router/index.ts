@@ -15,6 +15,7 @@ import AdminDashboard from '../views/admin/AdminDashboard.vue'
 import AdminPatients from '../views/admin/AdminPatients.vue'
 import AdminDoctors from '../views/admin/AdminDoctors.vue'
 import AdminAppointments from '../views/admin/AdminAppointments.vue'
+import AdminSlideshow from '../views/admin/AdminSlideshow.vue'
 
 const routes = [
   {
@@ -77,6 +78,11 @@ const routes = [
         path: 'appointments',
         name: 'admin-appointments',
         component: AdminAppointments
+      },
+      {
+        path: 'slideshow',
+        name: 'admin-slideshow',
+        component: AdminSlideshow
       }
     ]
   }
