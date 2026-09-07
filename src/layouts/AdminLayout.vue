@@ -97,6 +97,8 @@ const menuItems = [
   { path: '/admin/patients', label: 'Pasien', icon: 'fas fa-users' },
   { path: '/admin/doctors', label: 'Dokter', icon: 'fas fa-user-md' },
   { path: '/admin/appointments', label: 'Jadwal', icon: 'fas fa-calendar-check' },
+  { path: '/admin/slideshow', label: 'Slideshow', icon: 'fas fa-images' },
+  { path: '/admin/articles', label: 'Artikel', icon: 'fas fa-newspaper' },
   { path: '/', label: 'Kembali ke Home', icon: 'fas fa-home' },
 ]
 

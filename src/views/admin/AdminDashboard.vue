@@ -100,6 +100,9 @@
         </table>
       </div>
     </div>
+    <div class="mt-6 text-center text-sm text-slate-400">
+      &copy; 2026 Assyifa Hospital. All rights reserved.
+    </div>
   </div>
 </template>
 

@@ -9,12 +9,15 @@ import ArticlesView from '../views/ArticlesView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import LoginView from '../views/LoginView.vue'
 import ContactView from '../views/ContactView.vue' 
+import MedicalCheckView from '../views/MedicalCheckupView.vue'
 
 // Admin Pages
 import AdminDashboard from '../views/admin/AdminDashboard.vue'
 import AdminPatients from '../views/admin/AdminPatients.vue'
 import AdminDoctors from '../views/admin/AdminDoctors.vue'
 import AdminAppointments from '../views/admin/AdminAppointments.vue'
+import AdminSlideshow from '../views/admin/AdminSlideshow.vue'
+import AdminArticles from '../views/admin/AdminArticles.vue'
 
 const routes = [
   {
@@ -50,6 +53,11 @@ const routes = [
         path: 'contact',
         name: 'contact',
         component: ContactView
+      },
+      {
+        path: 'medical-checkup',
+        name: 'medical-checkup',
+        component: MedicalCheckView
       }
     ]
   },
@@ -77,7 +85,18 @@ const routes = [
         path: 'appointments',
         name: 'admin-appointments',
         component: AdminAppointments
+      },
+      {
+        path: 'slideshow',
+        name: 'admin-slideshow',
+        component: AdminSlideshow
+      },
+      {
+        path: 'articles',
+        name: 'admin-articles',
+        component: AdminArticles
       }
+
     ]
   }
 ]

@@ -63,11 +63,11 @@
                   </span>
                 </div>
                 <h1 class="text-6xl font-bold leading-[1.05] tracking-[-0.03em] text-white sm:text-7xl lg:text-[80px]">
-                  Medicare Hospital<br />
+                  Assyifa Hospital<br />
                   <span class="text-teal-300">Kesehatan untuk Semua</span>
                 </h1>
                 <p class="mt-6 max-w-[540px] text-lg leading-relaxed text-white/70">
-                  Selamat datang di Medicare Hospital - Fasilitas kesehatan dengan pengalaman tak tertandingi dan komitmen pada persahabatan abadi.
+                  Selamat datang di Assyifa Hospital - Fasilitas kesehatan dengan pengalaman tak tertandingi dan komitmen pada persahabatan abadi.
                 </p>
                 <div class="mt-10 flex flex-wrap items-center gap-4">
                   <a href="#about" class="group relative overflow-hidden rounded-full bg-teal-500 px-8 py-4 text-sm font-semibold text-white shadow-xl shadow-teal-500/30 transition-all hover:-translate-y-1 hover:shadow-2xl">
@@ -208,7 +208,7 @@
               <i class="fas fa-hospital"></i>
             </div>
             <h4 class="font-bold text-slate-900">Tentang Kami</h4>
-            <p class="text-sm text-slate-500">Kenali Medicare Hospital</p>
+            <p class="text-sm text-slate-500">Kenali Assyifa Hospital</p>
           </a>
 
           <a

@@ -111,7 +111,7 @@
             Jadwal Dokter
           </router-link>
 
-          <router-link to="/#medical-checkup" class="rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200"
+          <router-link to="/medical-checkup" class="rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200"
             :class="[
               isHomePage && !isScrolled ? 'text-white/70 hover:bg-white/10 hover:text-white' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
             ]"
@@ -136,13 +136,7 @@
           >
             Pelayanan
           </router-link>
-          <router-link to="#" class="rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200"
-            :class="[
-              isHomePage && !isScrolled ? 'text-white/70 hover:bg-white/10 hover:text-white' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
-            ]"
-          >
-            Promo
-          </router-link>
+          
           <router-link to="/contact" class="rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200"
             :class="[
               $route.path === '/contact'

@@ -49,7 +49,7 @@
             <router-link to="/register" class="rounded-full bg-teal-500 px-8 py-3 font-semibold text-white shadow-lg shadow-teal-500/20 transition hover:bg-teal-600 hover:-translate-y-0.5">
               <i class="fas fa-user-plus mr-2"></i>Daftar Sekarang
             </router-link>
-            <router-link to="/#medical-checkup" class="rounded-full border border-teal-200 bg-white px-8 py-3 font-semibold text-teal-600 transition hover:bg-teal-50 hover:-translate-y-0.5">
+            <router-link to="/medical-checkup" class="rounded-full border border-teal-200 bg-white px-8 py-3 font-semibold text-teal-600 transition hover:bg-teal-50 hover:-translate-y-0.5">
               <i class="fas fa-heartbeat mr-2"></i>Medical Check Up
             </router-link>
           </div>
