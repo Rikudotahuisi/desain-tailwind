@@ -1,5 +1,5 @@
 <template>
-  <section id="articles" class="scroll-mt-20 py-20 bg-white">
+  <section id="articles" class="scroll-mt-20 py-20 bg-slate-50">
     <div class="mx-auto max-w-[1400px] px-6 lg:px-16">
       <div class="mb-12 flex flex-wrap items-end justify-between">
         <div>
@@ -21,7 +21,7 @@
           v-for="article in latestArticles"
           :key="article.id"
           :to="{ name: 'article-detail', params: { id: article.id } }"
-          class="group block rounded-2xl overflow-hidden border border-slate-100 transition-all hover:shadow-xl hover:-translate-y-1"
+          class="group block rounded-2xl overflow-hidden border border-slate-100 transition-all hover:shadow-xl hover:-translate-y-1 shadow-lg cursor-pointer"
         >
           <div class="relative h-48 overflow-hidden bg-teal-100">
             <img

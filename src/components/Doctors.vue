@@ -1,5 +1,5 @@
 <template>
-  <section id="doctors" class="scroll-mt-20 py-20 bg-slate-50">
+  <section id="doctors" class="scroll-mt-20 py-20 bg-slate-40">
     <div class="mx-auto max-w-[1400px] px-6 lg:px-16">
       <!-- Header -->
       <div class="mb-12 flex flex-wrap items-end justify-between">

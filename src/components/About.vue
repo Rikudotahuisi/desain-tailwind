@@ -1,5 +1,5 @@
 <template>
-  <section id="about" class="scroll-mt-20 py-20 bg-white">
+  <section id="about" class="scroll-mt-20 py-20 bg-slate-50">
     <div class="mx-auto max-w-[1400px] px-6 lg:px-16">
       <div class="grid grid-cols-1 gap-12 lg:grid-cols-2">
         <!-- Left: Image -->
