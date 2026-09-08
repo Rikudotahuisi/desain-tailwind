@@ -39,11 +39,11 @@
       </div>
 
       <!-- Grid Dokter -->
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <div class="grid grid-cols-1 gap-6 items-start md:grid-cols-2 xl:grid-cols-3">
         <div
           v-for="doctor in filteredDoctors"
           :key="doctor.id"
-          class="rounded-2xl bg-white p-5 shadow-md border border-slate-100 transition-all hover:shadow-xl"
+          class="rounded-2xl bg-white p-5 shadow-md border border-slate-100 transition-all hover:shadow-xl duration-200 hover:-translate-y-2"
         >
           <!-- Top: Photo + Info -->
           <div class="flex items-start gap-4">
