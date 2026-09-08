@@ -92,7 +92,7 @@
         </router-link>
 
         <!-- Nav Links -->
-        <nav class="hidden items-center gap-0.5 lg:flex">
+        <nav class="hidden items-center gap-0.5 lg:flex ml-auto">
           <router-link to="/about" class="rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200"
             :class="[
               $route.path === '/about'
