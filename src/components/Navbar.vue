@@ -176,7 +176,7 @@
                   isHomePage && !isScrolled ? 'text-white/70 hover:bg-white/10 hover:text-white' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                 ]"
               >
-                Login
+                <li class="fas fa-sign-in-alt mr-1"></li> Login
               </router-link>
               <router-link to="/register" class="rounded-full bg-teal-500 px-5 py-2 text-sm font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5"
                 :class="[
