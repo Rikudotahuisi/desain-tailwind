@@ -1,27 +1,6 @@
 <template>
-  <div class="min-h-screen bg-slate-50" style="padding-top: 140px;">
+  <div class="min-h-screen bg-slate-50" style="padding-top: 160px;">
     <div class="mx-auto max-w-[1400px] px-6 lg:px-16 -mt-6 pb-16">
-      <!-- Header -->
-      <div class="mb-8 flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <div class="inline-flex items-center gap-3 rounded-full bg-teal-50 px-4 py-2">
-            <span class="h-2 w-2 rounded-full bg-teal-500 animate-pulse"></span>
-            <span class="text-sm font-semibold tracking-wider text-teal-600 uppercase">
-              <i class="fas fa-calendar-alt mr-2"></i>{{ todayName }}, {{ currentTime }}
-            </span>
-          </div>
-          <h1 class="mt-3 text-3xl font-bold text-slate-900 lg:text-4xl">
-            Jadwal Praktek <span class="text-teal-600">Dokter</span>
-          </h1>
-          <p class="mt-1 text-slate-600">Cek jadwal dan ketersediaan dokter spesialis secara real-time.</p>
-        </div>
-        <router-link
-          :to="{ name: 'register' }"
-          class="inline-flex items-center gap-2 rounded-full bg-teal-500 px-6 py-3 font-semibold text-white shadow-lg shadow-teal-500/20 transition hover:bg-teal-600 hover:-translate-y-0.5"
-        >
-          <i class="fas fa-calendar-plus"></i>Booking Online
-        </router-link>
-      </div>
       
       <div class="relative flex-1 max-w-sm">
           <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
@@ -29,14 +8,12 @@
             v-model="searchQuery"
             type="text"
             placeholder="Cari nama dokter atau spesialisasi..."
-            class="w-full rounded-full border border-slate-200 py-2.5 pl-11 pr-4 text-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
+            class="w-full rounded-full border border-slate-200 py-2.5 pl-11 pr-10 text-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
           />
         </div><br>
 
       <!-- Toolbar: Filter Spesialisasi + Toggle Hari Ini -->
-      <div class="mb-6 flex flex-col gap-4 rounded-2xl bg-white p-4 shadow-sm border border-slate-100 lg:flex-row lg:items-center lg:justify-between ">
-        
-
+      <div class="mb-6 flex flex-col gap-4 border-slate-100 lg:flex-row lg:items-center lg:justify-between ">
         <div class="flex flex-wrap items-center gap-2">
           <button
             v-for="spec in ['Semua', ...specialties]"
