@@ -1,16 +1,15 @@
 <template>
   <div class="min-h-screen bg-slate-50" style="padding-top: 160px;">
     <div class="mx-auto max-w-[1400px] px-6 lg:px-16 -mt-6 pb-16">
-      
-      <div class="relative flex-1 max-w-sm">
-          <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-          <input
-            v-model="searchQuery"
-            type="text"
-            placeholder="Cari nama dokter atau spesialisasi..."
-            class="w-full rounded-full border border-slate-200 py-2.5 pl-11 pr-10 text-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
-          />
-        </div><br>
+
+      <!-- <div class="flex items-center gap-2 mb-6">
+      <label class="flex items-center gap-2 cursor-pointer select-none whitespace-nowrap ml-auto">
+          <span class="text-sm font-medium text-slate-600">Praktik hari ini saja</span>
+          <span class="relative inline-flex h-6 w-11 items-center rounded-full transition" :class="onlyToday ? 'bg-teal-500' : 'bg-slate-200'" @click="onlyToday = !onlyToday">
+          <span class="inline-block h-4 w-4 transform rounded-full bg-white transition" :class="onlyToday ? 'translate-x-6' : 'translate-x-1'"></span>
+          </span>
+        </label>
+      </div> -->
 
       <!-- Toolbar: Filter Spesialisasi + Toggle Hari Ini -->
       <div class="mb-6 flex flex-col gap-4 border-slate-100 lg:flex-row lg:items-center lg:justify-between ">
@@ -29,14 +28,17 @@
             {{ spec }}
           </button>
         </div>
-
-        <label class="flex items-center gap-2 cursor-pointer select-none whitespace-nowrap">
-          <span class="text-sm font-medium text-slate-600">Praktik hari ini saja</span>
-          <span class="relative inline-flex h-6 w-11 items-center rounded-full transition" :class="onlyToday ? 'bg-teal-500' : 'bg-slate-200'" @click="onlyToday = !onlyToday">
-            <span class="inline-block h-4 w-4 transform rounded-full bg-white transition" :class="onlyToday ? 'translate-x-6' : 'translate-x-1'"></span>
-          </span>
-        </label>
+      <div class="relative flex-1 max-w-sm ml-auto">
+          <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+          <input
+            v-model="searchQuery"
+            type="text"
+            placeholder="Cari nama dokter atau spesialisasi..."
+            class="w-full rounded-full border border-slate-200 py-2.5 pl-11 pr-10 text-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
+          />
+      </div> 
       </div>
+      
 
       <!-- Grid Dokter -->
       <div class="grid grid-cols-1 gap-6 items-start md:grid-cols-2 xl:grid-cols-3">
