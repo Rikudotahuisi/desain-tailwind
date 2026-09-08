@@ -11,6 +11,7 @@ import RegisterView from '../views/RegisterView.vue'
 import LoginView from '../views/LoginView.vue'
 import ContactView from '../views/ContactView.vue' 
 import MedicalCheckView from '../views/MedicalCheckupView.vue'
+import DoctorsView from '../views/DoctorsView.vue'
 
 // Admin Pages
 import AdminDashboard from '../views/admin/AdminDashboard.vue'
@@ -20,6 +21,7 @@ import AdminAppointments from '../views/admin/AdminAppointments.vue'
 import AdminSlideshow from '../views/admin/AdminSlideshow.vue'
 import AdminArticles from '../views/admin/AdminArticles.vue'
 import AdminArticleForm from '../views/admin/AdminArticleForm.vue'
+import AdminDoctorForm from '../views/admin/AdminDoctorForm.vue'
 
 const routes = [
   {
@@ -65,6 +67,11 @@ const routes = [
         path: 'medical-checkup',
         name: 'medical-checkup',
         component: MedicalCheckView
+      },
+      {
+        path: 'doctors',
+        name: 'doctors',
+        component: DoctorsView
       }
     ]
   },
@@ -112,6 +119,16 @@ const routes = [
         path: 'articles/edit/:id',
         name: 'admin-articles-edit',
         component: AdminArticleForm
+      },
+      {
+        path: 'doctors/create',
+        name: 'admin-doctors-create',
+        component: AdminDoctorForm
+      },
+      {
+        path: 'doctors/edit/:id',
+        name: 'admin-doctors-edit',
+        component: AdminDoctorForm
       }
 
     ]
