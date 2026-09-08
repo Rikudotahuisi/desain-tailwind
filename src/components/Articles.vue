@@ -3,9 +3,12 @@
     <div class="mx-auto max-w-[1400px] px-6 lg:px-16">
       <div class="mb-12 flex flex-wrap items-end justify-between">
         <div>
+          <div class="inline-flex items-center gap-3 rounded-full bg-teal-50 px-4 py-2">
+          <span class="h-2 w-2 rounded-full bg-teal-500 animate-pulse"></span>
           <span class="text-sm font-semibold tracking-wider text-teal-600 uppercase">
             <i class="fas fa-newspaper mr-2"></i>Artikel & Berita
           </span>
+          </div>
           <h2 class="mt-2 text-4xl font-bold text-slate-900 lg:text-5xl">
             Informasi <span class="text-teal-600">Kesehatan</span>
           </h2>
