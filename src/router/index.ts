@@ -54,12 +54,14 @@ const routes = [
       {
         path: 'register',
         name: 'register',
-        component: RegisterView
+        component: RegisterView,
+        meta: { guestOnly: true }
       },
       {
         path: 'login',
         name: 'login',
-        component: LoginView
+        component: LoginView,
+        meta: { guestOnly: true }
       },
       {
         path: 'contact',
@@ -163,18 +165,32 @@ const router = createRouter({
   routes
 })
 
-// Guard untuk proteksi admin
 router.beforeEach((to, from, next) => {
+  const isAdmin = localStorage.getItem('isAdmin') === 'true'
+  const isUser = localStorage.getItem('user') !== null
+  const isLoggedIn = isAdmin || isUser
+
+  // Admin guard
   if (to.meta.requiresAuth) {
-    const isAdmin = localStorage.getItem('isAdmin')
-    if (isAdmin === 'true') {
+    if (isAdmin) {
       next()
     } else {
       next('/login')
     }
-  } else {
-    next()
+    return
   }
+
+  // Guest guard (mencegah akses login/register jika sudah login)
+  if (to.meta.guestOnly) {
+    if (isLoggedIn) {
+      next('/')
+    } else {
+      next()
+    }
+    return
+  }
+
+  next()
 })
 
 export default router

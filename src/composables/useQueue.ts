@@ -168,7 +168,10 @@ export function useQueue() {
   }
 
   function generateQueueNumber(poliklinik: string, date: string): string {
-    const prefix = poliklinik.charAt(0).toUpperCase()
+    // Nama poliklinik selalu diawali "Spesialis ..." jadi kalau ambil huruf pertama
+    // semua akan jadi "S". Di sini kita ambil huruf pertama dari kata SETELAH "Spesialis".
+    const nama = poliklinik.replace(/^Spesialis\s+/i, '')
+    const prefix = nama.charAt(0).toUpperCase() || 'X'
     const todayCount = bookings.value.filter(
       (b) => b.poliklinik === poliklinik && b.tanggal === date
     ).length

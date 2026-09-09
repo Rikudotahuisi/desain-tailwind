@@ -111,11 +111,14 @@
           Join our private network to discover job opportunities and connect with professionals.
         </p>
 
-        <!-- Info Admin -->
-        <div class="mt-4 p-3 bg-amber-50 rounded-xl border border-amber-200">
+        <!-- Info Akun Dummy -->
+        <div class="mt-4 p-3 bg-amber-50 rounded-xl border border-amber-200 space-y-1">
           <p class="text-xs text-amber-700 text-center">
             <i class="fas fa-info-circle mr-1"></i>
             Admin: admin@gmail.com / admin123
+          </p>
+          <p class="text-xs text-amber-700 text-center">
+            User: budi@email.com / user123
           </p>
         </div>
       </div>
@@ -126,8 +129,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useAuth } from '../composables/useAuth'
 
 const router = useRouter()
+const { login } = useAuth()
 const loading = ref(false)
 const showPassword = ref(false)
 
@@ -139,34 +144,17 @@ const form = ref({
 
 const handleLogin = () => {
   loading.value = true
-  
-  setTimeout(() => {
-    // Cek apakah login sebagai admin
-    if (form.value.email === 'admin@gmail.com' && form.value.password === 'admin123') {
-      localStorage.setItem('isAdmin', 'true')
-      localStorage.setItem('user', JSON.stringify({ 
-        name: 'Admin', 
-        email: form.value.email,
-        role: 'admin'
-      }))
-      alert('✅ Login berhasil! Selamat datang Admin.')
-      loading.value = false
-      router.push('/admin')
-      return
-    }
 
-    // Login biasa (user)
-    if (form.value.email && form.value.password.length >= 6) {
-      localStorage.setItem('user', JSON.stringify({ 
-        name: 'User', 
-        email: form.value.email,
-        role: 'user'
-      }))
-      alert('✅ Login berhasil! Selamat datang.')
+  setTimeout(() => {
+    const result = login(form.value.email, form.value.password)
+
+    if (result.success && result.user) {
+      const isAdmin = result.user.role === 'admin'
+      alert(isAdmin ? '✅ Login berhasil! Selamat datang Admin.' : '✅ Login berhasil! Selamat datang.')
       loading.value = false
-      router.push('/')
+      router.push(isAdmin ? '/admin' : '/')
     } else {
-      alert('❌ Email atau password salah!')
+      alert(`❌ ${result.message}`)
       loading.value = false
     }
   }, 1500)

@@ -1,7 +1,6 @@
 <template>
-  <div class="min-h-screen bg-gray-50 py-10 px-4" style="padding-top: 140px; padding-bottom: 4rem;">
+  <div class="min-h-screen bg-gray-50 py-10 px-4" style="padding-top: 140px;">
     <div class="max-w-2xl mx-auto">
-     
 
       <!-- Step indicator -->
       <div class="flex items-center justify-between mb-10">
@@ -247,9 +246,9 @@ const { isLoggedIn, currentUser } = useAuth()
 onMounted(() => {
   // Kalau sudah login, isi otomatis nama akun dari data user
   if (isLoggedIn.value && currentUser.value) {
-    patientData.value.nama = currentUser.value.nama
+    patientData.value.nama = currentUser.value.name
     patientData.value.email = currentUser.value.email
-    patientData.value.noHp = currentUser.value.noHp
+    patientData.value.noHp = currentUser.value.phone || ''
   }
 })
 
