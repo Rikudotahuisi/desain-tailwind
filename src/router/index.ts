@@ -12,6 +12,7 @@ import LoginView from '../views/LoginView.vue'
 import ContactView from '../views/ContactView.vue' 
 import MedicalCheckView from '../views/MedicalCheckupView.vue'
 import DoctorsView from '../views/DoctorsView.vue'
+import QueueBooking from '../views/QueueBooking.vue'
 
 // Admin Pages
 import AdminDashboard from '../views/admin/AdminDashboard.vue'
@@ -22,6 +23,8 @@ import AdminSlideshow from '../views/admin/AdminSlideshow.vue'
 import AdminArticles from '../views/admin/AdminArticles.vue'
 import AdminArticleForm from '../views/admin/AdminArticleForm.vue'
 import AdminDoctorForm from '../views/admin/AdminDoctorForm.vue'
+import AdminQueue from '../views/admin/AdminQueue.vue'
+import AdminQueueForm from '../views/admin/AdminQueueForm.vue'
 
 const routes = [
   {
@@ -72,6 +75,11 @@ const routes = [
         path: 'doctors',
         name: 'doctors',
         component: DoctorsView
+      },
+      {
+        path: 'antrian',
+        name: 'QueueBooking',
+        component: QueueBooking
       }
     ]
   },
@@ -129,6 +137,21 @@ const routes = [
         path: 'doctors/edit/:id',
         name: 'admin-doctors-edit',
         component: AdminDoctorForm
+      },
+      {
+        path: 'antrian',
+        name: 'admin-queue',
+        component: AdminQueue
+      },
+      {
+        path: 'antrian/create',
+        name: 'admin-queue-create',
+        component: AdminQueueForm
+      },
+      {
+        path: 'antrian/edit/:id',
+        name: 'admin-queue-edit',
+        component: AdminQueueForm
       }
 
     ]

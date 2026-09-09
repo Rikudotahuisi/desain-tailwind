@@ -1,5 +1,5 @@
 <template>
-  <section id="medical-checkup" class="scroll-mt-20 py-20 bg-gradient-to-b from-slate-50 to-white">
+  <section id="medical-checkup" class="scroll-mt-20 py-20 bg-slate-50">
     <div class="mx-auto max-w-[1400px] px-6 lg:px-16">
       <!-- Header -->
       <div class="mb-12 text-center">
@@ -131,16 +131,13 @@
       <div class="mt-16 rounded-3xl bg-gradient-to-r from-teal-600 to-teal-700 p-10 text-center text-white shadow-xl">
         <h3 class="text-2xl font-bold lg:text-3xl">
           <i class="fas fa-phone-alt mr-3"></i>
-          Butuh Bantuan Memilih Paket Skrining?
+          Ingin Mengambil Antrian?
         </h3>
         <p class="mt-2 text-teal-100">Konsultasikan dengan tim kami untuk mendapatkan rekomendasi yang tepat</p>
         <div class="mt-6 flex flex-wrap items-center justify-center gap-4">
-          <a href="#" class="rounded-full bg-white px-8 py-3 font-semibold text-teal-600 transition hover:bg-teal-50 hover:-translate-y-0.5">
-            <i class="fas fa-phone mr-2"></i>Hubungi 1600-MED
-          </a>
-          <a href="#" class="rounded-full border border-white/30 bg-white/10 px-8 py-3 font-semibold text-white transition hover:bg-white/20 hover:-translate-y-0.5">
-            <i class="fas fa-comment-dots mr-2"></i>Chat dengan Kami
-          </a>
+          <router-link to="/antrian" class="rounded-full bg-white px-8 py-3 font-semibold text-teal-600 transition hover:bg-teal-50 hover:-translate-y-0.5">
+            <i class="fas fa-calendar-check mr-2"></i>Ambil Antrian
+          </router-link>
         </div>
       </div>
     </div>
