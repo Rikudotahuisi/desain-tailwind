@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-3xl">
+  <div class="max-w-3x7">
     <!-- Header -->
     <div class="flex items-center gap-3 mb-6">
       <button @click="router.push('/admin/antrian')" class="text-slate-400 hover:text-slate-600 transition">
