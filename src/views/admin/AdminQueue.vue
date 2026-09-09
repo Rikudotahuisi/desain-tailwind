@@ -7,7 +7,7 @@
         <p class="text-sm text-slate-500">Kelola nomor antrian di ASSYIFA Hospital</p>
       </div>
       <button
-        @click="router.push('/admin/antrian/tambah')"
+        @click="router.push('/admin/antrian/create')"
         class="rounded-xl bg-teal-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-teal-500/20 transition hover:bg-teal-600 hover:-translate-y-0.5"
       >
         <i class="fas fa-plus mr-2"></i>Tambah Antrian
