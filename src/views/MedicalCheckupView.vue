@@ -1,14 +1,8 @@
 <template>
   <div class="min-h-screen bg-slate-50" style="padding-top: 140px;">
-
-
-    <!-- ===== Kategori Skrining ===== -->
     <div class="mx-auto max-w-[1400px] px-6 lg:px-16 -mt-6">
       <div class="py-4">
-        <h3 class="font-bold text-slate-900 mb-3 flex items-center gap-2">
-    
-          Kategori Skrining
-        </h3>
+      
         <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
           <button
             v-for="item in popularItems"
