@@ -49,7 +49,7 @@
         <thead>
           <tr class="bg-slate-50 border-b border-slate-200">
             <th class="text-left py-3.5 px-6 font-semibold text-slate-600">Dokter</th>
-            <th class="text-left py-3.5 px-6 font-semibold text-slate-600">Tanggal</th>
+            <th class="text-left py-3.5 px-6 font-semibold text-slate-600">Hari/Tanggal</th>
             <th class="text-left py-3.5 px-6 font-semibold text-slate-600">Jam</th>
             <th class="text-left py-3.5 px-6 font-semibold text-slate-600">Status</th>
             <th class="text-right py-3.5 px-6 font-semibold text-slate-600">Aksi</th>
@@ -124,7 +124,12 @@ const filterStatus = ref('')
 const imageErrors = ref(new Set<string>())
 
 function formatTanggal(tanggal: string) {
-  return new Date(tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })
+  return new Date(tanggal).toLocaleDateString('id-ID', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  })
 }
 
 function getInitials(name: string) {
