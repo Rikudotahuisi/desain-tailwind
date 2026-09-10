@@ -25,6 +25,7 @@ import AdminArticleForm from '../views/admin/AdminArticleForm.vue'
 import AdminDoctorForm from '../views/admin/AdminDoctorForm.vue'
 import AdminQueue from '../views/admin/AdminQueue.vue'
 import AdminQueueForm from '../views/admin/AdminQueueForm.vue'
+import AdminBranch from '../views/admin/AdminBranch.vue'
 
 const routes = [
   {
@@ -154,6 +155,11 @@ const routes = [
         path: 'antrian/edit/:id',
         name: 'admin-queue-edit',
         component: AdminQueueForm
+      },
+      {
+        path: 'branch',
+        name: 'admin-branch',
+        component: AdminBranch
       }
 
     ]
