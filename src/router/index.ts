@@ -18,13 +18,15 @@ import QueueBooking from '../views/QueueBooking.vue'
 import AdminDashboard from '../views/admin/AdminDashboard.vue'
 import AdminPatients from '../views/admin/AdminPatients.vue'
 import AdminDoctors from '../views/admin/AdminDoctors.vue'
-import AdminAppointments from '../views/admin/AdminAppointments.vue'
+import AdminSchedules from '../views/admin/AdminSchedules.vue'
+import AdminScheduleEntryForm from '../views/admin/AdminScheduleEntryForm.vue'
 import AdminSlideshow from '../views/admin/AdminSlideshow.vue'
 import AdminArticles from '../views/admin/AdminArticles.vue'
 import AdminArticleForm from '../views/admin/AdminArticleForm.vue'
 import AdminDoctorForm from '../views/admin/AdminDoctorForm.vue'
 import AdminQueue from '../views/admin/AdminQueue.vue'
 import AdminQueueForm from '../views/admin/AdminQueueForm.vue'
+import AdminBranch from '../views/admin/AdminBranch.vue'
 
 const routes = [
   {
@@ -106,9 +108,19 @@ const routes = [
         component: AdminDoctors
       },
       {
-        path: 'appointments',
-        name: 'admin-appointments',
-        component: AdminAppointments
+        path: 'schedules',
+        name: 'admin-schedules',
+        component: AdminSchedules
+      },
+      {
+        path: 'schedules/create',
+        name: 'admin-schedules-create',
+        component: AdminScheduleEntryForm
+      },
+      {
+        path: 'schedules/edit/:id',
+        name: 'admin-schedules-edit',
+        component: AdminScheduleEntryForm
       },
       {
         path: 'slideshow',
@@ -154,6 +166,11 @@ const routes = [
         path: 'antrian/edit/:id',
         name: 'admin-queue-edit',
         component: AdminQueueForm
+      },
+      {
+        path: 'branch',
+        name: 'admin-branch',
+        component: AdminBranch
       }
 
     ]
