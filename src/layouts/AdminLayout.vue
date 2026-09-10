@@ -95,6 +95,7 @@ const sidebarOpen = ref(false)
 const menuItems = [
   { path: '/admin', label: 'Dashboard', icon: 'fas fa-th-large' },
   { path: '/admin/patients', label: 'Pasien', icon: 'fas fa-users' },
+  { path: '/admin/antrian', label: 'Antrian', icon: 'fas fa-list' },
   { path: '/admin/doctors', label: 'Dokter', icon: 'fas fa-user-md' },
   { path: '/admin/appointments', label: 'Jadwal', icon: 'fas fa-calendar-check' },
   { path: '/admin/slideshow', label: 'Slideshow', icon: 'fas fa-images' },

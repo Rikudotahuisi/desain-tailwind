@@ -92,7 +92,7 @@
         </router-link>
 
         <!-- Nav Links -->
-        <nav class="hidden items-center gap-0.5 lg:flex">
+        <nav class="hidden items-center gap-0.5 lg:flex ml-auto">
           <router-link to="/about" class="rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200"
             :class="[
               $route.path === '/about'
@@ -103,9 +103,11 @@
             Tentang Kami
           </router-link>
 
-          <router-link to="/#doctors" class="rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200"
+          <router-link to="/doctors" class="rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200"
             :class="[
-              isHomePage && !isScrolled ? 'text-white/70 hover:bg-white/10 hover:text-white' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+              $route.path === '/doctors'
+                ? isHomePage && !isScrolled ? 'text-white bg-white/10 hover:bg-white/20' : 'text-teal-600 bg-teal-50 hover:bg-teal-100'
+                : isHomePage && !isScrolled ? 'text-white/70 hover:bg-white/10 hover:text-white' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
             ]"
           >
             Jadwal Dokter
@@ -127,16 +129,8 @@
             ]"
           >
             Artikel
-          </router-link>
+        </router-link>
 
-          <router-link to="#" class="rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200"
-            :class="[
-              isHomePage && !isScrolled ? 'text-white/70 hover:bg-white/10 hover:text-white' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
-            ]"
-          >
-            Pelayanan
-          </router-link>
-          
           <router-link to="/contact" class="rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200"
             :class="[
               $route.path === '/contact'
@@ -150,6 +144,7 @@
 
         <div class="flex items-center gap-3">
           <div class="hidden items-center gap-2 lg:flex">
+            
             <!-- Jika sudah login sebagai admin -->
             <template v-if="isAdmin">
               <router-link to="/admin" class="rounded-full px-4 py-2 text-sm font-medium transition"
@@ -167,14 +162,14 @@
                 <i class="fas fa-sign-out-alt mr-1"></i> Logout
               </button>
             </template>
-            <!-- Jika belum login -->
-            <template v-else>
+            <!-- Jika belum login (guest) -->
+            <template v-else-if="!isLoggedIn">
               <router-link to="/login" class="rounded-full px-4 py-2 text-sm font-medium transition-all duration-200"
                 :class="[
                   isHomePage && !isScrolled ? 'text-white/70 hover:bg-white/10 hover:text-white' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                 ]"
               >
-                Login
+                <li class="fas fa-sign-in-alt mr-1"></li> Login
               </router-link>
               <router-link to="/register" class="rounded-full bg-teal-500 px-5 py-2 text-sm font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5"
                 :class="[
@@ -183,6 +178,23 @@
               >
                 <i class="fas fa-user-plus mr-2"></i>Daftar
               </router-link>
+            </template>
+            <!-- Jika sudah login sebagai user biasa -->
+            <template v-else>
+              <router-link to="/antrian" class="rounded-full px-4 py-2 text-sm font-medium transition"
+                :class="[
+                  isHomePage && !isScrolled ? 'text-white/80 hover:bg-white/10 hover:text-white' : 'text-teal-600 bg-teal-50 hover:bg-teal-100'
+                ]"
+              >
+                <i class="fas fa-user mr-1"></i> {{ currentUser?.name }}
+              </router-link>
+              <button @click="handleLogout" class="rounded-full px-4 py-2 text-sm font-medium transition"
+                :class="[
+                  isHomePage && !isScrolled ? 'text-white/80 hover:bg-white/10 hover:text-white' : 'text-red-600 hover:bg-red-50'
+                ]"
+              >
+                <i class="fas fa-sign-out-alt mr-1"></i> Logout
+              </button>
             </template>
           </div>
           <button class="flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-200 lg:hidden"
@@ -199,14 +211,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, computed, watch } from 'vue'
+import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useAuth } from '../composables/useAuth'
 
 const route = useRoute()
 const router = useRouter()
 const currentLanguage = ref<'id' | 'en'>('id')
 const isScrolled = ref(false)
-const isAdmin = ref(false)
+const { isAdmin, isLoggedIn, currentUser, logout } = useAuth()
 
 const isHomePage = computed(() => {
   return route.path === '/'
@@ -228,15 +241,9 @@ const openChatbot = () => {
   window.dispatchEvent(new CustomEvent('openChatbot'))
 }
 
-const checkAdmin = () => {
-  isAdmin.value = localStorage.getItem('isAdmin') === 'true'
-}
-
 const handleLogout = () => {
   if (confirm('Apakah Anda yakin ingin logout?')) {
-    localStorage.removeItem('isAdmin')
-    localStorage.removeItem('user')
-    isAdmin.value = false
+    logout()
     router.push('/login')
   }
 }
@@ -245,13 +252,8 @@ const handleScroll = () => {
   isScrolled.value = window.scrollY > 50
 }
 
-watch(() => route.path, () => {
-  checkAdmin()
-})
-
 onMounted(() => {
   loadLanguage()
-  checkAdmin()
   window.addEventListener('scroll', handleScroll)
 })
 
