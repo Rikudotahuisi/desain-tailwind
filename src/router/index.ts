@@ -17,6 +17,7 @@ import QueueBooking from '../views/QueueBooking.vue'
 // Admin Pages
 import AdminDashboard from '../views/admin/AdminDashboard.vue'
 import AdminPatients from '../views/admin/AdminPatients.vue'
+import AdminPatientForm from '../views/admin/AdminPatientForm.vue'
 import AdminDoctors from '../views/admin/AdminDoctors.vue'
 import AdminSchedules from '../views/admin/AdminSchedules.vue'
 import AdminScheduleEntryForm from '../views/admin/AdminScheduleEntryForm.vue'
@@ -101,6 +102,16 @@ const routes = [
         path: 'patients',
         name: 'admin-patients',
         component: AdminPatients
+      },
+      {
+        path: 'patients/create',
+        name: 'admin-patients-create',
+        component: AdminPatientForm
+      },
+      {
+        path: 'patients/edit/:id',
+        name: 'admin-patients-edit',
+        component: AdminPatientForm
       },
       {
         path: 'doctors',
