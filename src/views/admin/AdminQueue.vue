@@ -138,20 +138,23 @@ import { useRouter } from 'vue-router'
 import { useQueue } from '../../composables/useQueue'
 
 const router = useRouter()
-const { bookings, poliklinikList, updateBookingStatus, deleteBooking } = useQueue()
+const { bookings, poliklinikList, updateBookingStatus, deleteBooking, todayDateString } = useQueue()
 
 const searchQuery = ref('')
 const filterPoliklinik = ref('')
 const filterStatus = ref('')
 const filterDate = ref('')
 
+// "Antrian Hari Ini" tetap dibatasi ke tanggal hari ini saja.
 const todayBookings = computed(() => {
-  const today = new Date().toISOString().split('T')[0]
+  const today = todayDateString()
   return bookings.value.filter((b) => b.tanggal === today)
 })
 
+// "Menunggu" dan "Selesai" menghitung SEMUA antrian (bukan cuma hari ini),
+// biar tetap kelihatan meski belum ada antrian yang jadwalnya hari ini.
 const countByStatus = (status: string) =>
-  todayBookings.value.filter((b) => b.status === status).length
+  bookings.value.filter((b) => b.status === status).length
 
 const filteredBookings = computed(() => {
   let filtered = [...bookings.value].sort((a, b) => (a.tanggal + a.jam).localeCompare(b.tanggal + b.jam))

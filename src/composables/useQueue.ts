@@ -43,6 +43,20 @@ function minutesToTime(mins: number) {
   return `${h}:${m}`
 }
 
+// Format tanggal berdasarkan waktu LOKAL (bukan toISOString, yang konversi ke UTC
+// dan bisa geser 1 hari untuk timezone WITA/WIB pas dini hari). Dipakai di semua
+// tempat yang butuh format YYYY-MM-DD supaya konsisten dengan "hari ini" pengguna.
+function toDateString(d: Date): string {
+  const y = d.getFullYear()
+  const m = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${y}-${m}-${day}`
+}
+
+export function todayDateString(): string {
+  return toDateString(new Date())
+}
+
 // Pecah rentang start-end jadi slot per 30 menit, misal "08:00" - "09:00" -> ["08:00 - 08:30", "08:30 - 09:00"]
 function generateTimeSlots(start: string, end: string, stepMinutes = 30): string[] {
   if (!start || !end) return []
@@ -67,7 +81,7 @@ function getScheduleDatesForDoctor(doctor: any, maxResults = 10): DateOption[] {
     const dayName = DAYS_ID[(d.getDay() + 6) % 7]
     if (activeDays.includes(dayName)) {
       result.push({
-        date: d.toISOString().split('T')[0],
+        date: toDateString(d),
         day: dayName,
         label: d.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long' }),
       })
@@ -284,5 +298,6 @@ export function useQueue() {
     deleteBooking,
     getScheduleDatesForDoctor,
     getTimeSlotsForDoctor,
+    todayDateString,
   }
 }
