@@ -91,7 +91,7 @@
               </span>
             </td>
             <td class="py-4 px-6 text-right">
-              <button @click="router.push(`/admin/schedules/edit-tanggal/${item.id}`)" class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-teal-600 hover:bg-teal-50 transition">
+              <button @click="router.push(`/admin/schedules/edit/${item.id}`)" class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-teal-600 hover:bg-teal-50 transition">
                 <i class="fas fa-edit"></i>
               </button>
               <button @click="handleDelete(item.id)" class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-red-500 hover:bg-red-50 transition">
