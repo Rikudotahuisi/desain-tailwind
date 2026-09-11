@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <form @submit.prevent="handleSubmit" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-5 max-w-3xl">
+    <form @submit.prevent="handleSubmit" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-5 max-w-3x2">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
         <!-- Nama Lengkap -->
         <div>
