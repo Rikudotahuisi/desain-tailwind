@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <form @submit.prevent="handleSubmit" class="max-w-3xl space-y-5 rounded-2xl bg-white p-6 shadow-lg border border-slate-200">
+    <form @submit.prevent="handleSubmit" class="max-w-3x2 space-y-5 rounded-2xl bg-white p-6 shadow-lg border border-slate-200">
       <!-- Upload Gambar -->
       <div>
         <label class="mb-1.5 block text-sm font-semibold text-slate-700">
