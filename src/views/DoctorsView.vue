@@ -61,9 +61,7 @@
               <h3 class="font-bold text-slate-900 leading-tight truncate">{{ doctor.name }}</h3>
               <p class="text-sm font-medium text-teal-600">{{ doctor.specialty }}</p>
               <div class="mt-1 flex items-center gap-2 text-xs text-slate-500">
-                <span><i class="fas fa-star text-yellow-400 mr-0.5"></i>{{ doctor.rating }}</span>
                 <span class="h-1 w-1 rounded-full bg-slate-300"></span>
-                <span>{{ doctor.experience }} th pengalaman</span>
               </div>
               <p class="mt-0.5 text-xs text-slate-400"><i class="fas fa-door-open mr-1"></i>{{ doctor.room }}</p>
             </div>
@@ -83,7 +81,7 @@
               class="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-700"
             >
               <i class="far fa-clock"></i>
-              Praktik Hari Ini • {{ todaySlot(doctor)?.start }} - {{ todaySlot(doctor)?.end }}
+              Praktik Hari Ini • {{ todaySlot(doctor)?.startTime }} - {{ todaySlot(doctor)?.endTime }}
             </span>
             <span
               v-else
@@ -94,19 +92,19 @@
             </span>
           </div>
 
-          <!-- Weekly Strip (Sen-Min), hari ini di-highlight -->
+          <!-- Weekly Strip (Sen-Min), hari ini di-highlight, sumber dari useSchedule -->
           <div class="mt-4 grid grid-cols-7 gap-1">
             <div
-              v-for="d in doctor.schedule"
-              :key="d.day"
+              v-for="d in DAYS"
+              :key="d"
               class="flex flex-col items-center rounded-lg py-1.5 text-[10px] font-medium transition"
               :class="[
-                d.active ? 'bg-teal-50 text-teal-600' : 'bg-slate-50 text-slate-300',
-                d.day === todayName ? 'ring-2 ring-teal-400' : ''
+                isActiveDay(doctor.id, d) ? 'bg-teal-50 text-teal-600' : 'bg-slate-50 text-slate-300',
+                d === today ? 'ring-2 ring-teal-400' : ''
               ]"
             >
-              {{ d.day.slice(0, 3) }}
-              <i v-if="d.active" class="fas fa-check text-[8px] mt-0.5"></i>
+              {{ d.slice(0, 3) }}
+              <i v-if="isActiveDay(doctor.id, d)" class="fas fa-check text-[8px] mt-0.5"></i>
               <i v-else class="fas fa-minus text-[8px] mt-0.5"></i>
             </div>
           </div>
@@ -123,15 +121,17 @@
           <!-- Detail Jadwal Lengkap (expand) -->
           <div v-if="expandedIds.has(doctor.id)" class="mt-2 space-y-1 rounded-xl bg-slate-50 p-3">
             <div
-              v-for="d in doctor.schedule"
-              :key="d.day"
+              v-for="d in DAYS"
+              :key="d"
               class="flex items-center justify-between rounded-lg px-2 py-1.5 text-sm"
-              :class="d.day === todayName ? 'bg-white shadow-sm' : ''"
+              :class="d === today ? 'bg-white shadow-sm' : ''"
             >
-              <span class="font-medium" :class="d.day === todayName ? 'text-teal-600' : 'text-slate-600'">
-                {{ d.day }}
+              <span class="font-medium" :class="d === today ? 'text-teal-600' : 'text-slate-600'">
+                {{ d }}
               </span>
-              <span v-if="d.active" class="font-semibold text-slate-700">{{ d.start }} - {{ d.end }}</span>
+              <span v-if="scheduleForDay(doctor.id, d)" class="font-semibold text-slate-700">
+                {{ scheduleForDay(doctor.id, d)?.startTime }} - {{ scheduleForDay(doctor.id, d)?.endTime }}
+              </span>
               <span v-else class="text-slate-400">Libur</span>
             </div>
           </div>
@@ -172,9 +172,11 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { useDoctors } from '../composables/useDoctors'
+import { useDoctors, type Doctor } from '../composables/useDoctors'
+import { useSchedule, DAYS, todayDayName } from '../composables/useSchedule'
 
-const { doctors, specialties, todayName, isPracticingNow, practicesToday } = useDoctors()
+const { doctors, specialties } = useDoctors()
+const { getSchedulesForDoctor, getTodaySchedulesForDoctor } = useSchedule()
 
 // ===== STATE =====
 const searchQuery = ref('')
@@ -196,9 +198,39 @@ const currentTime = computed(() =>
   now.value.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
 )
 
-// ===== HELPERS =====
-const todaySlot = (doctor: (typeof doctors.value)[number]) =>
-  doctor.schedule.find(s => s.day === todayName.value && s.active)
+// Nama hari ini (Senin..Minggu) — dipakai buat highlight & badge
+const today = todayDayName()
+
+// ===== HELPERS: jadwal bersumber dari useSchedule (Admin > Jadwal) =====
+function timeToMinutes(t: string) {
+  const [h, m] = t.split(':').map(Number)
+  return h * 60 + m
+}
+
+const scheduleForDay = (doctorId: number, day: string) =>
+  getSchedulesForDoctor(doctorId).find((s) => s.day === day && s.active)
+
+const isActiveDay = (doctorId: number, day: string) => !!scheduleForDay(doctorId, day)
+
+const isPracticingNow = (doctor: Doctor) => {
+  const todaySchedules = getTodaySchedulesForDoctor(doctor.id)
+  if (!todaySchedules.length) return false
+  const nowMinutes = now.value.getHours() * 60 + now.value.getMinutes()
+  return todaySchedules.some(
+    (s) => nowMinutes >= timeToMinutes(s.startTime) && nowMinutes <= timeToMinutes(s.endTime)
+  )
+}
+
+const practicesToday = (doctor: Doctor) => getTodaySchedulesForDoctor(doctor.id).length > 0
+
+const todaySlot = (doctor: Doctor) => {
+  const todaySchedules = getTodaySchedulesForDoctor(doctor.id)
+  const nowMinutes = now.value.getHours() * 60 + now.value.getMinutes()
+  return (
+    todaySchedules.find((s) => nowMinutes >= timeToMinutes(s.startTime) && nowMinutes <= timeToMinutes(s.endTime)) ||
+    todaySchedules[0]
+  )
+}
 
 const toggleExpand = (id: number) => {
   if (expandedIds.value.has(id)) {

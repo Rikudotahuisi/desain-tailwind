@@ -49,7 +49,7 @@
         <thead>
           <tr class="bg-slate-50 border-b border-slate-200">
             <th class="text-left py-3.5 px-6 font-semibold text-slate-600">Dokter</th>
-            <th class="text-left py-3.5 px-6 font-semibold text-slate-600">Hari/Tanggal</th>
+            <th class="text-left py-3.5 px-6 font-semibold text-slate-600">Hari</th>
             <th class="text-left py-3.5 px-6 font-semibold text-slate-600">Jam</th>
             <th class="text-left py-3.5 px-6 font-semibold text-slate-600">Status</th>
             <th class="text-right py-3.5 px-6 font-semibold text-slate-600">Aksi</th>
@@ -79,7 +79,11 @@
                 </div>
               </div>
             </td>
-            <td class="py-4 px-6 text-slate-600">{{ item.date }}</td>
+            <td class="py-4 px-6">
+              <span class="inline-flex items-center rounded-lg bg-teal-50 px-2.5 py-1 text-xs font-medium text-teal-600">
+                {{ item.day }}
+              </span>
+            </td>
             <td class="py-4 px-6">
               <span class="inline-flex items-center rounded-lg bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-600">
                 {{ item.time }}
@@ -91,7 +95,7 @@
               </span>
             </td>
             <td class="py-4 px-6 text-right">
-              <button @click="router.push(`/admin/schedules/edit/${item.id}`)" class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-teal-600 hover:bg-teal-50 transition">
+              <button @click="router.push(`/admin/schedules/edit/${item.doctorId}`)" class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-teal-600 hover:bg-teal-50 transition">
                 <i class="fas fa-edit"></i>
               </button>
               <button @click="handleDelete(item.id)" class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-red-500 hover:bg-red-50 transition">
@@ -111,7 +115,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useSchedule } from '../../composables/useSchedule'
+import { useSchedule, DAYS } from '../../composables/useSchedule'
 import { useDoctors } from '../../composables/useDoctors'
 
 const router = useRouter()
@@ -122,15 +126,6 @@ const searchQuery = ref('')
 const filterSpecialty = ref('')
 const filterStatus = ref('')
 const imageErrors = ref(new Set<string>())
-
-function formatTanggal(tanggal: string) {
-  return new Date(tanggal).toLocaleDateString('id-ID', {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  })
-}
 
 function getInitials(name: string) {
   return name
@@ -155,16 +150,17 @@ const scheduleList = computed(() =>
         (filterStatus.value === 'inactive' && !s.active)
       return matchSearch && matchSpecialty && matchStatus
     })
-    .sort((a, b) => (b.date + b.startTime).localeCompare(a.date + a.startTime))
+    .sort((a, b) => DAYS.indexOf(a.day) - DAYS.indexOf(b.day))
     .map((s) => {
       const doctor = getDoctorById(s.doctorId)
       return {
         id: s.id,
+        doctorId: s.doctorId,
         doctor: s.doctorName,
         specialty: doctor?.specialty ?? '',
         image: doctor?.image ?? '',
         color: doctor?.color ?? 'bg-slate-400',
-        date: formatTanggal(s.date),
+        day: s.day,
         time: `${s.startTime} - ${s.endTime}`,
         active: s.active,
       }
@@ -176,4 +172,4 @@ function handleDelete(id: string) {
     deleteSchedule(id)
   }
 }
-</script>
+</script> 

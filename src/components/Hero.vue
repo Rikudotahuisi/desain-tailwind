@@ -183,7 +183,7 @@
       </button>
     </div>
 
-    <!-- Tab Navigation di bawah Hero -->
+    <!-- Tab Navigation di bawah Hero
     <div class="relative z-30 -mt-16 px-4">
       <div class="mx-auto max-w-[1400px]">
         <div class="grid grid-cols-2 gap-3 md:grid-cols-4">
@@ -234,9 +234,9 @@
             <h4 class="font-bold text-slate-900">Artikel & Berita</h4>
             <p class="text-sm text-slate-500">Informasi kesehatan terkini</p>
           </a>
-        </div>
-      </div>
-    </div>
+        </div> 
+     </div>
+    </div> -->
   </section>
 </template>
 
