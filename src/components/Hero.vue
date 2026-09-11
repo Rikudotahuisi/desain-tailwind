@@ -152,7 +152,7 @@
       </div>
 
       <!-- Carousel Indicators -->
-      <div class="absolute bottom-24 left-1/2 z-20 flex -translate-x-1/2 gap-3">
+      <div class="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 gap-3">
         <button
           v-for="(slide, index) in 4"
           :key="index"
