@@ -22,6 +22,7 @@ import AdminDoctors from '../views/admin/AdminDoctors.vue'
 import AdminSchedules from '../views/admin/AdminSchedules.vue'
 import AdminScheduleEntryForm from '../views/admin/AdminScheduleEntryForm.vue'
 import AdminSlideshow from '../views/admin/AdminSlideshow.vue'
+import AdminSlideshowForm from '../views/admin/AdminSlideshowForm.vue'
 import AdminArticles from '../views/admin/AdminArticles.vue'
 import AdminArticleForm from '../views/admin/AdminArticleForm.vue'
 import AdminDoctorForm from '../views/admin/AdminDoctorForm.vue'
@@ -137,6 +138,16 @@ const routes = [
         path: 'slideshow',
         name: 'admin-slideshow',
         component: AdminSlideshow
+      },
+      {
+        path: 'slideshow/create',
+        name: 'admin-slideshow-create',
+        component: AdminSlideshowForm
+      },
+      {
+        path: 'slideshow/edit/:id',
+        name: 'admin-slideshow-edit',
+        component: AdminSlideshowForm
       },
       {
         path: 'articles',
