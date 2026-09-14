@@ -17,10 +17,12 @@ import QueueBooking from '../views/QueueBooking.vue'
 // Admin Pages
 import AdminDashboard from '../views/admin/AdminDashboard.vue'
 import AdminPatients from '../views/admin/AdminPatients.vue'
+import AdminPatientForm from '../views/admin/AdminPatientForm.vue'
 import AdminDoctors from '../views/admin/AdminDoctors.vue'
 import AdminSchedules from '../views/admin/AdminSchedules.vue'
 import AdminScheduleEntryForm from '../views/admin/AdminScheduleEntryForm.vue'
 import AdminSlideshow from '../views/admin/AdminSlideshow.vue'
+import AdminSlideshowForm from '../views/admin/AdminSlideshowForm.vue'
 import AdminArticles from '../views/admin/AdminArticles.vue'
 import AdminArticleForm from '../views/admin/AdminArticleForm.vue'
 import AdminDoctorForm from '../views/admin/AdminDoctorForm.vue'
@@ -103,6 +105,16 @@ const routes = [
         component: AdminPatients
       },
       {
+        path: 'patients/create',
+        name: 'admin-patients-create',
+        component: AdminPatientForm
+      },
+      {
+        path: 'patients/edit/:id',
+        name: 'admin-patients-edit',
+        component: AdminPatientForm
+      },
+      {
         path: 'doctors',
         name: 'admin-doctors',
         component: AdminDoctors
@@ -126,6 +138,16 @@ const routes = [
         path: 'slideshow',
         name: 'admin-slideshow',
         component: AdminSlideshow
+      },
+      {
+        path: 'slideshow/create',
+        name: 'admin-slideshow-create',
+        component: AdminSlideshowForm
+      },
+      {
+        path: 'slideshow/edit/:id',
+        name: 'admin-slideshow-edit',
+        component: AdminSlideshowForm
       },
       {
         path: 'articles',

@@ -74,18 +74,6 @@
           <h3 class="mt-4 text-center text-lg font-bold text-slate-900">{{ doctor.name }}</h3>
           <p class="text-center text-sm font-medium text-teal-600">{{ doctor.specialty }}</p>
 
-          <!-- Rating & Experience -->
-          <div class="mt-2 flex items-center justify-center gap-3 text-sm text-slate-500">
-            <span class="flex items-center gap-1">
-              <i class="fas fa-star text-yellow-400"></i>
-              {{ doctor.rating }}
-            </span>
-            <span class="h-1 w-1 rounded-full bg-slate-300"></span>
-            <span><i class="far fa-clock mr-1"></i>{{ doctor.experience }} tahun</span>
-            <span class="h-1 w-1 rounded-full bg-slate-300"></span>
-            <span><i class="fas fa-user mr-1"></i>{{ doctor.patients }}</span>
-          </div>
-
           <!-- Schedule -->
           <div class="mt-4 rounded-xl bg-slate-50 p-4">
             <div class="flex items-center justify-between text-sm">

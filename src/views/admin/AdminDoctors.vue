@@ -4,7 +4,7 @@
     <div class="flex items-center justify-between mb-6">
       <div>
         <h2 class="text-2xl font-bold text-slate-900">Data Dokter</h2>
-        <p class="text-sm text-slate-500">Kelola data & jadwal praktek dokter di ASSYIFA Hospital</p>
+        <p class="text-sm text-slate-500">Kelola data dokter di ASSYIFA Hospital</p>
       </div>
       <button
         @click="goToCreate"
@@ -54,7 +54,6 @@
               <th class="text-left py-3.5 px-4 font-semibold text-slate-600">Dokter</th>
               <th class="text-left py-3.5 px-4 font-semibold text-slate-600">Spesialisasi</th>
               <th class="text-left py-3.5 px-4 font-semibold text-slate-600">Kontak</th>
-              <th class="text-left py-3.5 px-4 font-semibold text-slate-600">Jadwal Aktif</th>
               <th class="text-left py-3.5 px-4 font-semibold text-slate-600">Status</th>
               <th class="text-center py-3.5 px-4 font-semibold text-slate-600">Aksi</th>
             </tr>
@@ -76,18 +75,6 @@
               <td class="py-3 px-4 text-slate-600">
                 <p>{{ doctor.email }}</p>
                 <p class="text-xs text-slate-400">{{ doctor.phone }}</p>
-              </td>
-              <td class="py-3 px-4 text-slate-600">
-                <div class="flex flex-wrap gap-1">
-                  <span
-                    v-for="d in doctor.schedule.filter(s => s.active)"
-                    :key="d.day"
-                    class="rounded-full bg-teal-50 px-2 py-0.5 text-[11px] font-medium text-teal-600"
-                  >
-                    {{ d.day.slice(0, 3) }}
-                  </span>
-                  <span v-if="!doctor.schedule.some(s => s.active)" class="text-xs text-slate-400">Belum diatur</span>
-                </div>
               </td>
               <td class="py-3 px-4">
                 <span class="px-2.5 py-1 rounded-full text-xs font-medium" :class="statusClass(doctor.status)">

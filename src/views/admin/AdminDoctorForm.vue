@@ -13,7 +13,8 @@
           {{ isEdit ? 'Edit Dokter' : 'Tambah Dokter Baru' }}
         </h2>
         <p class="text-sm text-slate-500">
-          {{ isEdit ? 'Perbarui data & jadwal praktek dokter' : 'Lengkapi data dan jadwal praktek dokter baru' }}
+          {{ isEdit ? 'Perbarui data dokter' : 'Lengkapi data dokter baru' }}. Jadwal praktek diatur di menu
+          <span class="font-medium text-teal-600">Jadwal</span>.
         </p>
       </div>
     </div>
@@ -197,43 +198,6 @@
           ></textarea>
         </div>
 
-        <!-- Jadwal Praktek Mingguan -->
-        <div>
-          <label class="mb-2 block text-sm font-semibold text-slate-700">
-            Jadwal Praktek Mingguan
-          </label>
-          <div class="rounded-xl border border-slate-200 divide-y divide-slate-100 overflow-hidden">
-            <div
-              v-for="d in form.schedule"
-              :key="d.day"
-              class="flex flex-wrap items-center gap-3 px-4 py-2.5"
-              :class="d.active ? 'bg-teal-50/40' : 'bg-white'"
-            >
-              <label class="flex items-center gap-2 w-28 flex-shrink-0 cursor-pointer select-none">
-                <input
-                  type="checkbox"
-                  v-model="d.active"
-                  class="h-4 w-4 rounded border-slate-300 text-teal-500 focus:ring-2 focus:ring-teal-500/20"
-                />
-                <span class="text-sm font-medium text-slate-700">{{ d.day }}</span>
-              </label>
-              <template v-if="d.active">
-                <input
-                  type="time"
-                  v-model="d.start"
-                  class="rounded-lg border border-slate-200 px-2.5 py-1.5 text-sm"
-                />
-                <span class="text-slate-400 text-sm">s/d</span>
-                <input
-                  type="time"
-                  v-model="d.end"
-                  class="rounded-lg border border-slate-200 px-2.5 py-1.5 text-sm"
-                />
-              </template>
-              <span v-else class="text-xs text-slate-400">Libur</span>
-            </div>
-          </div>
-        </div>
       </div>
 
       <!-- Footer Aksi -->

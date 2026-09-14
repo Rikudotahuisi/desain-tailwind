@@ -12,8 +12,6 @@ export interface Doctor {
   name: string
   specialty: string
   image: string
-  rating: number
-  experience: number
   patients: string
   room: string
   email: string
@@ -70,8 +68,6 @@ const doctors = ref<Doctor[]>([
     name: 'dr. Andi Pratama, Sp.JP',
     specialty: 'Spesialis Jantung',
     image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&q=80',
-    rating: 4.9,
-    experience: 12,
     patients: '1.250',
     room: 'Poli Jantung - Lt. 2',
     email: 'andi@assyifa.com',
@@ -91,8 +87,6 @@ const doctors = ref<Doctor[]>([
     name: 'dr. Siti Rahayu, Sp.OG',
     specialty: 'Spesialis Kandungan',
     image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=200&q=80',
-    rating: 4.8,
-    experience: 10,
     patients: '980',
     room: 'Poli Kandungan - Lt. 1',
     email: 'siti@assyifa.com',
@@ -112,8 +106,6 @@ const doctors = ref<Doctor[]>([
     name: 'dr. Budi Santoso, Sp.PD',
     specialty: 'Spesialis Penyakit Dalam',
     image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80',
-    rating: 4.7,
-    experience: 15,
     patients: '2.100',
     room: 'Poli Penyakit Dalam - Lt. 2',
     email: 'budi@assyifa.com',
@@ -133,8 +125,6 @@ const doctors = ref<Doctor[]>([
     name: 'dr. Maya Sari, Sp.A',
     specialty: 'Spesialis Anak',
     image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&q=80',
-    rating: 4.9,
-    experience: 8,
     patients: '850',
     room: 'Poli Anak - Lt. 1',
     email: 'maya@assyifa.com',
@@ -154,8 +144,6 @@ const doctors = ref<Doctor[]>([
     name: 'dr. Rina Wati, Sp.N',
     specialty: 'Spesialis Saraf',
     image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&q=80',
-    rating: 4.8,
-    experience: 9,
     patients: '720',
     room: 'Poli Saraf - Lt. 3',
     email: 'rina@assyifa.com',
@@ -175,8 +163,6 @@ const doctors = ref<Doctor[]>([
     name: 'dr. Fajar Nugroho, Sp.OT',
     specialty: 'Spesialis Orthopaedi',
     image: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=200&q=80',
-    rating: 4.6,
-    experience: 11,
     patients: '640',
     room: 'Poli Orthopaedi - Lt. 3',
     email: 'fajar@assyifa.com',
