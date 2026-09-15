@@ -12,12 +12,6 @@
               class="h-full w-full object-cover"
             />
           </div>
-          <div
-            class="absolute -bottom-6 -right-6 rounded-2xl bg-teal-500 p-6 text-white shadow-xl"
-          >
-            <p class="text-3xl font-bold">20+</p>
-            <p class="text-sm">Tahun Pengabdian</p>
-          </div>
         </div>
 
         <!-- Right: Content -->
