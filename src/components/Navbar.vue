@@ -220,6 +220,7 @@
           >
             Artikel
           </router-link>
+
           <router-link
             to="/registration"
             class="rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200"
@@ -235,6 +236,7 @@
           >
             Pendaftaran
           </router-link>
+
           <router-link
             to="/contact"
             class="rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200"
