@@ -143,16 +143,6 @@
                   Konsultasi Gratis
                 </a>
               </div>
-
-              <div
-                class="mt-6 flex items-center justify-center gap-4 text-xs text-slate-500"
-              >
-                <span><i class="far fa-clock mr-1"></i>2-3 Jam</span>
-                <span class="h-1 w-1 rounded-full bg-slate-300"></span>
-                <span><i class="fas fa-flask mr-1"></i>Akurat 98%</span>
-                <span class="h-1 w-1 rounded-full bg-slate-300"></span>
-                <span><i class="fas fa-user-md mr-1"></i>Dokter Ahli</span>
-              </div>
             </div>
           </div>
         </div>
