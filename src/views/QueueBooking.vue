@@ -1,7 +1,6 @@
 <template>
-  <div class="min-h-screen bg-gray-50 py-10 px-4" style="padding-top: 140px;">
+  <div class="min-h-screen bg-gray-50 py-10 px-4" style="padding-top: 140px">
     <div class="max-w-2xl mx-auto">
-
       <!-- Step indicator -->
       <div class="flex items-center justify-between mb-10">
         <template v-for="(label, idx) in steps" :key="idx">
@@ -13,7 +12,10 @@
               <span v-if="currentStep > idx + 1">✓</span>
               <span v-else>{{ idx + 1 }}</span>
             </div>
-            <span class="text-xs mt-2 text-center text-gray-500 hidden sm:block">{{ label }}</span>
+            <span
+              class="text-xs mt-2 text-center text-gray-500 hidden sm:block"
+              >{{ label }}</span
+            >
           </div>
           <div
             v-if="idx < steps.length - 1"
@@ -23,10 +25,14 @@
         </template>
       </div>
 
-      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
+      <div
+        class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8"
+      >
         <!-- Tahap 1: Pilih Poliklinik -->
         <div v-if="currentStep === 1">
-          <h2 class="text-lg font-semibold text-gray-800 mb-4">Pilih Poliklinik</h2>
+          <h2 class="text-lg font-semibold text-gray-800 mb-4">
+            Pilih Poliklinik
+          </h2>
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
             <button
               v-for="poli in poliklinikList"
@@ -44,9 +50,15 @@
 
         <!-- Tahap 2: Pilih Dokter -->
         <div v-else-if="currentStep === 2">
-          <button @click="prevStep" class="text-sm text-gray-400 hover:text-gray-600 mb-4">← Kembali</button>
+          <button
+            @click="prevStep"
+            class="text-sm text-gray-400 hover:text-gray-600 mb-4"
+          >
+            ← Kembali
+          </button>
           <h2 class="text-lg font-semibold text-gray-800 mb-4">
-            Pilih Dokter — <span class="text-teal-600">{{ selectedPoliklinik }}</span>
+            Pilih Dokter —
+            <span class="text-teal-600">{{ selectedPoliklinik }}</span>
           </h2>
           <div class="space-y-3">
             <button
@@ -61,7 +73,10 @@
                 class="w-12 h-12 rounded-full object-cover"
                 alt=""
               />
-              <div v-else class="w-12 h-12 rounded-full bg-teal-100 flex items-center justify-center text-teal-600 font-semibold">
+              <div
+                v-else
+                class="w-12 h-12 rounded-full bg-teal-100 flex items-center justify-center text-teal-600 font-semibold"
+              >
                 {{ doctor.name?.charAt(0) }}
               </div>
               <div>
@@ -70,16 +85,25 @@
               </div>
             </button>
           </div>
-          <p v-if="doctorsInPoliklinik.length === 0" class="text-gray-400 text-sm">
+          <p
+            v-if="doctorsInPoliklinik.length === 0"
+            class="text-gray-400 text-sm"
+          >
             Belum ada dokter di poliklinik ini.
           </p>
         </div>
 
         <!-- Tahap 3: Pilih Hari & Jadwal -->
         <div v-else-if="currentStep === 3">
-          <button @click="prevStep" class="text-sm text-gray-400 hover:text-gray-600 mb-4">← Kembali</button>
+          <button
+            @click="prevStep"
+            class="text-sm text-gray-400 hover:text-gray-600 mb-4"
+          >
+            ← Kembali
+          </button>
           <h2 class="text-lg font-semibold text-gray-800 mb-4">
-            Pilih Hari & Jadwal — <span class="text-teal-600">{{ selectedDoctor?.name }}</span>
+            Pilih Hari & Jadwal —
+            <span class="text-teal-600">{{ selectedDoctor?.name }}</span>
           </h2>
 
           <p class="text-sm font-medium text-gray-600 mb-2">Tanggal</p>
@@ -89,9 +113,11 @@
               :key="d.date"
               @click="selectDate(d.date, d.day)"
               class="flex-shrink-0 px-4 py-2 rounded-lg border text-sm whitespace-nowrap transition-colors"
-              :class="selectedDate === d.date
-                ? 'bg-teal-500 border-teal-500 text-white'
-                : 'border-gray-200 text-gray-600 hover:border-teal-400'"
+              :class="
+                selectedDate === d.date
+                  ? 'bg-teal-500 border-teal-500 text-white'
+                  : 'border-gray-200 text-gray-600 hover:border-teal-400'
+              "
             >
               {{ d.label }}
             </button>
@@ -117,13 +143,20 @@
 
         <!-- Tahap 4: Data Pasien -->
         <div v-else-if="currentStep === 4">
-          <button @click="prevStep" class="text-sm text-gray-400 hover:text-gray-600 mb-4">← Kembali</button>
+          <button
+            @click="prevStep"
+            class="text-sm text-gray-400 hover:text-gray-600 mb-4"
+          >
+            ← Kembali
+          </button>
           <h2 class="text-lg font-semibold text-gray-800 mb-4">Data Pasien</h2>
 
           <form @submit.prevent="handleSubmit" class="space-y-4">
             <template v-if="!isLoggedIn">
               <div>
-                <label class="block text-sm font-medium text-gray-600 mb-1">Nama Akun</label>
+                <label class="block text-sm font-medium text-gray-600 mb-1"
+                  >Nama Akun</label
+                >
                 <input
                   v-model="patientData.nama"
                   type="text"
@@ -132,7 +165,9 @@
                 />
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-600 mb-1">Email</label>
+                <label class="block text-sm font-medium text-gray-600 mb-1"
+                  >Email</label
+                >
                 <input
                   v-model="patientData.email"
                   type="email"
@@ -141,7 +176,9 @@
                 />
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-600 mb-1">Nomor HP</label>
+                <label class="block text-sm font-medium text-gray-600 mb-1"
+                  >Nomor HP</label
+                >
                 <input
                   v-model="patientData.noHp"
                   type="tel"
@@ -152,7 +189,9 @@
             </template>
 
             <div>
-              <label class="block text-sm font-medium text-gray-600 mb-1">Nama Pasien</label>
+              <label class="block text-sm font-medium text-gray-600 mb-1"
+                >Nama Pasien</label
+              >
               <input
                 v-model="patientData.namaPasien"
                 type="text"
@@ -162,10 +201,21 @@
               />
             </div>
 
-            <div class="bg-gray-50 rounded-lg p-4 text-sm text-gray-600 space-y-1">
-              <p><span class="font-medium">Poliklinik:</span> {{ selectedPoliklinik }}</p>
-              <p><span class="font-medium">Dokter:</span> {{ selectedDoctor?.name }}</p>
-              <p><span class="font-medium">Jadwal:</span> {{ selectedDay }}, {{ selectedTime }}</p>
+            <div
+              class="bg-gray-50 rounded-lg p-4 text-sm text-gray-600 space-y-1"
+            >
+              <p>
+                <span class="font-medium">Poliklinik:</span>
+                {{ selectedPoliklinik }}
+              </p>
+              <p>
+                <span class="font-medium">Dokter:</span>
+                {{ selectedDoctor?.name }}
+              </p>
+              <p>
+                <span class="font-medium">Jadwal:</span> {{ selectedDay }},
+                {{ selectedTime }}
+              </p>
             </div>
 
             <button
@@ -178,18 +228,39 @@
         </div>
 
         <!-- Tahap 5: Nomor Antrian -->
-        <div v-else-if="currentStep === 5 && lastBooking" class="text-center py-4">
-          <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div
+          v-else-if="currentStep === 5 && lastBooking"
+          class="text-center py-4"
+        >
+          <div
+            class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
             <span class="text-teal-600 text-2xl">✓</span>
           </div>
           <p class="text-gray-500 mb-1">Nomor Antrian Anda</p>
-          <p class="text-5xl font-bold text-teal-600 mb-6">{{ lastBooking.nomorAntrian }}</p>
+          <p class="text-5xl font-bold text-teal-600 mb-6">
+            {{ lastBooking.nomorAntrian }}
+          </p>
 
-          <div class="bg-gray-50 rounded-lg p-5 text-left text-sm text-gray-600 space-y-1.5 mb-6">
-            <p><span class="font-medium text-gray-800">Pasien:</span> {{ lastBooking.pasien.namaPasien }}</p>
-            <p><span class="font-medium text-gray-800">Poliklinik:</span> {{ lastBooking.poliklinik }}</p>
-            <p><span class="font-medium text-gray-800">Dokter:</span> {{ lastBooking.dokterNama }}</p>
-            <p><span class="font-medium text-gray-800">Jadwal:</span> {{ lastBooking.hari }}, {{ lastBooking.jam }}</p>
+          <div
+            class="bg-gray-50 rounded-lg p-5 text-left text-sm text-gray-600 space-y-1.5 mb-6"
+          >
+            <p>
+              <span class="font-medium text-gray-800">Pasien:</span>
+              {{ lastBooking.pasien.namaPasien }}
+            </p>
+            <p>
+              <span class="font-medium text-gray-800">Poliklinik:</span>
+              {{ lastBooking.poliklinik }}
+            </p>
+            <p>
+              <span class="font-medium text-gray-800">Dokter:</span>
+              {{ lastBooking.dokterNama }}
+            </p>
+            <p>
+              <span class="font-medium text-gray-800">Jadwal:</span>
+              {{ lastBooking.hari }}, {{ lastBooking.jam }}
+            </p>
           </div>
 
           <div class="flex gap-3">
@@ -213,11 +284,11 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { useQueue } from '../composables/useQueue'
-import { useAuth } from '../composables/useAuth'
+import { onMounted } from "vue";
+import { useQueue } from "../composables/useQueue";
+import { useAuth } from "../composables/useAuth";
 
-const steps = ['Poliklinik', 'Dokter', 'Jadwal', 'Data Diri', 'Selesai']
+const steps = ["Poliklinik", "Dokter", "Jadwal", "Data Diri", "Selesai"];
 
 const {
   currentStep,
@@ -239,30 +310,31 @@ const {
   selectTime,
   submitBooking,
   resetBooking,
-} = useQueue()
+} = useQueue();
 
-const { isLoggedIn, currentUser } = useAuth()
+const { isLoggedIn, currentUser } = useAuth();
 
 onMounted(() => {
   // Kalau sudah login, isi otomatis nama akun dari data user
   if (isLoggedIn.value && currentUser.value) {
-    patientData.value.nama = currentUser.value.name
-    patientData.value.email = currentUser.value.email
-    patientData.value.noHp = currentUser.value.phone || ''
+    patientData.value.nama = currentUser.value.name;
+    patientData.value.email = currentUser.value.email;
+    patientData.value.noHp = currentUser.value.phone || "";
   }
-})
+});
 
 function stepClass(step: number) {
-  if (currentStep.value > step) return 'bg-teal-500 border-teal-500 text-white'
-  if (currentStep.value === step) return 'border-teal-500 text-teal-500 bg-white'
-  return 'border-gray-200 text-gray-400 bg-white'
+  if (currentStep.value > step) return "bg-teal-500 border-teal-500 text-white";
+  if (currentStep.value === step)
+    return "border-teal-500 text-teal-500 bg-white";
+  return "border-gray-200 text-gray-400 bg-white";
 }
 
 function handleSubmit() {
-  submitBooking()
+  submitBooking();
 }
 
 function handleReset() {
-  resetBooking()
+  resetBooking();
 }
 </script>

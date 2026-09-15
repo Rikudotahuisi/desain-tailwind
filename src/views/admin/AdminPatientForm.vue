@@ -9,14 +9,23 @@
         <i class="fas fa-arrow-left"></i>
       </button>
       <div>
-        <h2 class="text-2xl font-bold text-slate-900">{{ isEdit ? 'Edit Pasien' : 'Tambah Pasien Baru' }}</h2>
+        <h2 class="text-2xl font-bold text-slate-900">
+          {{ isEdit ? "Edit Pasien" : "Tambah Pasien Baru" }}
+        </h2>
         <p class="text-sm text-slate-500">
-          {{ isEdit ? 'Perbarui data pasien di ASSYIFA Hospital' : 'Lengkapi data pasien baru di ASSYIFA Hospital' }}
+          {{
+            isEdit
+              ? "Perbarui data pasien di ASSYIFA Hospital"
+              : "Lengkapi data pasien baru di ASSYIFA Hospital"
+          }}
         </p>
       </div>
     </div>
 
-    <form @submit.prevent="handleSubmit" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-5 max-w-3x2">
+    <form
+      @submit.prevent="handleSubmit"
+      class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-5 max-w-3x2"
+    >
       <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
         <!-- Nama Lengkap -->
         <div>
@@ -138,7 +147,9 @@
       </div>
 
       <!-- Footer -->
-      <div class="flex items-center justify-end gap-3 border-t border-slate-200 pt-5">
+      <div
+        class="flex items-center justify-end gap-3 border-t border-slate-200 pt-5"
+      >
         <button
           type="button"
           @click="router.push('/admin/patients')"
@@ -153,7 +164,13 @@
         >
           <i v-if="loading" class="fas fa-spinner fa-spin mr-2"></i>
           <i v-else class="fas fa-save mr-2"></i>
-          {{ loading ? 'Menyimpan...' : isEdit ? 'Update Pasien' : 'Simpan Pasien' }}
+          {{
+            loading
+              ? "Menyimpan..."
+              : isEdit
+                ? "Update Pasien"
+                : "Simpan Pasien"
+          }}
         </button>
       </div>
     </form>
@@ -161,31 +178,31 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import { usePatients } from '../../composables/usePatients'
+import { ref, computed, onMounted } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { usePatients } from "../../composables/usePatients";
 
-const router = useRouter()
-const route = useRoute()
-const { getPatientById, addPatient, updatePatient } = usePatients()
+const router = useRouter();
+const route = useRoute();
+const { getPatientById, addPatient, updatePatient } = usePatients();
 
-const isEdit = computed(() => !!route.params.id)
-const loading = ref(false)
+const isEdit = computed(() => !!route.params.id);
+const loading = ref(false);
 
 const form = ref({
-  name: '',
-  birthDate: new Date().toISOString().split('T')[0],
-  email: '',
-  phone: '',
-  gender: '' as '' | 'Laki-laki' | 'Perempuan',
-  status: 'Aktif' as 'Aktif' | 'Nonaktif' | 'Menunggu',
-  address: '',
-  complaint: ''
-})
+  name: "",
+  birthDate: new Date().toISOString().split("T")[0],
+  email: "",
+  phone: "",
+  gender: "" as "" | "Laki-laki" | "Perempuan",
+  status: "Aktif" as "Aktif" | "Nonaktif" | "Menunggu",
+  address: "",
+  complaint: "",
+});
 
 onMounted(() => {
   if (isEdit.value) {
-    const patient = getPatientById(Number(route.params.id))
+    const patient = getPatientById(Number(route.params.id));
     if (patient) {
       form.value = {
         name: patient.name,
@@ -195,14 +212,14 @@ onMounted(() => {
         gender: patient.gender,
         status: patient.status,
         address: patient.address,
-        complaint: patient.complaint
-      }
+        complaint: patient.complaint,
+      };
     }
   }
-})
+});
 
 const handleSubmit = () => {
-  loading.value = true
+  loading.value = true;
 
   setTimeout(() => {
     const payload = {
@@ -210,20 +227,20 @@ const handleSubmit = () => {
       birthDate: form.value.birthDate,
       email: form.value.email,
       phone: form.value.phone,
-      gender: form.value.gender as 'Laki-laki' | 'Perempuan',
+      gender: form.value.gender as "Laki-laki" | "Perempuan",
       status: form.value.status,
       address: form.value.address,
-      complaint: form.value.complaint
-    }
+      complaint: form.value.complaint,
+    };
 
     if (isEdit.value) {
-      updatePatient(Number(route.params.id), payload)
+      updatePatient(Number(route.params.id), payload);
     } else {
-      addPatient(payload)
+      addPatient(payload);
     }
 
-    loading.value = false
-    router.push('/admin/patients')
-  }, 800)
-}
+    loading.value = false;
+    router.push("/admin/patients");
+  }, 800);
+};
 </script>

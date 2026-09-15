@@ -10,13 +10,18 @@
       </button>
       <div>
         <h2 class="text-2xl font-bold text-slate-900">
-          {{ isEdit ? 'Edit Slide' : 'Tambah Slide Baru' }}
+          {{ isEdit ? "Edit Slide" : "Tambah Slide Baru" }}
         </h2>
-        <p class="text-sm text-slate-500">Atur konten slideshow yang tampil di halaman utama</p>
+        <p class="text-sm text-slate-500">
+          Atur konten slideshow yang tampil di halaman utama
+        </p>
       </div>
     </div>
 
-    <form @submit.prevent="handleSubmit" class="max-w-3x2 space-y-5 rounded-2xl bg-white p-6 shadow-lg border border-slate-200">
+    <form
+      @submit.prevent="handleSubmit"
+      class="max-w-3x2 space-y-5 rounded-2xl bg-white p-6 shadow-lg border border-slate-200"
+    >
       <!-- Upload Gambar -->
       <div>
         <label class="mb-1.5 block text-sm font-semibold text-slate-700">
@@ -28,10 +33,16 @@
           @drop.prevent="handleDrop"
           @click="triggerFileInput"
           class="relative cursor-pointer rounded-xl border-2 border-dashed p-6 text-center transition-all hover:border-teal-400 hover:bg-teal-50/30"
-          :class="form.image ? 'border-teal-400 bg-teal-50/30' : 'border-slate-300'"
+          :class="
+            form.image ? 'border-teal-400 bg-teal-50/30' : 'border-slate-300'
+          "
         >
           <div v-if="form.image" class="relative">
-            <img :src="form.image" alt="Preview" class="mx-auto max-h-56 rounded-lg object-contain" />
+            <img
+              :src="form.image"
+              alt="Preview"
+              class="mx-auto max-h-56 rounded-lg object-contain"
+            />
             <button
               type="button"
               @click.stop="removeImage"
@@ -44,7 +55,9 @@
             <div class="mb-3 text-5xl text-slate-300">
               <i class="fas fa-cloud-upload-alt"></i>
             </div>
-            <p class="text-sm font-medium text-slate-600">Klik atau drag & drop untuk upload</p>
+            <p class="text-sm font-medium text-slate-600">
+              Klik atau drag & drop untuk upload
+            </p>
             <p class="mt-1 text-xs text-slate-400">PNG, JPG, WEBP (Max 5MB)</p>
           </div>
 
@@ -56,7 +69,9 @@
             class="hidden"
           />
         </div>
-        <p v-if="errors.image" class="mt-1.5 text-xs text-red-500">{{ errors.image }}</p>
+        <p v-if="errors.image" class="mt-1.5 text-xs text-red-500">
+          {{ errors.image }}
+        </p>
       </div>
 
       <!-- Judul -->
@@ -70,12 +85,16 @@
           placeholder="Masukkan judul slide"
           class="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm transition focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20"
         />
-        <p v-if="errors.title" class="mt-1.5 text-xs text-red-500">{{ errors.title }}</p>
+        <p v-if="errors.title" class="mt-1.5 text-xs text-red-500">
+          {{ errors.title }}
+        </p>
       </div>
 
       <!-- Deskripsi -->
       <div>
-        <label class="mb-1.5 block text-sm font-semibold text-slate-700">Deskripsi</label>
+        <label class="mb-1.5 block text-sm font-semibold text-slate-700"
+          >Deskripsi</label
+        >
         <textarea
           v-model="form.description"
           rows="3"
@@ -87,7 +106,9 @@
       <!-- Tombol -->
       <div>
         <div class="mb-2 flex items-center justify-between">
-          <label class="block text-sm font-semibold text-slate-700">Tombol</label>
+          <label class="block text-sm font-semibold text-slate-700"
+            >Tombol</label
+          >
           <button
             type="button"
             @click="addButton"
@@ -97,7 +118,11 @@
           </button>
         </div>
 
-        <div v-for="(btn, idx) in form.buttons" :key="idx" class="mb-2 flex gap-2">
+        <div
+          v-for="(btn, idx) in form.buttons"
+          :key="idx"
+          class="mb-2 flex gap-2"
+        >
           <input
             v-model="btn.text"
             type="text"
@@ -119,7 +144,12 @@
           </button>
         </div>
 
-        <p v-if="form.buttons.length === 0" class="text-sm italic text-slate-400">Belum ada tombol</p>
+        <p
+          v-if="form.buttons.length === 0"
+          class="text-sm italic text-slate-400"
+        >
+          Belum ada tombol
+        </p>
       </div>
 
       <!-- Status Aktif -->
@@ -133,7 +163,9 @@
       </div>
 
       <!-- Footer -->
-      <div class="flex items-center justify-end gap-3 border-t border-slate-200 pt-5">
+      <div
+        class="flex items-center justify-end gap-3 border-t border-slate-200 pt-5"
+      >
         <button
           type="button"
           @click="router.push('/admin/slideshow')"
@@ -148,7 +180,9 @@
         >
           <i v-if="loading" class="fas fa-spinner fa-spin mr-2"></i>
           <i v-else class="fas fa-save mr-2"></i>
-          {{ loading ? 'Menyimpan...' : isEdit ? 'Update Slide' : 'Simpan Slide' }}
+          {{
+            loading ? "Menyimpan..." : isEdit ? "Update Slide" : "Simpan Slide"
+          }}
         </button>
       </div>
     </form>
@@ -156,111 +190,113 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, reactive } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { useSlideshow } from '../../composables/useSlideshow'
+import { ref, computed, onMounted, reactive } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { useSlideshow } from "../../composables/useSlideshow";
 
-const route = useRoute()
-const router = useRouter()
-const { getSlideById, addSlide, updateSlide } = useSlideshow()
+const route = useRoute();
+const router = useRouter();
+const { getSlideById, addSlide, updateSlide } = useSlideshow();
 
-const fileInput = ref<HTMLInputElement | null>(null)
-const loading = ref(false)
+const fileInput = ref<HTMLInputElement | null>(null);
+const loading = ref(false);
 
-const isEdit = computed(() => !!route.params.id)
-const slideId = computed(() => Number(route.params.id))
+const isEdit = computed(() => !!route.params.id);
+const slideId = computed(() => Number(route.params.id));
 
 const form = ref({
-  image: '',
-  title: '',
-  description: '',
-  buttons: [{ text: '', link: '' }] as { text: string; link: string }[],
-  active: true
-})
+  image: "",
+  title: "",
+  description: "",
+  buttons: [{ text: "", link: "" }] as { text: string; link: string }[],
+  active: true,
+});
 
 const errors = reactive({
-  image: '',
-  title: ''
-})
+  image: "",
+  title: "",
+});
 
 onMounted(() => {
   if (isEdit.value) {
-    const slide = getSlideById(slideId.value)
+    const slide = getSlideById(slideId.value);
     if (slide) {
       form.value = {
         image: slide.image,
         title: slide.title,
         description: slide.description,
-        buttons: slide.buttons.length ? [...slide.buttons.map(b => ({ ...b }))] : [{ text: '', link: '' }],
-        active: slide.active
-      }
+        buttons: slide.buttons.length
+          ? [...slide.buttons.map((b) => ({ ...b }))]
+          : [{ text: "", link: "" }],
+        active: slide.active,
+      };
     } else {
-      router.push('/admin/slideshow')
+      router.push("/admin/slideshow");
     }
   }
-})
+});
 
 // ===== IMAGE HANDLING (base64 supaya persist di localStorage) =====
-const triggerFileInput = () => fileInput.value?.click()
+const triggerFileInput = () => fileInput.value?.click();
 
 const readFileAsBase64 = (file: File) => {
-  const reader = new FileReader()
+  const reader = new FileReader();
   reader.onload = () => {
-    form.value.image = reader.result as string
-  }
-  reader.readAsDataURL(file)
-}
+    form.value.image = reader.result as string;
+  };
+  reader.readAsDataURL(file);
+};
 
 const handleFileChange = (event: Event) => {
-  const input = event.target as HTMLInputElement
+  const input = event.target as HTMLInputElement;
   if (input.files && input.files[0]) {
-    readFileAsBase64(input.files[0])
+    readFileAsBase64(input.files[0]);
   }
-}
+};
 
 const handleDrop = (event: DragEvent) => {
-  const files = event.dataTransfer?.files
+  const files = event.dataTransfer?.files;
   if (files && files[0]) {
-    readFileAsBase64(files[0])
+    readFileAsBase64(files[0]);
   }
-}
+};
 
 const removeImage = () => {
-  form.value.image = ''
-  if (fileInput.value) fileInput.value.value = ''
-}
+  form.value.image = "";
+  if (fileInput.value) fileInput.value.value = "";
+};
 
 // ===== TOMBOL =====
-const addButton = () => form.value.buttons.push({ text: '', link: '' })
-const removeButton = (index: number) => form.value.buttons.splice(index, 1)
+const addButton = () => form.value.buttons.push({ text: "", link: "" });
+const removeButton = (index: number) => form.value.buttons.splice(index, 1);
 
 // ===== SUBMIT =====
 const validate = () => {
-  errors.image = form.value.image ? '' : 'Gambar slide wajib diisi'
-  errors.title = form.value.title.trim() ? '' : 'Judul wajib diisi'
-  return !errors.image && !errors.title
-}
+  errors.image = form.value.image ? "" : "Gambar slide wajib diisi";
+  errors.title = form.value.title.trim() ? "" : "Judul wajib diisi";
+  return !errors.image && !errors.title;
+};
 
 const handleSubmit = () => {
-  if (!validate()) return
-  loading.value = true
+  if (!validate()) return;
+  loading.value = true;
 
   const payload = {
     image: form.value.image,
     title: form.value.title,
     description: form.value.description,
     active: form.value.active,
-    buttons: form.value.buttons.filter(b => b.text.trim() && b.link.trim())
-  }
+    buttons: form.value.buttons.filter((b) => b.text.trim() && b.link.trim()),
+  };
 
   setTimeout(() => {
     if (isEdit.value) {
-      updateSlide(slideId.value, payload)
+      updateSlide(slideId.value, payload);
     } else {
-      addSlide(payload)
+      addSlide(payload);
     }
-    loading.value = false
-    router.push('/admin/slideshow')
-  }, 500)
-}
+    loading.value = false;
+    router.push("/admin/slideshow");
+  }, 500);
+};
 </script>

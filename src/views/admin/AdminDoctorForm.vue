@@ -10,22 +10,30 @@
       </button>
       <div>
         <h2 class="text-2xl font-bold text-slate-900">
-          {{ isEdit ? 'Edit Dokter' : 'Tambah Dokter Baru' }}
+          {{ isEdit ? "Edit Dokter" : "Tambah Dokter Baru" }}
         </h2>
         <p class="text-sm text-slate-500">
-          {{ isEdit ? 'Perbarui data dokter' : 'Lengkapi data dokter baru' }}. Jadwal praktek diatur di menu
+          {{ isEdit ? "Perbarui data dokter" : "Lengkapi data dokter baru" }}.
+          Jadwal praktek diatur di menu
           <span class="font-medium text-teal-600">Jadwal</span>.
         </p>
       </div>
     </div>
 
     <!-- Not found state (edit id invalid) -->
-    <div v-if="isEdit && !found" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-12 text-center">
+    <div
+      v-if="isEdit && !found"
+      class="bg-white rounded-2xl shadow-sm border border-slate-200 p-12 text-center"
+    >
       <div class="text-5xl mb-4 text-slate-300">
         <i class="fas fa-circle-exclamation"></i>
       </div>
-      <h3 class="text-lg font-semibold text-slate-900">Dokter tidak ditemukan</h3>
-      <p class="text-sm text-slate-500 mb-6">Data dokter yang ingin Anda edit tidak tersedia.</p>
+      <h3 class="text-lg font-semibold text-slate-900">
+        Dokter tidak ditemukan
+      </h3>
+      <p class="text-sm text-slate-500 mb-6">
+        Data dokter yang ingin Anda edit tidak tersedia.
+      </p>
       <button
         @click="goBack"
         class="rounded-xl bg-teal-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-teal-500/20 transition hover:bg-teal-600"
@@ -36,7 +44,9 @@
 
     <!-- ===== FORM PAGE ===== -->
     <form v-else @submit.prevent="saveDoctor" class="space-y-6">
-      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-5">
+      <div
+        class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-5"
+      >
         <!-- Foto Dokter -->
         <div>
           <label class="mb-1.5 block text-sm font-semibold text-slate-700">
@@ -47,7 +57,11 @@
             @drop.prevent="handleDrop"
             @click="triggerFileInput"
             class="relative flex items-center gap-4 rounded-xl border-2 border-dashed p-4 cursor-pointer transition-all hover:border-teal-400 hover:bg-teal-50/30"
-            :class="photoPreview ? 'border-teal-400 bg-teal-50/30' : 'border-slate-300'"
+            :class="
+              photoPreview
+                ? 'border-teal-400 bg-teal-50/30'
+                : 'border-slate-300'
+            "
           >
             <div class="relative flex-shrink-0">
               <img
@@ -67,9 +81,12 @@
             <div class="text-sm">
               <p class="font-medium text-slate-600">
                 <i class="fas fa-cloud-upload-alt mr-1.5 text-teal-500"></i>
-                Klik atau drag & drop untuk {{ photoPreview || form.image ? 'ganti' : 'upload' }} foto
+                Klik atau drag & drop untuk
+                {{ photoPreview || form.image ? "ganti" : "upload" }} foto
               </p>
-              <p class="text-xs text-slate-400 mt-0.5">PNG, JPG, WEBP (Max 5MB) — disarankan foto persegi</p>
+              <p class="text-xs text-slate-400 mt-0.5">
+                PNG, JPG, WEBP (Max 5MB) — disarankan foto persegi
+              </p>
             </div>
             <input
               ref="fileInput"
@@ -107,7 +124,9 @@
               class="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm transition focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20"
             >
               <option value="">Pilih Spesialisasi</option>
-              <option v-for="spec in specialties" :key="spec" :value="spec">{{ spec }}</option>
+              <option v-for="spec in specialties" :key="spec" :value="spec">
+                {{ spec }}
+              </option>
             </select>
           </div>
         </div>
@@ -197,7 +216,6 @@
             class="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm transition focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20"
           ></textarea>
         </div>
-
       </div>
 
       <!-- Footer Aksi -->
@@ -216,7 +234,13 @@
         >
           <i v-if="loading" class="fas fa-spinner fa-spin mr-2"></i>
           <i v-else class="fas fa-save mr-2"></i>
-          {{ loading ? 'Menyimpan...' : isEdit ? 'Update Dokter' : 'Simpan Dokter' }}
+          {{
+            loading
+              ? "Menyimpan..."
+              : isEdit
+                ? "Update Dokter"
+                : "Simpan Dokter"
+          }}
         </button>
       </div>
     </form>
@@ -224,76 +248,81 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { useDoctors, emptyWeekSchedule, type Doctor } from '../../composables/useDoctors'
+import { ref, computed, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import {
+  useDoctors,
+  emptyWeekSchedule,
+  type Doctor,
+} from "../../composables/useDoctors";
 
-const route = useRoute()
-const router = useRouter()
-const { specialties, getDoctorById, addDoctor, updateDoctor } = useDoctors()
+const route = useRoute();
+const router = useRouter();
+const { specialties, getDoctorById, addDoctor, updateDoctor } = useDoctors();
 
 // ===== MODE: create vs edit, ditentukan dari route param =====
 const editId = computed(() => {
-  const id = route.params.id
-  return id ? Number(id) : null
-})
-const isEdit = computed(() => editId.value !== null)
-const found = ref(true)
+  const id = route.params.id;
+  return id ? Number(id) : null;
+});
+const isEdit = computed(() => editId.value !== null);
+const found = ref(true);
 
 // ===== STATE =====
-const loading = ref(false)
+const loading = ref(false);
 
 // ===== UPLOAD FOTO =====
-const fileInput = ref<HTMLInputElement | null>(null)
-const photoPreview = ref('')
+const fileInput = ref<HTMLInputElement | null>(null);
+const photoPreview = ref("");
 
 const triggerFileInput = () => {
-  fileInput.value?.click()
-}
+  fileInput.value?.click();
+};
 
 const handleFileChange = (event: Event) => {
-  const input = event.target as HTMLInputElement
-  if (input.files?.[0]) setPhoto(input.files[0])
-}
+  const input = event.target as HTMLInputElement;
+  if (input.files?.[0]) setPhoto(input.files[0]);
+};
 
 const handleDrop = (event: DragEvent) => {
-  const file = event.dataTransfer?.files?.[0]
-  if (file) setPhoto(file)
-}
+  const file = event.dataTransfer?.files?.[0];
+  if (file) setPhoto(file);
+};
 
 const setPhoto = (file: File) => {
-  photoPreview.value = URL.createObjectURL(file)
-}
+  photoPreview.value = URL.createObjectURL(file);
+};
 
 const removePhoto = () => {
-  photoPreview.value = ''
-  form.value.image = ''
-  if (fileInput.value) fileInput.value.value = ''
-}
+  photoPreview.value = "";
+  form.value.image = "";
+  if (fileInput.value) fileInput.value.value = "";
+};
 
 // ===== FORM =====
 const defaultForm = () => ({
-  name: '',
-  specialty: '',
-  image: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=200&q=80',
+  name: "",
+  specialty: "",
+  image:
+    "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=200&q=80",
   rating: 5,
   experience: 0,
-  patients: '0',
-  room: '',
-  email: '',
-  phone: '',
-  joinDate: new Date().toISOString().split('T')[0],
-  address: '',
-  status: 'Aktif' as Doctor['status'],
-  schedule: emptyWeekSchedule()
-})
+  patients: "0",
+  room: "",
+  email: "",
+  phone: "",
+  joinDate: new Date().toISOString().split("T")[0],
+  address: "",
+  status: "Aktif" as Doctor["status"],
+  schedule: emptyWeekSchedule(),
+});
 
-const form = ref(defaultForm())
+const form = ref(defaultForm());
 
 // ===== LOAD DATA JIKA MODE EDIT =====
 onMounted(() => {
   if (isEdit.value && editId.value !== null) {
-    const doctor = getDoctorById(editId.value)
+    const doctor = getDoctorById(editId.value);
     if (doctor) {
       form.value = {
         name: doctor.name,
@@ -309,40 +338,41 @@ onMounted(() => {
         address: doctor.address,
         status: doctor.status,
         // clone supaya edit di form tidak langsung mengubah data asli sebelum disimpan
-        schedule: doctor.schedule.map(s => ({ ...s }))
-      }
-      found.value = true
+        schedule: doctor.schedule.map((s) => ({ ...s })),
+      };
+      found.value = true;
     } else {
-      found.value = false
+      found.value = false;
     }
   }
-})
+});
 
 // ===== NAVIGASI =====
 const goBack = () => {
-  router.push({ name: 'admin-doctors' })
-}
+  router.push({ name: "admin-doctors" });
+};
 
 // ===== SIMPAN =====
 const saveDoctor = () => {
-  loading.value = true
+  loading.value = true;
 
   // Kalau ada foto baru yang diupload, pakai itu. Kalau tidak, pakai foto lama/default.
-  const finalImage = photoPreview.value || form.value.image || defaultForm().image
+  const finalImage =
+    photoPreview.value || form.value.image || defaultForm().image;
 
   setTimeout(() => {
-    const payload = { ...form.value, image: finalImage }
+    const payload = { ...form.value, image: finalImage };
 
     if (isEdit.value && editId.value !== null) {
-      updateDoctor(editId.value, payload)
-      alert('✅ Data dokter berhasil diupdate!')
+      updateDoctor(editId.value, payload);
+      alert("✅ Data dokter berhasil diupdate!");
     } else {
-      addDoctor(payload)
-      alert('✅ Dokter baru berhasil ditambahkan!')
+      addDoctor(payload);
+      alert("✅ Dokter baru berhasil ditambahkan!");
     }
 
-    loading.value = false
-    goBack()
-  }, 800)
-}
+    loading.value = false;
+    goBack();
+  }, 800);
+};
 </script>
