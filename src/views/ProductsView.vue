@@ -22,7 +22,7 @@
     </div>
 
     <!-- ===== CONTENT ===== -->
-    <div class="mx-auto max-w-[1400px] px-6 lg:px-16 py-10">
+    <div class="mx-auto max-w-[1400px] px-6 lg:px-16 py-30">
       <div class="flex flex-col lg:flex-row gap-8">
         <!-- ===== SIDEBAR FILTER ===== -->
         <div class="w-full lg:w-72 flex-shrink-0">
