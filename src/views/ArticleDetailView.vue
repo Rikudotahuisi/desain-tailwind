@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-slate-50" style="padding-top: 140px">
+  <div class="min-h-screen bg-slate-50" style="padding-top: 170px">
     <div class="mx-auto max-w-[1000px] px-6 lg:px-16 -mt-6">
       <!-- Tombol Kembali -->
       <button

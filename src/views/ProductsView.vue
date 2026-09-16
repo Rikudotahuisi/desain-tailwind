@@ -175,7 +175,7 @@
                 <span
                   class="absolute top-3 left-3 bg-white/90 px-2.5 py-1 rounded-full text-xs font-semibold text-teal-600 shadow-sm"
                 >
-                  {{ item.subCategory }}
+                  {{ item.mainCategory }}
                 </span>
               </div>
 
@@ -188,11 +188,15 @@
                   <span class="text-lg font-bold text-teal-600">{{
                     formatRupiah(item.price)
                   }}</span>
-                  <span
-                    class="text-sm font-semibold text-teal-600 group-hover:text-teal-700 transition"
+
+                  <!-- Tombol Lihat Detail -->
+                  <router-link
+                    :to="`/produk/${item.id}`"
+                    class="mt-3 inline-flex items-center gap-1 rounded-full border border-teal-500 px-4 py-2 text-xs font-medium text-teal-600 transition hover:bg-teal-500 hover:text-white"
                   >
-                    Lihat detail <i class="fas fa-arrow-right ml-1"></i>
-                  </span>
+                    Lihat Detail
+                    <i class="fas fa-arrow-right text-[9px]"></i>
+                  </router-link>
                 </div>
               </div>
             </router-link>

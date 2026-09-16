@@ -7,181 +7,118 @@
           class="inline-flex items-center gap-3 rounded-full bg-teal-50 px-4 py-2"
         >
           <span class="h-2 w-2 rounded-full bg-teal-500 animate-pulse"></span>
+
           <span
             class="text-sm font-semibold tracking-wider text-teal-600 uppercase"
           >
-            <i class="fas fa-heartbeat mr-2"></i>Layanan Skrining
+            <i class="fas fa-heartbeat mr-2"></i>
+            Produk
           </span>
         </div>
+
         <h2 class="mt-4 text-4xl font-bold text-slate-900 lg:text-5xl">
-          Medical Check Up <br class="hidden lg:block" />
-          <span class="text-teal-600">Komprehensif & Terpercaya</span>
+          Pilihan Produk Terbaik Untuk Anda
+          <br class="hidden lg:block" />
         </h2>
+
         <p class="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
-          Pilih paket skrining yang sesuai dengan kebutuhan kesehatan Anda.
-          Deteksi dini untuk hidup yang lebih sehat.
+          Pilih paket yang sesuai dengan kebutuhan kesehatan Anda. Deteksi dini
+          untuk hidup yang lebih sehat.
         </p>
       </div>
 
+      <!-- Jika belum ada produk -->
       <div v-if="checkupProducts.length === 0" class="py-12 text-center">
-        <div class="text-5xl mb-4 text-slate-300">
+        <div class="mb-4 text-5xl text-slate-300">
           <i class="fas fa-briefcase-medical"></i>
         </div>
+
         <h3 class="text-lg font-semibold text-slate-900">
           Belum ada paket checkup
         </h3>
+
         <p class="text-sm text-slate-500">
           Paket skrining akan tampil di sini setelah ditambahkan oleh admin
         </p>
       </div>
 
       <template v-else>
+        <!-- ========================= -->
+        <!-- GRID PRODUK -->
+        <!-- ========================= -->
         <div
-          class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+          class="grid grid-cols-2 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
         >
           <div
-            v-for="(item, index) in checkupProducts"
+            v-for="item in checkupProducts"
             :key="item.id"
-            @click="selectedIndex = index"
-            class="group cursor-pointer rounded-2xl bg-white p-4 text-center shadow-sm border border-slate-100 transition-all hover:-translate-y-1 hover:shadow-lg"
-            :class="[
-              selectedIndex === index
-                ? 'ring-2 ring-teal-500 bg-teal-50/60'
-                : 'hover:border-teal-200',
-            ]"
+            class="group overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
           >
+            <!-- ========================= -->
+            <!-- GAMBAR PRODUK -->
+            <!-- ========================= -->
             <div
-              class="mx-auto mb-3 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl text-2xl transition-colors"
-              :class="[
-                item.image
-                  ? ''
-                  : selectedIndex === index
-                    ? 'bg-teal-500 text-white'
-                    : 'bg-teal-50 text-teal-600 group-hover:bg-teal-100',
-              ]"
+              class="relative h-48 w-full overflow-hidden bg-slate-100 sm:h-52"
             >
+              <!-- Gambar -->
               <img
                 v-if="item.image"
                 :src="item.image"
                 :alt="item.name"
-                class="h-full w-full object-cover"
+                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
-              <i v-else :class="item.icon"></i>
-            </div>
-            <h4 class="text-sm font-semibold text-slate-900">
-              {{ item.name }}
-            </h4>
-            <p class="mt-1 text-xs text-slate-500">{{ item.description }}</p>
-            <div
-              v-if="selectedIndex === index"
-              class="mt-2 flex items-center justify-center gap-1 text-xs font-semibold text-teal-600"
-            >
-              <i class="fas fa-check-circle"></i>
-              <span>Dipilih</span>
-            </div>
-          </div>
-        </div>
 
-        <div
-          v-if="selected"
-          class="mt-12 rounded-3xl bg-white p-8 shadow-lg border border-slate-100"
-        >
-          <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
-            <div class="lg:col-span-2">
-              <div class="flex items-start gap-4">
-                <div
-                  class="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl text-3xl"
-                  :class="selected.image ? '' : 'bg-teal-50 text-teal-600'"
-                >
-                  <img
-                    v-if="selected.image"
-                    :src="selected.image"
-                    :alt="selected.name"
-                    class="h-full w-full object-cover"
-                  />
-                  <i v-else :class="selected.icon"></i>
-                </div>
-                <div>
-                  <h3 class="text-2xl font-bold text-slate-900">
-                    {{ selected.name }}
-                  </h3>
-                  <p class="mt-1 text-slate-600">
-                    {{ selected.fullDescription }}
-                  </p>
-                </div>
-              </div>
-
-              <div class="mt-6">
-                <h4 class="mb-3 font-semibold text-slate-900">
-                  <i class="fas fa-list-check mr-2 text-teal-500"></i>
-                  Pemeriksaan yang Termasuk:
-                </h4>
-                <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                  <div
-                    v-for="test in selected.tests"
-                    :key="test"
-                    class="flex items-start gap-3 rounded-lg bg-slate-50 p-3"
-                  >
-                    <i class="fas fa-check-circle mt-0.5 text-teal-500"></i>
-                    <span class="text-sm text-slate-600">{{ test }}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="mt-6 rounded-xl bg-blue-50 p-4">
-                <h4 class="mb-2 font-semibold text-slate-900">
-                  <i class="fas fa-users mr-2 text-blue-500"></i>
-                  Direkomendasikan untuk:
-                </h4>
-                <p class="text-sm text-slate-600">
-                  {{ selected.recommended }}
-                </p>
-              </div>
-
-              <router-link
-                :to="`/produk/${selected.id}`"
-                class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-teal-600 hover:text-teal-700 transition"
-              >
-                Lihat Detail Lengkap <i class="fas fa-arrow-right"></i>
-              </router-link>
-            </div>
-
-            <div class="lg:col-span-1">
+              <!-- Icon jika tidak ada gambar -->
               <div
-                class="rounded-2xl bg-gradient-to-br from-teal-50 to-white p-6 text-center"
+                v-else
+                class="flex h-full w-full items-center justify-center bg-teal-50 text-5xl text-teal-500"
               >
-                <p class="text-sm text-slate-500">Mulai dari</p>
-                <p class="text-4xl font-bold text-teal-600">
-                  {{ formatRupiah(selected.price) }}
-                </p>
-                <p class="mt-1 text-sm text-slate-500">
-                  termasuk konsultasi dokter
-                </p>
-
-                <div class="mt-6 space-y-3">
-                  <router-link
-                    to="/register"
-                    class="flex w-full items-center justify-center gap-2 rounded-full bg-teal-500 px-6 py-3.5 font-semibold text-white transition hover:bg-teal-600 hover:-translate-y-0.5"
-                  >
-                    <i class="fas fa-calendar-check"></i>
-                    Booking Sekarang
-                  </router-link>
-
-                  <a
-                    href="#"
-                    class="flex w-full items-center justify-center gap-2 rounded-full border border-teal-200 bg-white px-6 py-3 font-semibold text-teal-600 transition hover:bg-teal-50 hover:-translate-y-0.5"
-                  >
-                    <i class="fas fa-phone"></i>
-                    Konsultasi Gratis
-                  </a>
-                </div>
+                <i :class="item.icon"></i>
               </div>
+              <span
+                class="absolute top-3 left-3 bg-white/90 px-2.5 py-1 rounded-full text-xs font-semibold text-teal-600 shadow-sm"
+              >
+                {{ item.mainCategory }}
+              </span>
+            </div>
+
+            <!-- ========================= -->
+            <!-- INFORMASI PRODUK -->
+            <!-- ========================= -->
+            <div class="p-4 text-left">
+              <!-- Nama Produk -->
+              <h4
+                class="min-h-[20px] text-base font-semibold leading-5 text-slate-900"
+              >
+                {{ item.name }}
+              </h4>
+
+              <!-- Deskripsi Produk -->
+              <p class="mt-1 text-sm text-slate-500 line-clamp-1">
+                {{ item.description }}
+              </p>
+
+              <!-- Harga -->
+              <p class="mt-3 text-lg font-bold text-teal-600">
+                {{ formatRupiah(item.price) }}
+              </p>
+
+              <!-- Tombol Lihat Detail -->
+              <router-link
+                :to="`/produk/${item.id}`"
+                class="mt-3 inline-flex items-center gap-1 rounded-full border border-teal-500 px-4 py-2 text-xs font-medium text-teal-600 transition hover:bg-teal-500 hover:text-white"
+              >
+                Lihat Detail
+                <i class="fas fa-arrow-right text-[9px]"></i>
+              </router-link>
             </div>
           </div>
         </div>
       </template>
 
-      <!-- CTA Banner -->
+      <!-- ========================= -->
+      <!-- CTA BANNER -->
+      <!-- ========================= -->
       <div
         class="mt-16 rounded-3xl bg-gradient-to-r from-teal-600 to-teal-700 p-10 text-center text-white shadow-xl"
       >
@@ -189,15 +126,18 @@
           <i class="fas fa-phone-alt mr-3"></i>
           Ingin Mengambil Antrian?
         </h3>
+
         <p class="mt-2 text-teal-100">
           Konsultasikan dengan tim kami untuk mendapatkan rekomendasi yang tepat
         </p>
+
         <div class="mt-6 flex flex-wrap items-center justify-center gap-4">
           <router-link
             to="/antrian"
             class="rounded-full bg-white px-8 py-3 font-semibold text-teal-600 transition hover:bg-teal-50 hover:-translate-y-0.5"
           >
-            <i class="fas fa-calendar-check mr-2"></i>Ambil Antrian
+            <i class="fas fa-calendar-check mr-2"></i>
+            Ambil Antrian
           </router-link>
         </div>
       </div>
@@ -206,23 +146,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { computed } from "vue";
+
 import { useProducts, formatRupiah } from "../composables/useProducts";
 
 const { products } = useProducts();
 
 const checkupProducts = computed(() =>
   products.value.filter((p) => p.mainCategory === "Medical Checkup"),
-);
-
-const selectedIndex = ref<number | null>(
-  checkupProducts.value.length > 0 ? 0 : null,
-);
-
-const selected = computed(() =>
-  selectedIndex.value !== null
-    ? checkupProducts.value[selectedIndex.value]
-    : null,
 );
 </script>
 
@@ -236,8 +167,16 @@ const selected = computed(() =>
   100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.4;
   }
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 </style>

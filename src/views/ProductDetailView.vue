@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-slate-50" style="padding-top: 140px">
+  <div class="min-h-screen bg-slate-50" style="padding-top: 120px">
     <div class="mx-auto max-w-4xl px-6 lg:px-0 py-10">
       <button
         @click="router.push('/produk')"
@@ -22,7 +22,7 @@
           <span
             class="absolute top-4 left-4 bg-white/90 px-3 py-1.5 rounded-full text-xs font-semibold text-teal-600 shadow-sm"
           >
-            {{ item.mainCategory }} · {{ item.subCategory }}
+            {{ item.mainCategory }}
           </span>
         </div>
 
