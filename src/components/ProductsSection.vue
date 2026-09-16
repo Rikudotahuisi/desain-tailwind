@@ -62,19 +62,10 @@
             >
               <!-- Gambar -->
               <img
-                v-if="item.image"
-                :src="item.image"
+                :src="getProductImage(item)"
                 :alt="item.name"
                 class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
-
-              <!-- Icon jika tidak ada gambar -->
-              <div
-                v-else
-                class="flex h-full w-full items-center justify-center bg-teal-50 text-5xl text-teal-500"
-              >
-                <i :class="item.icon"></i>
-              </div>
               <span
                 class="absolute top-3 left-3 bg-white/90 px-2.5 py-1 rounded-full text-xs font-semibold text-teal-600 shadow-sm"
               >
@@ -148,7 +139,11 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-import { useProducts, formatRupiah } from "../composables/useProducts";
+import {
+  useProducts,
+  formatRupiah,
+  getProductImage,
+} from "../composables/useProducts";
 
 const { products } = useProducts();
 

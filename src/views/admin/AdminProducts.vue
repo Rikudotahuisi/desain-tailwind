@@ -37,15 +37,6 @@
             {{ cat }}
           </option>
         </select>
-        <select
-          v-model="filterSubCategory"
-          class="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
-        >
-          <option value="">Semua Sub Kategori</option>
-          <option v-for="sub in subCategories" :key="sub" :value="sub">
-            {{ sub }}
-          </option>
-        </select>
       </div>
     </div>
 
@@ -61,9 +52,6 @@
               </th>
               <th class="text-left py-3.5 px-4 font-semibold text-slate-600">
                 Kategori Utama
-              </th>
-              <th class="text-left py-3.5 px-4 font-semibold text-slate-600">
-                Sub Kategori
               </th>
               <th class="text-left py-3.5 px-4 font-semibold text-slate-600">
                 Umur
@@ -91,17 +79,15 @@
                     class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center overflow-hidden flex-shrink-0"
                   >
                     <img
-                      v-if="item.image"
-                      :src="item.image"
+                      :src="getProductImage(item)"
+                      :alt="item.name"
                       class="w-full h-full object-cover"
                     />
-                    <i v-else :class="[item.icon, 'text-teal-500']"></i>
                   </div>
                   <p class="font-medium text-slate-900">{{ item.name }}</p>
                 </div>
               </td>
               <td class="py-3 px-4 text-slate-600">{{ item.mainCategory }}</td>
-              <td class="py-3 px-4 text-slate-600">{{ item.subCategory }}</td>
               <td class="py-3 px-4 text-slate-600">{{ item.age }}</td>
               <td class="py-3 px-4 text-slate-600">{{ item.gender }}</td>
               <td class="py-3 px-4 font-semibold text-teal-600">
@@ -139,21 +125,20 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
-import { useProducts, formatRupiah } from "../../composables/useProducts";
+import {
+  useProducts,
+  formatRupiah,
+  getProductImage,
+} from "../../composables/useProducts";
 
 const router = useRouter();
 const { products, deleteProduct } = useProducts();
 
 const searchQuery = ref("");
 const filterMainCategory = ref("");
-const filterSubCategory = ref("");
 
 const mainCategories = computed(() =>
   Array.from(new Set(products.value.map((p) => p.mainCategory))),
-);
-
-const subCategories = computed(() =>
-  Array.from(new Set(products.value.map((p) => p.subCategory))),
 );
 
 const filteredItems = computed(() => {
@@ -161,22 +146,14 @@ const filteredItems = computed(() => {
 
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase();
-    filtered = filtered.filter(
-      (item) =>
-        item.name.toLowerCase().includes(query) ||
-        item.subCategory.toLowerCase().includes(query),
+    filtered = filtered.filter((item) =>
+      item.name.toLowerCase().includes(query),
     );
   }
 
   if (filterMainCategory.value) {
     filtered = filtered.filter(
       (item) => item.mainCategory === filterMainCategory.value,
-    );
-  }
-
-  if (filterSubCategory.value) {
-    filtered = filtered.filter(
-      (item) => item.subCategory === filterSubCategory.value,
     );
   }
 

@@ -3,12 +3,10 @@ import { ref } from "vue";
 export interface Product {
   id: number;
   name: string;
-  icon: string;
   image: string;
   description: string;
   fullDescription: string;
   mainCategory: string; // kategori utama, mis. "Medical Checkup", "Farmasi", "Alat Kesehatan"
-  subCategory: string; // sub-kategori di dalam kategori utama, mis. "Umum", "Jantung"
   price: number;
   recommended: string;
   age: string;
@@ -21,17 +19,30 @@ export type ProductPayload = Omit<Product, "id">;
 const STORAGE_KEY = "assyifa_products";
 const LEGACY_CHECKUP_KEY = "assyifa_checkups";
 
+// Foto random (konsisten per produk berdasarkan id) untuk produk yang belum
+// punya foto sendiri. Menggantikan fallback icon lama.
+function randomProductImage(id: number): string {
+  return `https://picsum.photos/seed/product-${id}/600/400`;
+}
+
+// Dipakai di komponen: selalu kembalikan foto (upload jika ada, kalau tidak foto random)
+export function getProductImage(
+  product: Pick<Product, "id" | "image">,
+): string {
+  return product.image && product.image.trim() !== ""
+    ? product.image
+    : randomProductImage(product.id);
+}
+
 const defaultProducts: Product[] = [
   {
     id: 1,
     name: "Skrining Umum",
-    icon: "fas fa-stethoscope",
-    image: "",
+    image: randomProductImage(1),
     description: "Pemeriksaan kesehatan dasar",
     fullDescription:
       "Paket skrining kesehatan umum untuk mengetahui kondisi kesehatan Anda secara menyeluruh. Cocok untuk semua kalangan.",
     mainCategory: "Medical Checkup",
-    subCategory: "Umum",
     price: 350000,
     recommended:
       "Semua usia, terutama untuk deteksi dini masalah kesehatan umum.",
@@ -49,13 +60,11 @@ const defaultProducts: Product[] = [
   {
     id: 2,
     name: "Skrining Jantung",
-    icon: "fas fa-heart",
-    image: "",
+    image: randomProductImage(2),
     description: "Deteksi dini penyakit jantung",
     fullDescription:
       "Paket skrining khusus untuk mendeteksi risiko penyakit jantung koroner dan masalah kardiovaskular lainnya.",
     mainCategory: "Medical Checkup",
-    subCategory: "Jantung",
     price: 750000,
     recommended:
       "Usia 35+ tahun, memiliki riwayat keluarga penyakit jantung, perokok, atau memiliki gaya hidup tidak sehat.",
@@ -73,13 +82,11 @@ const defaultProducts: Product[] = [
   {
     id: 3,
     name: "Skrining Kanker",
-    icon: "fas fa-ribbon",
-    image: "",
+    image: randomProductImage(3),
     description: "Deteksi dini berbagai kanker",
     fullDescription:
       "Paket skrining komprehensif untuk mendeteksi dini berbagai jenis kanker termasuk kanker payudara, serviks, dan prostat.",
     mainCategory: "Medical Checkup",
-    subCategory: "Kanker",
     price: 1200000,
     recommended:
       "Usia 40+ tahun, memiliki riwayat keluarga kanker, atau faktor risiko lainnya.",
@@ -97,13 +104,11 @@ const defaultProducts: Product[] = [
   {
     id: 4,
     name: "Skrining Stroke",
-    icon: "fas fa-brain",
-    image: "",
+    image: randomProductImage(4),
     description: "Deteksi risiko stroke",
     fullDescription:
       "Paket skrining untuk mendeteksi faktor risiko stroke dan mencegah kejadian stroke di masa depan.",
     mainCategory: "Medical Checkup",
-    subCategory: "Stroke",
     price: 850000,
     recommended:
       "Usia 40+ tahun, hipertensi, diabetes, atau memiliki riwayat keluarga stroke.",
@@ -121,13 +126,11 @@ const defaultProducts: Product[] = [
   {
     id: 5,
     name: "Skrining Calon Pelajar",
-    icon: "fas fa-graduation-cap",
-    image: "",
+    image: randomProductImage(5),
     description: "Cek kesehatan untuk pelajar",
     fullDescription:
       "Paket skrining kesehatan lengkap untuk calon pelajar baru. Memastikan kondisi fisik dan mental siap untuk menempuh pendidikan.",
     mainCategory: "Medical Checkup",
-    subCategory: "Pelajar",
     price: 450000,
     recommended:
       "Calon pelajar baru, mahasiswa baru, atau peserta program pendidikan.",
@@ -145,13 +148,11 @@ const defaultProducts: Product[] = [
   {
     id: 6,
     name: "Skrining Pria",
-    icon: "fas fa-mars",
-    image: "",
+    image: randomProductImage(6),
     description: "Kesehatan khusus pria",
     fullDescription:
       "Paket skrining kesehatan yang dirancang khusus untuk pria, mencakup pemeriksaan organ reproduksi dan penyakit umum pada pria.",
     mainCategory: "Medical Checkup",
-    subCategory: "Pria",
     price: 650000,
     recommended:
       "Pria usia 25+ tahun, atau yang ingin menjaga kesehatan organ reproduksi.",
@@ -169,13 +170,11 @@ const defaultProducts: Product[] = [
   {
     id: 7,
     name: "Skrining Wanita",
-    icon: "fas fa-venus",
-    image: "",
+    image: randomProductImage(7),
     description: "Kesehatan khusus wanita",
     fullDescription:
       "Paket skrining kesehatan yang dirancang khusus untuk wanita, mencakup pemeriksaan organ reproduksi dan deteksi dini kanker serviks & payudara.",
     mainCategory: "Medical Checkup",
-    subCategory: "Wanita",
     price: 650000,
     recommended:
       "Wanita usia 18+ tahun, terutama untuk deteksi dini kanker serviks dan payudara.",
@@ -193,13 +192,11 @@ const defaultProducts: Product[] = [
   {
     id: 8,
     name: "Pranikah",
-    icon: "fas fa-ring",
-    image: "",
+    image: randomProductImage(8),
     description: "Cek kesehatan sebelum menikah",
     fullDescription:
       "Paket skrining kesehatan lengkap untuk calon pengantin. Memastikan kedua calon pasangan dalam kondisi sehat untuk memulai kehidupan pernikahan.",
     mainCategory: "Medical Checkup",
-    subCategory: "Pranikah",
     price: 900000,
     recommended:
       "Calon pengantin, baik pria maupun wanita, yang ingin memastikan kesehatan sebelum menikah.",
@@ -217,13 +214,11 @@ const defaultProducts: Product[] = [
   {
     id: 9,
     name: "Pra-Karyawan",
-    icon: "fas fa-briefcase",
-    image: "",
+    image: randomProductImage(9),
     description: "Cek kesehatan untuk karyawan baru",
     fullDescription:
       "Paket skrining kesehatan untuk calon karyawan baru. Memastikan kondisi fisik dan mental siap untuk bekerja di lingkungan profesional.",
     mainCategory: "Medical Checkup",
-    subCategory: "Karyawan",
     price: 500000,
     recommended:
       "Calon karyawan baru di berbagai perusahaan, termasuk pemeriksaan kesehatan kerja.",
@@ -251,12 +246,10 @@ function migrateLegacyCheckups(): Product[] | null {
     return parsed.map((item: any) => ({
       id: item.id,
       name: item.name,
-      icon: item.icon || "fas fa-briefcase-medical",
-      image: item.image || "",
+      image: item.image || randomProductImage(item.id),
       description: item.description || "",
       fullDescription: item.fullDescription || "",
       mainCategory: "Medical Checkup",
-      subCategory: item.category || "Umum",
       price: item.price || 0,
       recommended: item.recommended || "",
       age: item.age || "Semua",
@@ -276,12 +269,14 @@ function loadProducts(): Product[] {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) {
         // migrasi field lama (kalau ada) ke bentuk baru
-        return parsed.map((item: any) => ({
-          image: "",
-          mainCategory: item.mainCategory ?? "Medical Checkup",
-          subCategory: item.subCategory ?? item.category ?? "Umum",
-          ...item,
-        }));
+        return parsed.map((item: any) => {
+          const { subCategory, icon, ...rest } = item;
+          return {
+            mainCategory: item.mainCategory ?? "Medical Checkup",
+            ...rest,
+            image: item.image || randomProductImage(item.id),
+          };
+        });
       }
     }
 
@@ -312,7 +307,11 @@ export function useProducts() {
       products.value.length > 0
         ? Math.max(...products.value.map((p) => p.id)) + 1
         : 1;
-    products.value.push({ id: newId, ...payload });
+    products.value.push({
+      id: newId,
+      ...payload,
+      image: payload.image?.trim() ? payload.image : randomProductImage(newId),
+    });
     persist();
     return newId;
   };
@@ -320,7 +319,11 @@ export function useProducts() {
   const updateProduct = (id: number, payload: ProductPayload) => {
     const index = products.value.findIndex((p) => p.id === id);
     if (index !== -1) {
-      products.value[index] = { id, ...payload };
+      products.value[index] = {
+        id,
+        ...payload,
+        image: payload.image?.trim() ? payload.image : randomProductImage(id),
+      };
       persist();
     }
   };

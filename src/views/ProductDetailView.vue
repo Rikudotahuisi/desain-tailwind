@@ -11,14 +11,10 @@
       <div v-if="item" class="bg-white rounded-3xl shadow-lg overflow-hidden">
         <div class="relative h-72 bg-gradient-to-br from-teal-100 to-teal-200">
           <img
-            v-if="item.image"
-            :src="item.image"
+            :src="getProductImage(item)"
             :alt="item.name"
             class="h-full w-full object-cover"
           />
-          <div v-else class="flex h-full items-center justify-center">
-            <i :class="[item.icon, 'text-8xl text-teal-500/40']"></i>
-          </div>
           <span
             class="absolute top-4 left-4 bg-white/90 px-3 py-1.5 rounded-full text-xs font-semibold text-teal-600 shadow-sm"
           >
@@ -98,7 +94,11 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { useProducts, formatRupiah } from "../composables/useProducts";
+import {
+  useProducts,
+  formatRupiah,
+  getProductImage,
+} from "../composables/useProducts";
 
 const route = useRoute();
 const router = useRouter();

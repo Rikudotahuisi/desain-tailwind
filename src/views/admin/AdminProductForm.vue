@@ -24,7 +24,10 @@
       <!-- Upload Foto (disamakan dengan upload artikel) -->
       <div>
         <label class="mb-1.5 block text-sm font-semibold text-slate-700">
-          Foto Produk <span class="text-red-500">*</span>
+          Foto Produk
+          <span class="text-xs font-normal text-slate-400"
+            >(opsional, foto random akan dipakai jika kosong)</span
+          >
         </label>
         <div
           @dragover.prevent
@@ -115,32 +118,6 @@
         </div>
       </div>
 
-      <!-- Sub Kategori -->
-      <div>
-        <label class="mb-1.5 block text-sm font-semibold text-slate-700">
-          Sub Kategori <span class="text-red-500">*</span>
-        </label>
-        <select
-          v-model="subCategorySelect"
-          required
-          class="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm transition focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20"
-        >
-          <option value="" disabled>Pilih sub kategori</option>
-          <option v-for="sub in existingSubCategories" :key="sub" :value="sub">
-            {{ sub }}
-          </option>
-          <option value="__new__">+ Tambah Sub Kategori Baru</option>
-        </select>
-        <input
-          v-if="subCategorySelect === '__new__'"
-          v-model="form.subCategory"
-          type="text"
-          required
-          placeholder="Mis. Umum, Jantung"
-          class="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm transition focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20"
-        />
-      </div>
-
       <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
         <div>
           <label class="mb-1.5 block text-sm font-semibold text-slate-700">
@@ -184,18 +161,6 @@
             </option>
           </select>
         </div>
-      </div>
-
-      <div>
-        <label class="mb-1.5 block text-sm font-semibold text-slate-700">
-          Icon (Font Awesome class, fallback jika belum ada foto)
-        </label>
-        <input
-          v-model="form.icon"
-          type="text"
-          placeholder="fas fa-stethoscope"
-          class="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm transition focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20"
-        />
       </div>
 
       <div>
@@ -324,23 +289,17 @@ const fileInput = ref<HTMLInputElement | null>(null);
 const existingMainCategories = computed(() =>
   Array.from(new Set(products.value.map((p) => p.mainCategory))),
 );
-const existingSubCategories = computed(() =>
-  Array.from(new Set(products.value.map((p) => p.subCategory))),
-);
 
 const mainCategorySelect = ref("");
-const subCategorySelect = ref("");
 
 const defaultForm = {
   image: "",
   imageFile: null as File | null,
   imagePreview: "",
   name: "",
-  icon: "fas fa-stethoscope",
   description: "",
   fullDescription: "",
   mainCategory: "",
-  subCategory: "",
   price: 0,
   recommended: "",
   age: "Semua",
@@ -352,9 +311,6 @@ const form = ref({ ...defaultForm });
 
 watch(mainCategorySelect, (val) => {
   form.value.mainCategory = val !== "__new__" ? val : "";
-});
-watch(subCategorySelect, (val) => {
-  form.value.subCategory = val !== "__new__" ? val : "";
 });
 
 // ===== IMAGE HANDLING (disamakan dengan AdminArticleForm.vue) =====
@@ -405,11 +361,6 @@ onMounted(() => {
       )
         ? item.mainCategory
         : "__new__";
-      subCategorySelect.value = existingSubCategories.value.includes(
-        item.subCategory,
-      )
-        ? item.subCategory
-        : "__new__";
     }
   }
 });
@@ -428,19 +379,14 @@ const handleSubmit = () => {
   loading.value = true;
 
   setTimeout(() => {
-    const imageUrl =
-      form.value.imagePreview ||
-      form.value.image ||
-      "https://via.placeholder.com/800x400/0d9488/ffffff?text=ASSYIFA+Hospital";
+    const imageUrl = form.value.imagePreview || form.value.image || "";
 
     const payload = {
       name: form.value.name,
-      icon: form.value.icon,
       image: imageUrl,
       description: form.value.description,
       fullDescription: form.value.fullDescription,
       mainCategory: form.value.mainCategory,
-      subCategory: form.value.subCategory,
       price: form.value.price,
       recommended: form.value.recommended,
       age: form.value.age,

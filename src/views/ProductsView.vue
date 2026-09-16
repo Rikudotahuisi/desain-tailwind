@@ -18,26 +18,6 @@
             {{ cat }}
           </button>
         </div>
-
-        <!-- Tab Sub Kategori, mengikuti kategori utama yang dipilih -->
-        <div
-          v-if="subCategoryTabs.length > 1"
-          class="flex flex-wrap gap-2 mt-3"
-        >
-          <button
-            v-for="sub in subCategoryTabs"
-            :key="sub"
-            @click="selectedSubCategory = sub"
-            class="px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 border"
-            :class="[
-              selectedSubCategory === sub
-                ? 'bg-teal-50 border-teal-300 text-teal-700'
-                : 'border-slate-200 text-slate-500 hover:border-teal-200 hover:bg-slate-50',
-            ]"
-          >
-            {{ sub }}
-          </button>
-        </div>
       </div>
     </div>
 
@@ -164,14 +144,10 @@
                 class="relative h-44 bg-gradient-to-br from-teal-50 to-teal-100 overflow-hidden"
               >
                 <img
-                  v-if="item.image"
-                  :src="item.image"
+                  :src="getProductImage(item)"
                   :alt="item.name"
                   class="h-full w-full object-cover"
                 />
-                <div v-else class="flex h-full items-center justify-center">
-                  <i :class="[item.icon, 'text-5xl text-teal-400/60']"></i>
-                </div>
                 <span
                   class="absolute top-3 left-3 bg-white/90 px-2.5 py-1 rounded-full text-xs font-semibold text-teal-600 shadow-sm"
                 >
@@ -220,12 +196,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from "vue";
+import { ref, computed } from "vue";
 import {
   useProducts,
   AGE_OPTIONS,
   GENDER_OPTIONS,
   formatRupiah,
+  getProductImage,
 } from "../composables/useProducts";
 
 const { products } = useProducts();
@@ -234,7 +211,6 @@ const AGE_FILTER_OPTIONS = AGE_OPTIONS.filter((a) => a !== "Semua");
 const GENDER_FILTER_OPTIONS = GENDER_OPTIONS.filter((g) => g !== "Semua");
 
 const selectedMainCategory = ref("Semua");
-const selectedSubCategory = ref("Semua");
 const selectedAges = ref<string[]>([]);
 const selectedGenders = ref<string[]>([]);
 const searchQuery = ref("");
@@ -243,23 +219,6 @@ const sortBy = ref("popular");
 const mainCategoryTabs = computed(() => {
   const unique = Array.from(new Set(products.value.map((p) => p.mainCategory)));
   return ["Semua", ...unique];
-});
-
-// Sub kategori tab mengikuti kategori utama yang aktif
-const subCategoryTabs = computed(() => {
-  const scoped =
-    selectedMainCategory.value === "Semua"
-      ? products.value
-      : products.value.filter(
-          (p) => p.mainCategory === selectedMainCategory.value,
-        );
-  const unique = Array.from(new Set(scoped.map((p) => p.subCategory)));
-  return ["Semua", ...unique];
-});
-
-// Reset sub kategori tiap kali kategori utama berganti
-watch(selectedMainCategory, () => {
-  selectedSubCategory.value = "Semua";
 });
 
 const hasActiveFilters = computed(
@@ -279,19 +238,12 @@ const filteredItems = computed(() => {
     );
   }
 
-  if (selectedSubCategory.value !== "Semua") {
-    filtered = filtered.filter(
-      (item) => item.subCategory === selectedSubCategory.value,
-    );
-  }
-
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase();
     filtered = filtered.filter(
       (item) =>
         item.name.toLowerCase().includes(query) ||
-        item.description.toLowerCase().includes(query) ||
-        item.subCategory.toLowerCase().includes(query),
+        item.description.toLowerCase().includes(query),
     );
   }
 
@@ -326,7 +278,6 @@ const filteredItems = computed(() => {
 const resetFilters = () => {
   searchQuery.value = "";
   selectedMainCategory.value = "Semua";
-  selectedSubCategory.value = "Semua";
   selectedAges.value = [];
   selectedGenders.value = [];
   sortBy.value = "popular";
