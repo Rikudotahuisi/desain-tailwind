@@ -15,6 +15,8 @@ import ProductDetailView from "../views/ProductDetailView.vue";
 import DoctorsView from "../views/DoctorsView.vue";
 import PatientRegistration from "../views/PatientRegistration.vue";
 import QueueBooking from "../views/QueueBooking.vue";
+import Branch from "../views/branch.vue"; 
+import BranchDetail from '../views/branchdetail.vue'
 
 // Admin Pages
 import AdminDashboard from "../views/admin/AdminDashboard.vue";
@@ -100,6 +102,16 @@ const routes = [
         path: "antrian",
         name: "QueueBooking",
         component: QueueBooking,
+      },
+      {
+        path: "branch",
+        name: "branch",
+        component: Branch,
+      },
+      {
+        path: "branch/:id",
+        name: "branch-Detail",
+        component: BranchDetail,
       },
     ],
   },
