@@ -1,18 +1,17 @@
 <template>
   <div>
     <Hero />
-    <MedicalCheckup />
+    <ProductsSection />
     <About />
     <Doctors />
     <Articles />
-    
   </div>
 </template>
 
 <script setup lang="ts">
-import Hero from '../components/Hero.vue'
-import MedicalCheckup from '../components/MedicalCheckup.vue'
-import About from '../components/About.vue'
-import Doctors from '../components/Doctors.vue'
-import Articles from '../components/Articles.vue'
+import Hero from "../components/Hero.vue";
+import ProductsSection from "../components/ProductsSection.vue";
+import About from "../components/About.vue";
+import Doctors from "../components/Doctors.vue";
+import Articles from "../components/Articles.vue";
 </script>

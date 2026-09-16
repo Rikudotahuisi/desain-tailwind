@@ -123,6 +123,7 @@ const menuItems = [
   { path: "/admin/schedules", label: "Jadwal", icon: "fas fa-calendar-check" },
   { path: "/admin/slideshow", label: "Slideshow", icon: "fas fa-images" },
   { path: "/admin/articles", label: "Artikel", icon: "fas fa-newspaper" },
+  { path: "/admin/products", label: "Produk", icon: "fas fa-box-open" },
   { path: "/", label: "Kembali ke Home", icon: "fas fa-home" },
 ];
 

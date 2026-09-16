@@ -10,7 +10,8 @@ import ArticleDetailView from "../views/ArticleDetailView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import LoginView from "../views/LoginView.vue";
 import ContactView from "../views/ContactView.vue";
-import MedicalCheckView from "../views/MedicalCheckupView.vue";
+import ProductsView from "../views/ProductsView.vue";
+import ProductDetailView from "../views/ProductDetailView.vue";
 import DoctorsView from "../views/DoctorsView.vue";
 import PatientRegistration from "../views/PatientRegistration.vue";
 import QueueBooking from "../views/QueueBooking.vue";
@@ -30,6 +31,8 @@ import AdminDoctorForm from "../views/admin/AdminDoctorForm.vue";
 import AdminQueue from "../views/admin/AdminQueue.vue";
 import AdminQueueForm from "../views/admin/AdminQueueForm.vue";
 import AdminBranch from "../views/admin/AdminBranch.vue";
+import AdminProducts from "../views/admin/AdminProducts.vue";
+import AdminProductForm from "../views/admin/AdminProductForm.vue";
 
 const routes = [
   {
@@ -74,9 +77,14 @@ const routes = [
         component: ContactView,
       },
       {
-        path: "medical-checkup",
-        name: "medical-checkup",
-        component: MedicalCheckView,
+        path: "produk",
+        name: "products",
+        component: ProductsView,
+      },
+      {
+        path: "produk/:id",
+        name: "product-detail",
+        component: ProductDetailView,
       },
       {
         path: "doctors",
@@ -199,6 +207,21 @@ const routes = [
         path: "branch",
         name: "admin-branch",
         component: AdminBranch,
+      },
+      {
+        path: "products",
+        name: "admin-products",
+        component: AdminProducts,
+      },
+      {
+        path: "products/create",
+        name: "admin-products-create",
+        component: AdminProductForm,
+      },
+      {
+        path: "products/edit/:id",
+        name: "admin-products-edit",
+        component: AdminProductForm,
       },
     ],
   },
