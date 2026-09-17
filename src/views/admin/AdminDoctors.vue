@@ -4,7 +4,9 @@
     <div class="flex items-center justify-between mb-6">
       <div>
         <h2 class="text-2xl font-bold text-slate-900">Data Dokter</h2>
-        <p class="text-sm text-slate-500">Kelola data dokter di ASSYIFA Hospital</p>
+        <p class="text-sm text-slate-500">
+          Kelola data dokter di ASSYIFA Hospital
+        </p>
       </div>
       <button
         @click="goToCreate"
@@ -17,7 +19,9 @@
     <!-- Search & Filter -->
     <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
       <div class="relative flex-1 max-w-sm">
-        <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+        <i
+          class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"
+        ></i>
         <input
           v-model="searchQuery"
           type="text"
@@ -31,7 +35,9 @@
           class="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
         >
           <option value="">Semua Spesialisasi</option>
-          <option v-for="spec in specialties" :key="spec" :value="spec">{{ spec }}</option>
+          <option v-for="spec in specialties" :key="spec" :value="spec">
+            {{ spec }}
+          </option>
         </select>
         <select
           v-model="filterStatus"
@@ -46,26 +52,48 @@
     </div>
 
     <!-- Table -->
-    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+    <div
+      class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden"
+    >
       <div class="overflow-x-auto">
         <table class="w-full text-sm">
           <thead>
             <tr class="bg-slate-50 border-b border-slate-200">
-              <th class="text-left py-3.5 px-4 font-semibold text-slate-600">Dokter</th>
-              <th class="text-left py-3.5 px-4 font-semibold text-slate-600">Spesialisasi</th>
-              <th class="text-left py-3.5 px-4 font-semibold text-slate-600">Kontak</th>
-              <th class="text-left py-3.5 px-4 font-semibold text-slate-600">Status</th>
-              <th class="text-center py-3.5 px-4 font-semibold text-slate-600">Aksi</th>
+              <th class="text-left py-3.5 px-4 font-semibold text-slate-600">
+                Dokter
+              </th>
+              <th class="text-left py-3.5 px-4 font-semibold text-slate-600">
+                Spesialisasi
+              </th>
+              <th class="text-left py-3.5 px-4 font-semibold text-slate-600">
+                Kontak
+              </th>
+              <th class="text-left py-3.5 px-4 font-semibold text-slate-600">
+                Status
+              </th>
+              <th class="text-center py-3.5 px-4 font-semibold text-slate-600">
+                Aksi
+              </th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="doctor in filteredDoctors" :key="doctor.id" class="border-b border-slate-100 hover:bg-slate-50 transition">
+            <tr
+              v-for="doctor in filteredDoctors"
+              :key="doctor.id"
+              class="border-b border-slate-100 hover:bg-slate-50 transition"
+            >
               <td class="py-3 px-4">
                 <div class="flex items-center gap-3">
-                  <img :src="doctor.image" :alt="doctor.name" class="w-9 h-9 rounded-full object-cover flex-shrink-0" />
+                  <img
+                    :src="doctor.image"
+                    :alt="doctor.name"
+                    class="w-9 h-9 rounded-full object-cover flex-shrink-0"
+                  />
                   <div>
                     <p class="font-medium text-slate-900">{{ doctor.name }}</p>
-                    <p class="text-xs text-slate-500">ID: DOC-{{ String(doctor.id).padStart(4, '0') }}</p>
+                    <p class="text-xs text-slate-500">
+                      ID: DOC-{{ String(doctor.id).padStart(4, "0") }}
+                    </p>
                   </div>
                 </div>
               </td>
@@ -77,15 +105,24 @@
                 <p class="text-xs text-slate-400">{{ doctor.phone }}</p>
               </td>
               <td class="py-3 px-4">
-                <span class="px-2.5 py-1 rounded-full text-xs font-medium" :class="statusClass(doctor.status)">
+                <span
+                  class="px-2.5 py-1 rounded-full text-xs font-medium"
+                  :class="statusClass(doctor.status)"
+                >
                   {{ doctor.status }}
                 </span>
               </td>
               <td class="py-3 px-4 text-center">
-                <button @click="goToEdit(doctor.id)" class="text-teal-600 hover:text-teal-700 mr-2 transition">
+                <button
+                  @click="goToEdit(doctor.id)"
+                  class="text-teal-600 hover:text-teal-700 mr-2 transition"
+                >
                   <i class="fas fa-edit"></i>
                 </button>
-                <button @click="removeDoctor(doctor.id)" class="text-red-500 hover:text-red-600 transition">
+                <button
+                  @click="removeDoctor(doctor.id)"
+                  class="text-red-500 hover:text-red-600 transition"
+                >
                   <i class="fas fa-trash"></i>
                 </button>
               </td>
@@ -99,63 +136,66 @@
           <i class="fas fa-user-md"></i>
         </div>
         <h3 class="text-lg font-semibold text-slate-900">Tidak ada dokter</h3>
-        <p class="text-sm text-slate-500">Belum ada data dokter yang terdaftar</p>
+        <p class="text-sm text-slate-500">
+          Belum ada data dokter yang terdaftar
+        </p>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
-import { useDoctors, statusClass } from '../../composables/useDoctors'
+import { ref, computed } from "vue";
+import { useRouter } from "vue-router";
+import { useDoctors, statusClass } from "../../composables/useDoctors";
 
-const router = useRouter()
-const { doctors, specialties, deleteDoctor } = useDoctors()
+const router = useRouter();
+const { doctors, specialties, deleteDoctor } = useDoctors();
 
 // ===== STATE =====
-const searchQuery = ref('')
-const filterSpecialty = ref('')
-const filterStatus = ref('')
+const searchQuery = ref("");
+const filterSpecialty = ref("");
+const filterStatus = ref("");
 
 // ===== COMPUTED =====
 const filteredDoctors = computed(() => {
-  let filtered = doctors.value
+  let filtered = doctors.value;
 
   if (searchQuery.value) {
-    const query = searchQuery.value.toLowerCase()
-    filtered = filtered.filter(d =>
-      d.name.toLowerCase().includes(query) ||
-      d.specialty.toLowerCase().includes(query) ||
-      d.email.toLowerCase().includes(query)
-    )
+    const query = searchQuery.value.toLowerCase();
+    filtered = filtered.filter(
+      (d) =>
+        d.name.toLowerCase().includes(query) ||
+        d.specialty.toLowerCase().includes(query) ||
+        d.email.toLowerCase().includes(query),
+    );
   }
 
   if (filterSpecialty.value) {
-    filtered = filtered.filter(d => d.specialty === filterSpecialty.value)
+    filtered = filtered.filter((d) => d.specialty === filterSpecialty.value);
   }
 
   if (filterStatus.value) {
-    filtered = filtered.filter(d => d.status === filterStatus.value)
+    filtered = filtered.filter((d) => d.status === filterStatus.value);
   }
 
-  return filtered
-})
+  return filtered;
+});
 
 // ===== NAVIGASI KE HALAMAN BARU (bukan modal) =====
 const goToCreate = () => {
-  router.push({ name: 'admin-doctors-create' })
-}
+  router.push({ name: "admin-doctors-create" });
+};
 
 const goToEdit = (id: number) => {
-  router.push({ name: 'admin-doctors-edit', params: { id } })
-}
+  router.push({ name: "admin-doctors-edit", params: { id } });
+};
 
 // ===== HAPUS DOKTER =====
 const removeDoctor = (id: number) => {
-  if (confirm('Apakah Anda yakin ingin menghapus dokter ini?')) {
-    deleteDoctor(id)
-    alert('🗑️ Dokter berhasil dihapus!')
+  if (confirm("Apakah Anda yakin ingin menghapus dokter ini?")) {
+    deleteDoctor(id);
+    alert("🗑️ Dokter berhasil dihapus!");
   }
-}
+};
 </script>

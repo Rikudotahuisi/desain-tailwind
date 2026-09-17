@@ -4,7 +4,9 @@
     <div class="mb-6 flex items-center justify-between">
       <div>
         <h2 class="text-2xl font-bold text-slate-900">Kelola Slideshow</h2>
-        <p class="text-sm text-slate-500">Atur konten slideshow yang tampil di halaman utama</p>
+        <p class="text-sm text-slate-500">
+          Atur konten slideshow yang tampil di halaman utama
+        </p>
       </div>
       <router-link
         to="/admin/slideshow/create"
@@ -29,24 +31,39 @@
             class="h-full w-full object-cover"
           />
           <div class="absolute top-2 right-2 flex gap-1">
-            <span v-if="slide.active" class="rounded-full bg-green-500 px-2 py-0.5 text-[10px] font-semibold text-white">
+            <span
+              v-if="slide.active"
+              class="rounded-full bg-green-500 px-2 py-0.5 text-[10px] font-semibold text-white"
+            >
               Aktif
             </span>
-            <span v-else class="rounded-full bg-red-500 px-2 py-0.5 text-[10px] font-semibold text-white">
+            <span
+              v-else
+              class="rounded-full bg-red-500 px-2 py-0.5 text-[10px] font-semibold text-white"
+            >
               Nonaktif
             </span>
           </div>
-          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3">
+          <div
+            class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3"
+          >
             <span class="text-xs text-white/80">Slide #{{ index + 1 }}</span>
           </div>
         </div>
 
         <!-- Content -->
         <div class="p-4">
-          <h3 class="line-clamp-1 font-bold text-slate-900">{{ slide.title || 'Tanpa Judul' }}</h3>
-          <p class="mt-1 line-clamp-2 text-sm text-slate-600">{{ slide.description || 'Tanpa Deskripsi' }}</p>
+          <h3 class="line-clamp-1 font-bold text-slate-900">
+            {{ slide.title || "Tanpa Judul" }}
+          </h3>
+          <p class="mt-1 line-clamp-2 text-sm text-slate-600">
+            {{ slide.description || "Tanpa Deskripsi" }}
+          </p>
           <div class="mt-3 flex items-center gap-2 text-xs text-slate-500">
-            <span><i class="far fa-calendar-alt mr-1"></i>{{ slide.createdAt }}</span>
+            <span
+              ><i class="far fa-calendar-alt mr-1"></i
+              >{{ slide.createdAt }}</span
+            >
             <span class="h-1 w-1 rounded-full bg-slate-300"></span>
             <span>{{ slide.buttons.length }} tombol</span>
           </div>
@@ -54,9 +71,14 @@
             <button
               @click="toggleActive(slide.id)"
               class="flex-1 rounded-lg px-3 py-1.5 text-sm font-medium transition"
-              :class="slide.active ? 'bg-amber-50 text-amber-600 hover:bg-amber-100' : 'bg-green-50 text-green-600 hover:bg-green-100'"
+              :class="
+                slide.active
+                  ? 'bg-amber-50 text-amber-600 hover:bg-amber-100'
+                  : 'bg-green-50 text-green-600 hover:bg-green-100'
+              "
             >
-              <i class="fas fa-power-off mr-1"></i>{{ slide.active ? 'Nonaktifkan' : 'Aktifkan' }}
+              <i class="fas fa-power-off mr-1"></i
+              >{{ slide.active ? "Nonaktifkan" : "Aktifkan" }}
             </button>
             <router-link
               :to="`/admin/slideshow/edit/${slide.id}`"
@@ -80,22 +102,24 @@
           <i class="fas fa-images"></i>
         </div>
         <h3 class="text-lg font-semibold text-slate-900">Belum ada slide</h3>
-        <p class="text-sm text-slate-500">Klik tombol "Tambah Slide" untuk menambahkan slide baru</p>
+        <p class="text-sm text-slate-500">
+          Klik tombol "Tambah Slide" untuk menambahkan slide baru
+        </p>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useSlideshow } from '../../composables/useSlideshow'
+import { useSlideshow } from "../../composables/useSlideshow";
 
-const { slides, deleteSlide, toggleActive } = useSlideshow()
+const { slides, deleteSlide, toggleActive } = useSlideshow();
 
 const handleDelete = (id: number) => {
-  if (confirm('Apakah Anda yakin ingin menghapus slide ini?')) {
-    deleteSlide(id)
+  if (confirm("Apakah Anda yakin ingin menghapus slide ini?")) {
+    deleteSlide(id);
   }
-}
+};
 </script>
 
 <style scoped>

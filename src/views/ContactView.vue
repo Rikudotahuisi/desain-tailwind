@@ -1,6 +1,5 @@
 <template>
-  <div class="min-h-screen bg-slate-50" style="padding-top: 95px;">
-    
+  <div class="min-h-screen bg-slate-50" style="padding-top: 95px">
     <!-- ===== CONTENT ===== -->
     <div class="mx-auto max-w-[1400px] px-6 lg:px-16 py-10">
       <div class="flex flex-col gap-8 lg:grid lg:grid-cols-3">
@@ -10,12 +9,16 @@
             <h2 class="text-2xl font-bold text-slate-900 mb-2">
               <i class="fas fa-envelope mr-2 text-teal-500"></i>Kirim Pesan
             </h2>
-            <p class="text-sm text-slate-500 mb-6">Isi form di bawah ini untuk menghubungi kami</p>
+            <p class="text-sm text-slate-500 mb-6">
+              Isi form di bawah ini untuk menghubungi kami
+            </p>
 
             <form @submit.prevent="handleSubmit" class="space-y-5">
               <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
                 <div>
-                  <label class="mb-1.5 block text-sm font-semibold text-slate-700">
+                  <label
+                    class="mb-1.5 block text-sm font-semibold text-slate-700"
+                  >
                     Nama Lengkap <span class="text-red-500">*</span>
                   </label>
                   <input
@@ -27,7 +30,9 @@
                   />
                 </div>
                 <div>
-                  <label class="mb-1.5 block text-sm font-semibold text-slate-700">
+                  <label
+                    class="mb-1.5 block text-sm font-semibold text-slate-700"
+                  >
                     Email <span class="text-red-500">*</span>
                   </label>
                   <input
@@ -41,7 +46,9 @@
               </div>
 
               <div>
-                <label class="mb-1.5 block text-sm font-semibold text-slate-700">
+                <label
+                  class="mb-1.5 block text-sm font-semibold text-slate-700"
+                >
                   Subjek <span class="text-red-500">*</span>
                 </label>
                 <input
@@ -54,7 +61,9 @@
               </div>
 
               <div>
-                <label class="mb-1.5 block text-sm font-semibold text-slate-700">
+                <label
+                  class="mb-1.5 block text-sm font-semibold text-slate-700"
+                >
                   Pesan <span class="text-red-500">*</span>
                 </label>
                 <textarea
@@ -73,7 +82,7 @@
               >
                 <i v-if="loading" class="fas fa-spinner fa-spin mr-2"></i>
                 <i v-else class="fas fa-paper-plane mr-2"></i>
-                {{ loading ? 'Mengirim...' : 'Kirim Pesan' }}
+                {{ loading ? "Mengirim..." : "Kirim Pesan" }}
               </button>
             </form>
           </div>
@@ -84,11 +93,14 @@
           <!-- Contact Info -->
           <div class="bg-white rounded-3xl shadow-lg p-6">
             <h3 class="font-bold text-slate-900 mb-4">
-              <i class="fas fa-info-circle mr-2 text-teal-500"></i>Informasi Kontak
+              <i class="fas fa-info-circle mr-2 text-teal-500"></i>Informasi
+              Kontak
             </h3>
             <div class="space-y-4">
               <div class="flex items-start gap-3">
-                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                <div
+                  class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-600"
+                >
                   <i class="fas fa-phone"></i>
                 </div>
                 <div>
@@ -98,17 +110,23 @@
                 </div>
               </div>
               <div class="flex items-start gap-3">
-                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal-50 text-teal-600">
+                <div
+                  class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal-50 text-teal-600"
+                >
                   <i class="fas fa-envelope"></i>
                 </div>
                 <div>
                   <p class="text-xs text-slate-500">Email</p>
-                  <p class="font-semibold text-slate-900">info@assyifahospital.com</p>
+                  <p class="font-semibold text-slate-900">
+                    info@assyifahospital.com
+                  </p>
                   <p class="text-xs text-slate-400">Balas dalam 24 Jam</p>
                 </div>
               </div>
               <div class="flex items-start gap-3">
-                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-green-50 text-green-600">
+                <div
+                  class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-green-50 text-green-600"
+                >
                   <i class="fab fa-whatsapp"></i>
                 </div>
                 <div>
@@ -118,12 +136,16 @@
                 </div>
               </div>
               <div class="flex items-start gap-3">
-                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber-50 text-amber-600">
+                <div
+                  class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber-50 text-amber-600"
+                >
                   <i class="fas fa-map-marker-alt"></i>
                 </div>
                 <div>
                   <p class="text-xs text-slate-500">Alamat</p>
-                  <p class="font-semibold text-slate-900">Jl. Kesehatan No. 123</p>
+                  <p class="font-semibold text-slate-900">
+                    Jl. Kesehatan No. 123
+                  </p>
                   <p class="text-xs text-slate-400">Jakarta, Indonesia</p>
                 </div>
               </div>
@@ -194,8 +216,8 @@
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260322509!2d106.829561!3d-6.175113!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5d2e764b12d%3A0x3c3e9c1b3c3e9c1b!2sJakarta!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
               width="100%"
               height="100%"
-              style="border:0;"
-              allowfullscreen="true"
+              style="border: 0"
+              allowfullscreen=""
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
               class="w-full h-[400px]"
@@ -207,7 +229,9 @@
       <!-- FAQ Section -->
       <div class="mt-12">
         <div class="text-center mb-10">
-          <span class="text-sm font-semibold tracking-wider text-teal-600 uppercase">
+          <span
+            class="text-sm font-semibold tracking-wider text-teal-600 uppercase"
+          >
             <i class="fas fa-question-circle mr-2"></i>FAQ
           </span>
           <h2 class="mt-2 text-3xl font-bold text-slate-900 lg:text-4xl">
@@ -216,9 +240,15 @@
         </div>
 
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <div v-for="(faq, index) in faqs" :key="index" class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition">
+          <div
+            v-for="(faq, index) in faqs"
+            :key="index"
+            class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition"
+          >
             <div class="flex items-start gap-3">
-              <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal-50 text-teal-600 font-bold text-sm">
+              <div
+                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal-50 text-teal-600 font-bold text-sm"
+              >
                 {{ index + 1 }}
               </div>
               <div>
@@ -234,48 +264,52 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from "vue";
 
 // ===== STATE =====
-const loading = ref(false)
+const loading = ref(false);
 
 // ===== FORM =====
 const form = ref({
-  name: '',
-  email: '',
-  subject: '',
-  message: ''
-})
+  name: "",
+  email: "",
+  subject: "",
+  message: "",
+});
 
 // ===== FAQ =====
 const faqs = [
   {
-    question: 'Bagaimana cara melakukan pendaftaran online?',
-    answer: 'Anda dapat mendaftar melalui halaman Register atau menghubungi kami di 1600-MED.'
+    question: "Bagaimana cara melakukan pendaftaran online?",
+    answer:
+      "Anda dapat mendaftar melalui halaman Register atau menghubungi kami di 1600-MED.",
   },
   {
-    question: 'Apa saja fasilitas yang tersedia di ASSYIFA Hospital?',
-    answer: 'Kami menyediakan fasilitas rawat inap, konsultasi spesialis, laboratorium, farmasi, dan medical check up.'
+    question: "Apa saja fasilitas yang tersedia di ASSYIFA Hospital?",
+    answer:
+      "Kami menyediakan fasilitas rawat inap, konsultasi spesialis, laboratorium, farmasi, dan medical check up.",
   },
   {
-    question: 'Apakah ada layanan darurat 24 jam?',
-    answer: 'Ya, kami menyediakan layanan gawat darurat 24 jam penuh setiap hari.'
+    question: "Apakah ada layanan darurat 24 jam?",
+    answer:
+      "Ya, kami menyediakan layanan gawat darurat 24 jam penuh setiap hari.",
   },
   {
-    question: 'Bagaimana cara melihat jadwal dokter?',
-    answer: 'Anda dapat melihat jadwal dokter di halaman Jadwal Dokter atau menghubungi bagian pendaftaran.'
-  }
-]
+    question: "Bagaimana cara melihat jadwal dokter?",
+    answer:
+      "Anda dapat melihat jadwal dokter di halaman Jadwal Dokter atau menghubungi bagian pendaftaran.",
+  },
+];
 
 // ===== SUBMIT =====
 const handleSubmit = () => {
-  loading.value = true
-  
+  loading.value = true;
+
   setTimeout(() => {
-    console.log('Data Pesan:', form.value)
-    alert('✅ Pesan berhasil dikirim! Kami akan menghubungi Anda segera.')
-    loading.value = false
-    form.value = { name: '', email: '', subject: '', message: '' }
-  }, 1500)
-}
+    console.log("Data Pesan:", form.value);
+    alert("✅ Pesan berhasil dikirim! Kami akan menghubungi Anda segera.");
+    loading.value = false;
+    form.value = { name: "", email: "", subject: "", message: "" };
+  }, 1500);
+};
 </script>

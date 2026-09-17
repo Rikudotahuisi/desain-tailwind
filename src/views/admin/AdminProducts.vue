@@ -1,22 +1,20 @@
 <template>
   <div>
-    <!-- Header -->
     <div class="flex items-center justify-between mb-6">
       <div>
-        <h2 class="text-2xl font-bold text-slate-900">Data Pasien</h2>
+        <h2 class="text-2xl font-bold text-slate-900">Produk</h2>
         <p class="text-sm text-slate-500">
-          Kelola data pasien di ASSYIFA Hospital
+          Kelola semua produk ASSYIFA Hospital
         </p>
       </div>
       <button
-        @click="router.push('/admin/patients/create')"
+        @click="router.push('/admin/products/create')"
         class="rounded-xl bg-teal-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-teal-500/20 transition hover:bg-teal-600 hover:-translate-y-0.5"
       >
-        <i class="fas fa-plus mr-2"></i>Tambah Pasien
+        <i class="fas fa-plus mr-2"></i>Tambah Produk
       </button>
     </div>
 
-    <!-- Search & Filter -->
     <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
       <div class="relative flex-1 max-w-sm">
         <i
@@ -25,24 +23,23 @@
         <input
           v-model="searchQuery"
           type="text"
-          placeholder="Cari pasien..."
+          placeholder="Cari produk..."
           class="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 pl-10 text-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
         />
       </div>
       <div class="flex items-center gap-2">
         <select
-          v-model="filterStatus"
+          v-model="filterMainCategory"
           class="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
         >
-          <option value="">Semua Status</option>
-          <option value="Aktif">Aktif</option>
-          <option value="Nonaktif">Nonaktif</option>
-          <option value="Menunggu">Menunggu</option>
+          <option value="">Semua Kategori Utama</option>
+          <option v-for="cat in mainCategories" :key="cat" :value="cat">
+            {{ cat }}
+          </option>
         </select>
       </div>
     </div>
 
-    <!-- Table -->
     <div
       class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden"
     >
@@ -51,19 +48,19 @@
           <thead>
             <tr class="bg-slate-50 border-b border-slate-200">
               <th class="text-left py-3.5 px-4 font-semibold text-slate-600">
-                Pasien
+                Produk
               </th>
               <th class="text-left py-3.5 px-4 font-semibold text-slate-600">
-                Email
+                Kategori Utama
               </th>
               <th class="text-left py-3.5 px-4 font-semibold text-slate-600">
-                Telepon
+                Umur
               </th>
               <th class="text-left py-3.5 px-4 font-semibold text-slate-600">
-                Tanggal Daftar
+                Gender
               </th>
               <th class="text-left py-3.5 px-4 font-semibold text-slate-600">
-                Status
+                Harga
               </th>
               <th class="text-center py-3.5 px-4 font-semibold text-slate-600">
                 Aksi
@@ -72,48 +69,39 @@
           </thead>
           <tbody>
             <tr
-              v-for="patient in filteredPatients"
-              :key="patient.id"
+              v-for="item in filteredItems"
+              :key="item.id"
               class="border-b border-slate-100 hover:bg-slate-50 transition"
             >
               <td class="py-3 px-4">
                 <div class="flex items-center gap-3">
                   <div
-                    class="w-9 h-9 rounded-full flex items-center justify-center text-white text-xs font-bold"
-                    :class="patient.color"
+                    class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center overflow-hidden flex-shrink-0"
                   >
-                    {{ patient.name.charAt(0) }}
+                    <img
+                      :src="getProductImage(item)"
+                      :alt="item.name"
+                      class="w-full h-full object-cover"
+                    />
                   </div>
-                  <div>
-                    <p class="font-medium text-slate-900">{{ patient.name }}</p>
-                    <p class="text-xs text-slate-500">
-                      ID: PAT-{{ String(patient.id).padStart(4, "0") }}
-                    </p>
-                  </div>
+                  <p class="font-medium text-slate-900">{{ item.name }}</p>
                 </div>
               </td>
-              <td class="py-3 px-4 text-slate-600">{{ patient.email }}</td>
-              <td class="py-3 px-4 text-slate-600">{{ patient.phone }}</td>
-              <td class="py-3 px-4 text-slate-600">
-                {{ patient.registerDate }}
-              </td>
-              <td class="py-3 px-4">
-                <span
-                  class="px-2.5 py-1 rounded-full text-xs font-medium"
-                  :class="statusClass(patient.status)"
-                >
-                  {{ patient.status }}
-                </span>
+              <td class="py-3 px-4 text-slate-600">{{ item.mainCategory }}</td>
+              <td class="py-3 px-4 text-slate-600">{{ item.age }}</td>
+              <td class="py-3 px-4 text-slate-600">{{ item.gender }}</td>
+              <td class="py-3 px-4 font-semibold text-teal-600">
+                {{ formatRupiah(item.price) }}
               </td>
               <td class="py-3 px-4 text-center">
                 <button
-                  @click="router.push(`/admin/patients/edit/${patient.id}`)"
+                  @click="router.push(`/admin/products/edit/${item.id}`)"
                   class="text-teal-600 hover:text-teal-700 mr-2 transition"
                 >
                   <i class="fas fa-edit"></i>
                 </button>
                 <button
-                  @click="handleDelete(patient.id)"
+                  @click="handleDelete(item.id)"
                   class="text-red-500 hover:text-red-600 transition"
                 >
                   <i class="fas fa-trash"></i>
@@ -123,15 +111,12 @@
           </tbody>
         </table>
       </div>
-      <!-- Empty State -->
-      <div v-if="filteredPatients.length === 0" class="py-12 text-center">
+      <div v-if="filteredItems.length === 0" class="py-12 text-center">
         <div class="text-5xl mb-4 text-slate-300">
-          <i class="fas fa-users"></i>
+          <i class="fas fa-box-open"></i>
         </div>
-        <h3 class="text-lg font-semibold text-slate-900">Tidak ada pasien</h3>
-        <p class="text-sm text-slate-500">
-          Belum ada data pasien yang terdaftar
-        </p>
+        <h3 class="text-lg font-semibold text-slate-900">Tidak ada produk</h3>
+        <p class="text-sm text-slate-500">Belum ada produk yang ditambahkan</p>
       </div>
     </div>
   </div>
@@ -140,37 +125,44 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
-import { usePatients, statusClass } from "../../composables/usePatients";
+import {
+  useProducts,
+  formatRupiah,
+  getProductImage,
+} from "../../composables/useProducts";
 
 const router = useRouter();
-const { patients, deletePatient } = usePatients();
+const { products, deleteProduct } = useProducts();
 
 const searchQuery = ref("");
-const filterStatus = ref("");
+const filterMainCategory = ref("");
 
-const filteredPatients = computed(() => {
-  let filtered = patients.value;
+const mainCategories = computed(() =>
+  Array.from(new Set(products.value.map((p) => p.mainCategory))),
+);
+
+const filteredItems = computed(() => {
+  let filtered = products.value;
 
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase();
-    filtered = filtered.filter(
-      (p) =>
-        p.name.toLowerCase().includes(query) ||
-        p.email.toLowerCase().includes(query) ||
-        p.phone.includes(query),
+    filtered = filtered.filter((item) =>
+      item.name.toLowerCase().includes(query),
     );
   }
 
-  if (filterStatus.value) {
-    filtered = filtered.filter((p) => p.status === filterStatus.value);
+  if (filterMainCategory.value) {
+    filtered = filtered.filter(
+      (item) => item.mainCategory === filterMainCategory.value,
+    );
   }
 
   return filtered;
 });
 
 const handleDelete = (id: number) => {
-  if (confirm("Apakah Anda yakin ingin menghapus data pasien ini?")) {
-    deletePatient(id);
+  if (confirm("Apakah Anda yakin ingin menghapus produk ini?")) {
+    deleteProduct(id);
   }
 };
 </script>

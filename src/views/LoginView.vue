@@ -1,18 +1,29 @@
 <template>
-  <div class="min-h-screen bg-white flex" style="padding-top: 85px;">
+  <div class="min-h-screen bg-white flex" style="padding-top: 85px">
     <!-- Left Side - Image -->
-    <div class="hidden lg:flex flex-1 bg-gradient-to-br from-teal-600 to-teal-700 items-center justify-center p-12 relative overflow-hidden">
-      <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
-      <div class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-white/5 blur-2xl"></div>
-      
+    <div
+      class="hidden lg:flex flex-1 bg-gradient-to-br from-teal-600 to-teal-700 items-center justify-center p-12 relative overflow-hidden"
+    >
+      <div
+        class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-white/10 blur-3xl"
+      ></div>
+      <div
+        class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-white/10 blur-3xl"
+      ></div>
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-white/5 blur-2xl"
+      ></div>
+
       <div class="relative z-10 text-center text-white">
-        <div class="w-24 h-24 rounded-3xl bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-8">
+        <div
+          class="w-24 h-24 rounded-3xl bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-8"
+        >
           <i class="fas fa-plus text-4xl font-bold text-white"></i>
         </div>
         <h2 class="text-3xl font-bold mb-4">Welcome Back!</h2>
         <p class="text-white/80 max-w-sm mx-auto leading-relaxed">
-          Sign in to access your account and continue your journey with Assyiffa Hospital.
+          Sign in to access your account and continue your journey with Assyiffa
+          Hospital.
         </p>
         <div class="mt-8 flex items-center justify-center gap-2">
           <span class="w-2 h-2 rounded-full bg-white/60"></span>
@@ -27,10 +38,14 @@
       <div class="w-full max-w-md">
         <div class="mb-8">
           <div class="flex items-center gap-3 mb-6">
-            <div class="w-10 h-10 rounded-xl bg-teal-500 flex items-center justify-center text-white shadow-lg shadow-teal-500/30">
+            <div
+              class="w-10 h-10 rounded-xl bg-teal-500 flex items-center justify-center text-white shadow-lg shadow-teal-500/30"
+            >
               <i class="fas fa-plus text-lg font-bold"></i>
             </div>
-            <span class="text-xl font-bold text-slate-900">Assyiffa Hospital</span>
+            <span class="text-xl font-bold text-slate-900"
+              >Assyiffa Hospital</span
+            >
           </div>
           <h1 class="text-3xl font-bold text-slate-900">Sign in</h1>
           <p class="mt-2 text-sm text-slate-500">Welcome Back</p>
@@ -38,7 +53,9 @@
 
         <form @submit.prevent="handleLogin" class="space-y-5">
           <div>
-            <label class="mb-1.5 block text-sm font-medium text-slate-700">Email</label>
+            <label class="mb-1.5 block text-sm font-medium text-slate-700"
+              >Email</label
+            >
             <input
               v-model="form.email"
               type="email"
@@ -50,8 +67,14 @@
 
           <div>
             <div class="flex items-center justify-between mb-1.5">
-              <label class="block text-sm font-medium text-slate-700">Password</label>
-              <a href="#" class="text-xs font-medium text-teal-600 hover:text-teal-700 hover:underline transition">Forgot password?</a>
+              <label class="block text-sm font-medium text-slate-700"
+                >Password</label
+              >
+              <a
+                href="#"
+                class="text-xs font-medium text-teal-600 hover:text-teal-700 hover:underline transition"
+                >Forgot password?</a
+              >
             </div>
             <div class="relative">
               <input
@@ -66,7 +89,9 @@
                 @click="showPassword = !showPassword"
                 class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-teal-600 transition-colors"
               >
-                <i :class="showPassword ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
+                <i
+                  :class="showPassword ? 'fas fa-eye' : 'fas fa-eye-slash'"
+                ></i>
               </button>
             </div>
           </div>
@@ -87,7 +112,7 @@
           >
             <i v-if="loading" class="fas fa-spinner fa-spin mr-2"></i>
             <i v-else class="fas fa-sign-in-alt mr-2"></i>
-            {{ loading ? 'Processing...' : 'Sign in' }}
+            {{ loading ? "Processing..." : "Sign in" }}
           </button>
         </form>
 
@@ -101,18 +126,24 @@
         </div>
 
         <p class="text-center text-sm text-slate-600">
-          Don't have an account? 
-          <router-link to="/register" class="font-semibold text-teal-600 hover:text-teal-700 hover:underline transition">
+          Don't have an account?
+          <router-link
+            to="/register"
+            class="font-semibold text-teal-600 hover:text-teal-700 hover:underline transition"
+          >
             Sign up
           </router-link>
         </p>
 
         <p class="mt-6 text-center text-xs text-slate-400 leading-relaxed">
-          Join our private network to discover job opportunities and connect with professionals.
+          Join our private network to discover job opportunities and connect
+          with professionals.
         </p>
 
         <!-- Info Akun Dummy -->
-        <div class="mt-4 p-3 bg-amber-50 rounded-xl border border-amber-200 space-y-1">
+        <div
+          class="mt-4 p-3 bg-amber-50 rounded-xl border border-amber-200 space-y-1"
+        >
           <p class="text-xs text-amber-700 text-center">
             <i class="fas fa-info-circle mr-1"></i>
             Admin: admin@gmail.com / admin123
@@ -127,36 +158,40 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuth } from '../composables/useAuth'
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { useAuth } from "../composables/useAuth";
 
-const router = useRouter()
-const { login } = useAuth()
-const loading = ref(false)
-const showPassword = ref(false)
+const router = useRouter();
+const { login } = useAuth();
+const loading = ref(false);
+const showPassword = ref(false);
 
 const form = ref({
-  email: '',
-  password: '',
-  remember: false
-})
+  email: "",
+  password: "",
+  remember: false,
+});
 
 const handleLogin = () => {
-  loading.value = true
+  loading.value = true;
 
   setTimeout(() => {
-    const result = login(form.value.email, form.value.password)
+    const result = login(form.value.email, form.value.password);
 
     if (result.success && result.user) {
-      const isAdmin = result.user.role === 'admin'
-      alert(isAdmin ? '✅ Login berhasil! Selamat datang Admin.' : '✅ Login berhasil! Selamat datang.')
-      loading.value = false
-      router.push(isAdmin ? '/admin' : '/')
+      const isAdmin = result.user.role === "admin";
+      alert(
+        isAdmin
+          ? "✅ Login berhasil! Selamat datang Admin."
+          : "✅ Login berhasil! Selamat datang.",
+      );
+      loading.value = false;
+      router.push(isAdmin ? "/admin" : "/");
     } else {
-      alert(`❌ ${result.message}`)
-      loading.value = false
+      alert(`❌ ${result.message}`);
+      loading.value = false;
     }
-  }, 1500)
-}
+  }, 1500);
+};
 </script>
