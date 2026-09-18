@@ -1,7 +1,6 @@
 <template>
-  <div class="min-h-screen bg-slate-50 pt-[120px] pb-16">
+  <div class="min-h-screen bg-slate-50 pt-[100px] pb-16">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10">
-
       <!-- ========================================== -->
       <!-- HEADER: BREADCRUMB + TOMBOL KEMBALI -->
       <!-- ========================================== -->
@@ -21,7 +20,10 @@
 
             <!-- Produk -->
             <li>
-              <router-link to="/produk" class="transition-colors hover:text-teal-600">
+              <router-link
+                to="/produk"
+                class="transition-colors hover:text-teal-600"
+              >
                 Produk
               </router-link>
             </li>
@@ -31,7 +33,9 @@
 
             <!-- Kategori Produk -->
             <li>
-              <span class="font-medium text-teal-600">{{ item.mainCategory }}</span>
+              <span class="font-medium text-teal-600">{{
+                item.mainCategory
+              }}</span>
             </li>
             <li class="text-slate-300">
               <i class="fas fa-chevron-right text-[10px]"></i>
@@ -45,22 +49,12 @@
             </li>
           </ol>
         </nav>
-
-        <!-- Tombol Kembali -->
-        <button
-          @click="router.push('/produk')"
-          class="inline-flex items-center gap-2 text-sm font-medium text-teal-600 transition hover:text-teal-700"
-        >
-          <i class="fas fa-arrow-left"></i>
-          Kembali ke Daftar Produk
-        </button>
       </header>
 
       <!-- ========================================== -->
       <!-- DETAIL PRODUK -->
       <!-- ========================================== -->
       <div v-if="item" class="overflow-hidden rounded-3xl bg-white shadow-lg">
-        
         <!-- Gambar Produk -->
         <div class="relative h-72 bg-gradient-to-br from-teal-100 to-teal-200">
           <img
@@ -68,14 +62,15 @@
             :alt="item.name"
             class="h-full w-full object-cover"
           />
-          <span class="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1.5 text-xs font-semibold text-teal-600 shadow-sm">
+          <span
+            class="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1.5 text-xs font-semibold text-teal-600 shadow-sm"
+          >
             {{ item.mainCategory }}
           </span>
         </div>
 
         <!-- Body Produk -->
         <div class="space-y-6 p-6 md:p-8">
-          
           <!-- Nama & Deskripsi -->
           <div>
             <h1 class="text-2xl font-bold text-slate-900">{{ item.name }}</h1>
@@ -108,7 +103,9 @@
           </div>
 
           <!-- Harga & Booking -->
-          <div class="flex flex-col items-start justify-between gap-4 border-t border-slate-200 pt-6 sm:flex-row sm:items-center">
+          <div
+            class="flex flex-col items-start justify-between gap-4 border-t border-slate-200 pt-6 sm:flex-row sm:items-center"
+          >
             <div>
               <p class="text-sm text-slate-500">Harga</p>
               <p class="text-3xl font-bold text-teal-600">
@@ -150,17 +147,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import {
   useProducts,
   formatRupiah,
   getProductImage,
-} from '../composables/useProducts'
+} from "../composables/useProducts";
 
-const route = useRoute()
-const router = useRouter()
-const { getProductById } = useProducts()
+const route = useRoute();
+const router = useRouter();
+const { getProductById } = useProducts();
 
-const item = computed(() => getProductById(Number(route.params.id)))
+const item = computed(() => getProductById(Number(route.params.id)));
 </script>
