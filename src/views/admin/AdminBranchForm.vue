@@ -17,12 +17,6 @@ const form = ref({
   hours: '',
 })
 
-/*
-|--------------------------------------------------------------------------
-| Dummy data sementara
-|--------------------------------------------------------------------------
-| Nanti bagian ini bisa diganti dengan data dari useBranch.ts / API.
-*/
 
 const branches = [
   {
@@ -47,11 +41,7 @@ const branches = [
   },
 ]
 
-/*
-|--------------------------------------------------------------------------
-| Jika halaman dibuka untuk EDIT
-|--------------------------------------------------------------------------
-*/
+
 
 if (isEdit.value) {
   const branchId = Number(route.params.id)
@@ -71,11 +61,7 @@ if (isEdit.value) {
   }
 }
 
-/*
-|--------------------------------------------------------------------------
-| Submit
-|--------------------------------------------------------------------------
-*/
+
 
 const handleSubmit = () => {
   if (isEdit.value) {
@@ -99,7 +85,7 @@ const handleCancel = () => {
   <div class="min-h-screen bg-gray-50 p-6 lg:p-8">
     <div class="mx-auto max-w-5xl">
 
-      <!-- HEADER -->
+      
       <div class="mb-8 flex items-center justify-between">
         <div>
           <button
@@ -124,12 +110,12 @@ const handleCancel = () => {
         </div>
       </div>
 
-      <!-- FORM CARD -->
+      
       <div class="rounded-2xl bg-white p-6 shadow-sm lg:p-8">
 
         <form @submit.prevent="handleSubmit">
 
-          <!-- INFORMASI UTAMA -->
+          
           <div class="mb-8">
             <h2 class="text-lg font-semibold text-gray-900">
               Informasi Branch
@@ -142,7 +128,7 @@ const handleCancel = () => {
 
           <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
 
-            <!-- NAMA -->
+            
             <div class="md:col-span-2">
               <label
                 for="name"
@@ -161,7 +147,7 @@ const handleCancel = () => {
               />
             </div>
 
-            <!-- KOTA -->
+    
             <div>
               <label
                 for="city"
@@ -180,7 +166,7 @@ const handleCancel = () => {
               />
             </div>
 
-            <!-- PROVINSI -->
+        
             <div>
               <label
                 for="province"
@@ -199,7 +185,7 @@ const handleCancel = () => {
               />
             </div>
 
-            <!-- ALAMAT -->
+        
             <div class="md:col-span-2">
               <label
                 for="address"
@@ -218,7 +204,7 @@ const handleCancel = () => {
               ></textarea>
             </div>
 
-            <!-- TELEPON -->
+
             <div>
               <label
                 for="phone"
@@ -236,7 +222,6 @@ const handleCancel = () => {
               />
             </div>
 
-            <!-- EMAIL -->
             <div>
               <label
                 for="email"
@@ -254,7 +239,7 @@ const handleCancel = () => {
               />
             </div>
 
-            <!-- JAM OPERASIONAL -->
+        
             <div class="md:col-span-2">
               <label
                 for="hours"
@@ -274,7 +259,7 @@ const handleCancel = () => {
 
           </div>
 
-          <!-- BUTTON -->
+    
           <div class="mt-8 flex justify-end gap-3 border-t border-gray-100 pt-6">
 
             <button
