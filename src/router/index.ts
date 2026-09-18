@@ -16,7 +16,7 @@ import DoctorsView from "../views/DoctorsView.vue";
 import PatientRegistration from "../views/PatientRegistration.vue";
 import QueueBooking from "../views/QueueBooking.vue";
 import Branch from "../views/branch.vue"; 
-import BranchDetail from '../views/branchdetail.vue'
+import BranchDetail from '../views/branchDetail.vue'
 
 // Admin Pages
 import AdminDashboard from "../views/admin/AdminDashboard.vue";
@@ -33,6 +33,7 @@ import AdminDoctorForm from "../views/admin/AdminDoctorForm.vue";
 import AdminQueue from "../views/admin/AdminQueue.vue";
 import AdminQueueForm from "../views/admin/AdminQueueForm.vue";
 import AdminBranch from "../views/admin/AdminBranch.vue";
+import AdminBranchForm from "../views/admin/AdminBranchForm.vue";
 import AdminProducts from "../views/admin/AdminProducts.vue";
 import AdminProductForm from "../views/admin/AdminProductForm.vue";
 
@@ -219,6 +220,16 @@ const routes = [
         path: "branch",
         name: "admin-branch",
         component: AdminBranch,
+      },
+      {
+        path: "branch/create",
+        name: "admin-branch-create",
+        component: AdminBranchForm,
+      },
+      {
+        path: "branch/edit/:id",
+        name: "admin-branch-edit",
+        component: AdminBranchForm,
       },
       {
         path: "products",
