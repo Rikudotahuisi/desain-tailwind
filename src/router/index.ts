@@ -15,11 +15,13 @@ import ProductDetailView from "../views/ProductDetailView.vue";
 import DoctorsView from "../views/DoctorsView.vue";
 import PatientRegistration from "../views/PatientRegistration.vue";
 import QueueBooking from "../views/QueueBooking.vue";
+import BookingView from "../views/BookingView.vue"; // 👈 TAMBAHAN BARU
 import Branch from "../views/branch.vue";
 import BranchDetail from "../views/branchDetail.vue";
 
 // 404 Pages
 import NotFoundView from "../views/NotFoundView.vue";
+
 // Admin Pages
 import AdminDashboard from "../views/admin/AdminDashboard.vue";
 import AdminPatients from "../views/admin/AdminPatients.vue";
@@ -106,6 +108,14 @@ const routes = [
         name: "QueueBooking",
         component: QueueBooking,
       },
+
+      // 👇 RUTE BARU UNTUK BOOKING DOKTER
+      {
+        path: "booking/:doctorId?",
+        name: "booking",
+        component: BookingView,
+      },
+
       {
         path: "branch",
         name: "branch",
@@ -275,4 +285,5 @@ router.beforeEach((to, from, next) => {
 
   next();
 });
+
 export default router;
