@@ -5,6 +5,7 @@
     <About />
     <Doctors />
     <Articles />
+    <BranchMap />
   </div>
 </template>
 
@@ -14,4 +15,5 @@ import ProductsSection from "../components/ProductsSection.vue";
 import About from "../components/About.vue";
 import Doctors from "../components/Doctors.vue";
 import Articles from "../components/Articles.vue";
+import BranchMap from "../components/BranchMap.vue";
 </script>
