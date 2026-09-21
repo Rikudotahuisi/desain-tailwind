@@ -18,6 +18,8 @@ import QueueBooking from "../views/QueueBooking.vue";
 import Branch from "../views/branch.vue";
 import BranchDetail from "../views/branchDetail.vue";
 
+// 404 Pages
+import NotFoundView from "../views/NotFoundView.vue";
 // Admin Pages
 import AdminDashboard from "../views/admin/AdminDashboard.vue";
 import AdminPatients from "../views/admin/AdminPatients.vue";
@@ -246,6 +248,10 @@ const routes = [
         component: AdminProductForm,
       },
     ],
+  },
+  {
+    path: "/:catchAll(.*)",
+    component: NotFoundView,
   },
 ];
 
