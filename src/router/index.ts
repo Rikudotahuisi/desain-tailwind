@@ -15,7 +15,7 @@ import ProductDetailView from "../views/ProductDetailView.vue";
 import DoctorsView from "../views/DoctorsView.vue";
 import PatientRegistration from "../views/PatientRegistration.vue";
 import QueueBooking from "../views/QueueBooking.vue";
-import BookingView from "../views/BookingView.vue"; // 👈 TAMBAHAN BARU
+
 import Branch from "../views/branch.vue";
 import BranchDetail from "../views/branchDetail.vue";
 
@@ -107,13 +107,6 @@ const routes = [
         path: "antrian",
         name: "QueueBooking",
         component: QueueBooking,
-      },
-
-      // 👇 RUTE BARU UNTUK BOOKING DOKTER
-      {
-        path: "booking/:doctorId?",
-        name: "booking",
-        component: BookingView,
       },
 
       {

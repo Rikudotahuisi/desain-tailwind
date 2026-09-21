@@ -1,6 +1,15 @@
 <template>
   <div class="min-h-screen bg-slate-50" style="padding-top: 160px">
     <div class="mx-auto max-w-[1400px] px-6 lg:px-16 -mt-6 pb-16">
+      <!-- <div class="flex items-center gap-2 mb-6">
+      <label class="flex items-center gap-2 cursor-pointer select-none whitespace-nowrap ml-auto">
+          <span class="text-sm font-medium text-slate-600">Praktik hari ini saja</span>
+          <span class="relative inline-flex h-6 w-11 items-center rounded-full transition" :class="onlyToday ? 'bg-teal-500' : 'bg-slate-200'" @click="onlyToday = !onlyToday">
+          <span class="inline-block h-4 w-4 transform rounded-full bg-white transition" :class="onlyToday ? 'translate-x-6' : 'translate-x-1'"></span>
+          </span>
+        </label>
+      </div> -->
+
       <!-- Toolbar: Filter Spesialisasi + Toggle Hari Ini -->
       <div
         class="mb-6 flex flex-col gap-4 border-slate-100 lg:flex-row lg:items-center lg:justify-between"
@@ -100,7 +109,7 @@
             </span>
           </div>
 
-          <!-- Weekly Strip (Sen-Min) -->
+          <!-- Weekly Strip (Sen-Min), hari ini di-highlight, sumber dari useSchedule -->
           <div class="mt-4 grid grid-cols-7 gap-1">
             <div
               v-for="d in DAYS"
@@ -168,14 +177,12 @@
 
           <!-- Actions -->
           <div class="mt-4 flex gap-2">
-            <!-- ✅ TOMBOL BOOKING — DIPERBAIKI -->
             <router-link
-              :to="{ name: 'booking', params: { doctorId: doctor.id } }"
+              :to="{ name: 'QueueBooking', query: { doctorId: doctor.id } }"
               class="flex-1 rounded-full bg-teal-500 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-teal-600 hover:-translate-y-0.5"
             >
               <i class="fas fa-calendar-check mr-1.5"></i>Booking
             </router-link>
-
             <a
               :href="`https://wa.me/6281234567890?text=${encodeURIComponent('Halo, saya ingin bertanya jadwal ' + doctor.name)}`"
               target="_blank"
@@ -234,13 +241,13 @@ onUnmounted(() => {
 });
 
 const currentTime = computed(() =>
-  now.value.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" })
+  now.value.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }),
 );
 
-// Nama hari ini (Senin..Minggu)
+// Nama hari ini (Senin..Minggu) — dipakai buat highlight & badge
 const today = todayDayName();
 
-// ===== HELPERS =====
+// ===== HELPERS: jadwal bersumber dari useSchedule (Admin > Jadwal) =====
 function timeToMinutes(t: string) {
   const [h, m] = t.split(":").map(Number);
   return h * 60 + m;
@@ -259,7 +266,7 @@ const isPracticingNow = (doctor: Doctor) => {
   return todaySchedules.some(
     (s) =>
       nowMinutes >= timeToMinutes(s.startTime) &&
-      nowMinutes <= timeToMinutes(s.endTime)
+      nowMinutes <= timeToMinutes(s.endTime),
   );
 };
 
@@ -273,7 +280,7 @@ const todaySlot = (doctor: Doctor) => {
     todaySchedules.find(
       (s) =>
         nowMinutes >= timeToMinutes(s.startTime) &&
-        nowMinutes <= timeToMinutes(s.endTime)
+        nowMinutes <= timeToMinutes(s.endTime),
     ) || todaySchedules[0]
   );
 };
@@ -284,6 +291,7 @@ const toggleExpand = (id: number) => {
   } else {
     expandedIds.value.add(id);
   }
+  // trigger reactivity untuk Set
   expandedIds.value = new Set(expandedIds.value);
 };
 
@@ -300,7 +308,7 @@ const filteredDoctors = computed(() => {
     filtered = filtered.filter(
       (d) =>
         d.name.toLowerCase().includes(query) ||
-        d.specialty.toLowerCase().includes(query)
+        d.specialty.toLowerCase().includes(query),
     );
   }
 

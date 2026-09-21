@@ -285,8 +285,10 @@
 
 <script setup lang="ts">
 import { onMounted } from "vue";
+import { useRoute } from "vue-router";
 import { useQueue } from "../composables/useQueue";
 import { useAuth } from "../composables/useAuth";
+import { useDoctors } from "../composables/useDoctors";
 
 const steps = ["Poliklinik", "Dokter", "Jadwal", "Data Diri", "Selesai"];
 
@@ -313,6 +315,8 @@ const {
 } = useQueue();
 
 const { isLoggedIn, currentUser } = useAuth();
+const { getDoctorById } = useDoctors();
+const route = useRoute();
 
 onMounted(() => {
   // Kalau sudah login, isi otomatis nama akun dari data user
@@ -320,6 +324,17 @@ onMounted(() => {
     patientData.value.nama = currentUser.value.name;
     patientData.value.email = currentUser.value.email;
     patientData.value.noHp = currentUser.value.phone || "";
+  }
+
+  // Kalau datang dari tombol "Booking" di halaman Dokter (bawa ?doctorId=..),
+  // langsung pilihkan poliklinik + dokternya, lompat ke Tahap 3 (Pilih Jadwal)
+  const doctorId = Number(route.query.doctorId);
+  if (doctorId) {
+    const doctor = getDoctorById(doctorId);
+    if (doctor) {
+      selectPoliklinik(doctor.specialty);
+      selectDoctor(doctor.id);
+    }
   }
 });
 
