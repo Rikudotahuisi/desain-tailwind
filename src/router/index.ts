@@ -15,8 +15,8 @@ import ProductDetailView from "../views/ProductDetailView.vue";
 import DoctorsView from "../views/DoctorsView.vue";
 import PatientRegistration from "../views/PatientRegistration.vue";
 import QueueBooking from "../views/QueueBooking.vue";
-import Branch from "../views/branch.vue"; 
-import BranchDetail from '../views/branchDetail.vue'
+import Branch from "../views/branch.vue";
+import BranchDetail from "../views/branchDetail.vue";
 
 // Admin Pages
 import AdminDashboard from "../views/admin/AdminDashboard.vue";
@@ -119,7 +119,6 @@ const routes = [
   {
     path: "/admin",
     component: AdminLayout,
-    meta: { requiresAuth: true },
     children: [
       {
         path: "",
@@ -256,23 +255,11 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const isAdmin = localStorage.getItem("isAdmin") === "true";
   const isUser = localStorage.getItem("user") !== null;
-  const isLoggedIn = isAdmin || isUser;
-
-  // Admin guard
-  if (to.meta.requiresAuth) {
-    if (isAdmin) {
-      next();
-    } else {
-      next("/login");
-    }
-    return;
-  }
 
   // Guest guard (mencegah akses login/register jika sudah login)
   if (to.meta.guestOnly) {
-    if (isLoggedIn) {
+    if (isUser) {
       next("/");
     } else {
       next();
@@ -282,5 +269,4 @@ router.beforeEach((to, from, next) => {
 
   next();
 });
-
 export default router;
