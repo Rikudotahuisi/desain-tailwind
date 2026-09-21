@@ -2,7 +2,7 @@
   <section class="bg-white py-16">
     <div class="mx-auto max-w-[1400px] px-6 lg:px-10">
 
-      <!-- HEADER -->
+      
       <div class="mb-10 text-center">
         <span
           class="mb-3 inline-block rounded-full bg-teal-50 px-4 py-2 text-sm font-semibold text-teal-600"
@@ -20,16 +20,16 @@
         </p>
       </div>
 
-      <!-- MAP + LIST -->
+     
       <div class="grid gap-6 lg:grid-cols-[1fr_380px]">
 
-        <!-- MAP -->
+    
         <div
           id="branch-map"
           class="h-[500px] w-full overflow-hidden rounded-3xl border border-gray-200 shadow-sm"
         ></div>
 
-        <!-- DAFTAR CABANG -->
+        
         <div class="space-y-4">
 
           <div
@@ -40,11 +40,11 @@
 
             <div class="flex items-start gap-4">
 
-              <!-- ICON -->
+              
               <div
                 class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-teal-50 text-xl text-teal-600"
               >
-                📍
+                
               </div>
 
               <div class="min-w-0 flex-1">
@@ -59,11 +59,11 @@
 
                 <div class="mt-3 space-y-1 text-sm">
                   <p class="text-gray-600">
-                    🕐 {{ branch.hours }}
+                     {{ branch.hours }}
                   </p>
 
                   <p class="text-gray-600">
-                    📞 {{ branch.phone }}
+                     {{ branch.phone }}
                   </p>
                 </div>
 
@@ -115,7 +115,7 @@ const branches = [
     phone: "0451-123456",
     hours: "Senin - Minggu, 08:00 - 21:00",
 
-    // GANTI dengan koordinat lokasi rumah sakit yang sebenarnya
+    
     lat: -0.8917,
     lng: 119.8707,
 
@@ -131,7 +131,7 @@ const branches = [
     phone: "0411-654321",
     hours: "Senin - Minggu, 08:00 - 21:00",
 
-    // GANTI dengan koordinat sebenarnya
+    
     lat: -5.1750,
     lng: 119.4238,
 
@@ -147,7 +147,7 @@ const branches = [
     phone: "021-987654",
     hours: "Senin - Minggu, 08:00 - 21:00",
 
-    // GANTI dengan koordinat sebenarnya
+    
     lat: -6.2088,
     lng: 106.8456,
 
@@ -157,18 +157,18 @@ const branches = [
 ];
 
 onMounted(() => {
-  // Membuat peta
+  
   map = L.map("branch-map").setView(
     [-2.5, 118.0],
     5
   );
 
-  // OpenStreetMap
+  
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "&copy; OpenStreetMap contributors",
   }).addTo(map);
 
-  // Marker setiap cabang
+  
   branches.forEach((branch) => {
     if (!map) return;
 
@@ -184,11 +184,11 @@ onMounted(() => {
         </h3>
 
         <p style="font-size: 13px; margin-bottom: 5px;">
-          📍 ${branch.address}
+           ${branch.address}
         </p>
 
         <p style="font-size: 13px; margin-bottom: 8px;">
-          🕐 ${branch.hours}
+           ${branch.hours}
         </p>
 
         <a
