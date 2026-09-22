@@ -19,8 +19,9 @@ import QueueBooking from "../views/QueueBooking.vue";
 import Branch from "../views/branch.vue";
 import BranchDetail from "../views/branchDetail.vue";
 
-// 404 Pages
+// Error Pages
 import NotFoundView from "../views/NotFoundView.vue";
+import Error403View from "../views/Error403View.vue"; // ⬅️ TAMBAHAN
 
 // Admin Pages
 import AdminDashboard from "../views/admin/AdminDashboard.vue";
@@ -108,7 +109,6 @@ const routes = [
         name: "QueueBooking",
         component: QueueBooking,
       },
-
       {
         path: "branch",
         name: "branch",
@@ -252,6 +252,14 @@ const routes = [
       },
     ],
   },
+
+  // ⬇️⬇️⬇️ TAMBAHAN: ROUTE 403 (di atas catchAll) ⬇️⬇️⬇️
+  {
+    path: "/403",
+    name: "forbidden",
+    component: Error403View,
+  },
+
   {
     path: "/:catchAll(.*)",
     component: NotFoundView,
