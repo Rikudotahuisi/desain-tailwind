@@ -21,6 +21,8 @@ import BranchDetail from "../views/branchDetail.vue";
 
 // 404 Pages
 import NotFoundView from "../views/NotFoundView.vue";
+// 503 Pages
+import ErrorCodeView from "../views/ErrorCodeView.vue";
 
 // Admin Pages
 import AdminDashboard from "../views/admin/AdminDashboard.vue";
@@ -256,6 +258,11 @@ const routes = [
     path: "/:catchAll(.*)",
     component: NotFoundView,
   },
+  {
+    path: "/503",
+    component: ErrorCodeView,
+  },
+
 ];
 
 const router = createRouter({
