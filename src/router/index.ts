@@ -19,10 +19,10 @@ import QueueBooking from "../views/QueueBooking.vue";
 import Branch from "../views/branch.vue";
 import BranchDetail from "../views/branchDetail.vue";
 
-// 404 Pages
+// Error Pages
 import NotFoundView from "../views/NotFoundView.vue";
-// 503 Pages
 import ErrorCodeView from "../views/ErrorCodeView.vue";
+import Error403View from "../views/Error403View.vue";
 
 // Admin Pages
 import AdminDashboard from "../views/admin/AdminDashboard.vue";
@@ -110,7 +110,6 @@ const routes = [
         name: "QueueBooking",
         component: QueueBooking,
       },
-
       {
         path: "branch",
         name: "branch",
@@ -254,6 +253,7 @@ const routes = [
       },
     ],
   },
+
   {
     path: "/:catchAll(.*)",
     component: NotFoundView,
@@ -262,7 +262,11 @@ const routes = [
     path: "/503",
     component: ErrorCodeView,
   },
-
+  {
+    path: "/403",
+    name: "forbidden",
+    component: Error403View,
+  },
 ];
 
 const router = createRouter({
