@@ -3,7 +3,7 @@
   <div
     class="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-950 px-6"
   >
-    <!-- Background accents -->
+    
     <div class="pointer-events-none absolute inset-0">
       <div
         class="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-teal-500/20 blur-3xl"
@@ -14,27 +14,27 @@
       ></div>
     </div>
 
-    <!-- Content -->
+    
     <div class="relative z-10 mx-auto w-full max-w-[560px] text-center">
-      <!-- Error Code -->
+     
       <p
         class="text-8xl font-bold leading-none tracking-[-0.03em] text-white sm:text-9xl"
       >
         503
       </p>
 
-      <!-- Title -->
+      
       <h1 class="mt-6 text-2xl font-semibold text-white sm:text-3xl">
         Server Sedang Down
       </h1>
 
-      <!-- Description -->
+     
       <p class="mx-auto mt-4 max-w-md text-sm leading-6 text-slate-400 sm:text-base">
         Maaf, server sedang mengalami gangguan atau dalam proses maintenance.
         Silakan coba kembali beberapa saat lagi.
       </p>
 
-      <!-- Button -->
+     
       <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
         <button
           @click="reloadPage"
