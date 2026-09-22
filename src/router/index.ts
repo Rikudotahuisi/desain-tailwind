@@ -1,10 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
-
-// ==================== Layouts ====================
 import DefaultLayout from "../layouts/DefaultLayout.vue";
 import AdminLayout from "../layouts/AdminLayout.vue";
 
-// ==================== Public Pages ====================
+// Public Pages
 import HomeView from "../views/HomeView.vue";
 import AboutView from "../views/AboutView.vue";
 import ArticlesView from "../views/ArticlesView.vue";
@@ -17,14 +15,16 @@ import ProductDetailView from "../views/ProductDetailView.vue";
 import DoctorsView from "../views/DoctorsView.vue";
 import PatientRegistration from "../views/PatientRegistration.vue";
 import QueueBooking from "../views/QueueBooking.vue";
+
 import Branch from "../views/branch.vue";
 import BranchDetail from "../views/branchDetail.vue";
 
-// ==================== Error Pages ====================
+// Error Pages
 import NotFoundView from "../views/NotFoundView.vue";
+import ErrorCodeView from "../views/ErrorCodeView.vue";
 import Error403View from "../views/Error403View.vue";
 
-// ==================== Admin Pages ====================
+// Admin Pages
 import AdminDashboard from "../views/admin/AdminDashboard.vue";
 import AdminPatients from "../views/admin/AdminPatients.vue";
 import AdminPatientForm from "../views/admin/AdminPatientForm.vue";
@@ -44,7 +44,6 @@ import AdminProducts from "../views/admin/AdminProducts.vue";
 import AdminProductForm from "../views/admin/AdminProductForm.vue";
 
 const routes = [
-  // ==================== Public Routes ====================
   {
     path: "/",
     component: DefaultLayout,
@@ -123,8 +122,6 @@ const routes = [
       },
     ],
   },
-
-  // ==================== Admin Routes ====================
   {
     path: "/admin",
     component: AdminLayout,
@@ -257,18 +254,18 @@ const routes = [
     ],
   },
 
- 
+  {
+    path: "/:catchAll(.*)",
+    component: NotFoundView,
+  },
+  {
+    path: "/503",
+    component: ErrorCodeView,
+  },
   {
     path: "/403",
     name: "forbidden",
     component: Error403View,
-  },
-
-
-  {
-    path: "/:catchAll(.*)",
-    name: "not-found",
-    component: NotFoundView,
   },
 ];
 

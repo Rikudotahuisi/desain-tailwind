@@ -3,6 +3,7 @@
     <Hero />
     <ProductsSection />
     <About />
+    <template></template>
     <Doctors />
     <Articles />
     <BranchMap />
