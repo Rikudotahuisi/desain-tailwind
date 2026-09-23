@@ -116,6 +116,7 @@ const sidebarOpen = ref(false);
 
 const menuItems = [
   { path: "/admin", label: "Dashboard", icon: "fas fa-th-large" },
+  { path: "/admin/chatbot", label: "Chatbot", icon: "fas fa-comments" },
   { path: "/admin/patients", label: "Pasien", icon: "fas fa-users" },
   { path: "/admin/antrian", label: "Antrian", icon: "fas fa-list" },
   { path: "/admin/branch", label: "Cabang", icon: "fas fa-building" },

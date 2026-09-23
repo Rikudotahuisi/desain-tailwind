@@ -42,6 +42,8 @@ import AdminBranch from "../views/admin/AdminBranch.vue";
 import AdminBranchForm from "../views/admin/AdminBranchForm.vue";
 import AdminProducts from "../views/admin/AdminProducts.vue";
 import AdminProductForm from "../views/admin/AdminProductForm.vue";
+import AdminChatbot from "../views/admin/AdminChatbot.vue";
+import AdminChatbotForm from "../views/admin/AdminChatbotForm.vue";
 
 const routes = [
   {
@@ -250,6 +252,21 @@ const routes = [
         path: "products/edit/:id",
         name: "admin-products-edit",
         component: AdminProductForm,
+      },
+      {
+        path: "chatbot",
+        name: "admin-chatbot",
+        component: AdminChatbot,
+      },
+      {
+        path: "chatbot/create",
+        name: "admin-chatbot-create",
+        component: AdminChatbotForm,
+      },
+      {
+        path: "chatbot/edit/:id",
+        name: "admin-chatbot-edit",
+        component: AdminChatbotForm,
       },
     ],
   },
