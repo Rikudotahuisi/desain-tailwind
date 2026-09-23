@@ -136,7 +136,7 @@
           <!-- Action Buttons -->
           <div class="mt-4 flex gap-2">
             <router-link
-              :to="{ name: 'register' }"
+              :to="{ name: 'QueueBooking', query: { doctorId: doctor.id } }"
               class="flex-1 rounded-full bg-teal-500 px-4 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-teal-600 hover:-translate-y-0.5"
             >
               <i class="fas fa-calendar-check mr-2"></i>Booking
