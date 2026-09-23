@@ -26,6 +26,16 @@
           untuk hidup yang lebih sehat.
         </p>
       </div>
+      <!-- lihat produk lainnya -->
+      <div class="mb-12 text-right">
+        <router-link
+          to="/produk"
+          class="inline-flex items-center gap-2 rounded-full bg-teal-500 px-6 py-3 font-semibold text-white transition hover:bg-teal-600 hover:-translate-y-0.5"
+        >
+          <i class="fas fa-product-hunt"></i>
+          Semua Produk
+        </router-link>
+      </div>
 
       <!-- Jika belum ada produk -->
       <div v-if="checkupProducts.length === 0" class="py-12 text-center">

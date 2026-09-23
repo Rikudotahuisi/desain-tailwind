@@ -1,76 +1,28 @@
-<script setup lang="ts">
-import { ref } from "vue";
-
-const branches = ref([
-  {
-    id: 1,
-    name: "Assyifa Hospital Palu",
-    city: "Palu",
-    province: "Sulawesi Tengah",
-    address: "Jl. Ahmad Yani No. 25, Palu",
-    phone: "0451-123456",
-    email: "palu@assyifahospital.com",
-    hours: "Senin - Minggu, 08:00 - 21:00",
-    image:
-      "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1200&q=80",
-    maps: "https://maps.google.com/",
-  },
-  {
-    id: 2,
-    name: "Assyifa Hospital Makassar",
-    city: "Makassar",
-    province: "Sulawesi Selatan",
-    address: "Jl. Sultan Alauddin No. 10, Makassar",
-    phone: "0411-654321",
-    email: "makassar@assyifahospital.com",
-    hours: "Senin - Minggu, 08:00 - 21:00",
-    image:
-      "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80",
-    maps: "https://maps.google.com/",
-  },
-  {
-    id: 3,
-    name: "Assyifa Hospital Jakarta",
-    city: "Jakarta",
-    province: "DKI Jakarta",
-    address: "Jl. Sudirman No. 100, Jakarta",
-    phone: "021-987654",
-    email: "jakarta@assyifahospital.com",
-    hours: "Senin - Minggu, 08:00 - 21:00",
-    image:
-      "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=1200&q=80",
-    maps: "https://maps.google.com/",
-  },
-]);
-</script>
-
 <template>
   <div class="min-h-screen bg-slate-50" style="padding-top: 80px">
     <!-- CABANG -->
     <section id="cabang" class="mx-auto max-w-7xl px-6 py-16 lg:px-10">
-      <!-- SECTION HEADER -->
-      <div class="mb-10 text-center">
-        <span
-          class="text-sm font-semibold uppercase tracking-[0.2em] text-teal-600"
-        >
-          Lokasi Kami
-        </span>
+      <!-- PETA LOKASI SEMUA CABANG -->
+      <div class="mb-12">
+        <div class="mb-8 text-center">
+          <h2 class="text-3xl font-bold text-slate-900">Peta Lokasi Cabang</h2>
 
-        <h2
-          class="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl"
-        >
-          Cabang Assyifa Hospital
-        </h2>
+          <p class="mx-auto mt-3 max-w-2xl text-slate-500">
+            Lihat sebaran seluruh cabang Assyifa Hospital dan pilih yang paling
+            dekat dengan Anda.
+          </p>
+        </div>
 
-        <p class="mx-auto mt-4 max-w-2xl text-slate-600">
-          Pilih cabang Assyifa Hospital yang ingin Anda kunjungi.
-        </p>
+        <div
+          id="branch-page-map"
+          class="relative isolate z-0 h-[420px] w-full overflow-hidden rounded-3xl border border-slate-200 shadow-sm"
+        ></div>
       </div>
 
       <!-- SEARCH -->
       <div class="mx-auto mb-10 max-w-xl">
         <div
-          class="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm"
+          class="flex items-right gap-3 rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm"
         >
           <svg
             class="h-5 w-5 text-slate-400"
@@ -87,6 +39,7 @@ const branches = ref([
           </svg>
 
           <input
+            v-model="search"
             type="text"
             placeholder="Cari cabang atau kota..."
             class="w-full border-0 bg-transparent text-sm text-slate-700 outline-none focus:ring-0"
@@ -97,7 +50,7 @@ const branches = ref([
       <!-- CARD CABANG -->
       <div class="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
         <article
-          v-for="branch in branches"
+          v-for="branch in filteredBranches"
           :key="branch.id"
           class="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
         >
@@ -113,15 +66,6 @@ const branches = ref([
             <div
               class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"
             ></div>
-
-            <!-- CITY -->
-            <div class="absolute bottom-4 left-5">
-              <span
-                class="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-800 backdrop-blur"
-              >
-                {{ branch.city }}
-              </span>
-            </div>
           </div>
 
           <!-- CONTENT -->
@@ -229,7 +173,7 @@ const branches = ref([
             <!-- BUTTON -->
             <div class="mt-6 flex gap-3">
               <a
-                :href="branch.maps"
+                :href="getMapsUrl(branch)"
                 target="_blank"
                 class="flex-1 rounded-xl bg-teal-500 px-4 py-3 text-center text-sm font-semibold text-white transition hover:bg-teal-600"
               >
@@ -245,30 +189,91 @@ const branches = ref([
             </div>
           </div>
         </article>
-      </div>
-    </section>
 
-    <!-- CTA -->
-    <section class="mx-auto max-w-7xl px-6 pb-16 lg:px-10">
-      <div
-        class="overflow-hidden rounded-3xl bg-gradient-to-r from-teal-600 to-teal-500 px-8 py-12 text-center shadow-xl sm:px-12"
-      >
-        <h2 class="text-3xl font-bold text-white">
-          Butuh Informasi Lebih Lanjut?
-        </h2>
-
-        <p class="mx-auto mt-3 max-w-2xl text-teal-50">
-          Hubungi kami untuk mendapatkan informasi mengenai layanan, jadwal
-          dokter, dan fasilitas di setiap cabang.
-        </p>
-
-        <a
-          href="/kontak"
-          class="mt-7 inline-flex rounded-full bg-white px-7 py-3.5 font-semibold text-teal-700 transition hover:bg-slate-100"
+        <p
+          v-if="filteredBranches.length === 0"
+          class="col-span-full py-16 text-center text-slate-400"
         >
-          Hubungi Kami
-        </a>
+          Cabang tidak ditemukan.
+        </p>
       </div>
     </section>
   </div>
 </template>
+<script setup lang="ts">
+import { onBeforeUnmount, onMounted, watch } from "vue";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import { useBranch } from "../composables/useBranch";
+
+const { branches, search, filteredBranches, getMapsUrl } = useBranch();
+
+// ===== PETA SEMUA CABANG =====
+let map: L.Map | null = null;
+let markers: L.Marker[] = [];
+
+const renderMarkers = () => {
+  if (!map) return;
+
+  // Bersihkan marker lama sebelum digambar ulang (misalnya setelah admin
+  // menambah/mengedit/menghapus cabang)
+  markers.forEach((marker) => marker.remove());
+  markers = [];
+
+  branches.value.forEach((branch) => {
+    if (!map) return;
+
+    const marker = L.marker([branch.lat, branch.lng]).addTo(map);
+
+    marker.bindPopup(`
+      <div style="min-width: 200px">
+        <h3 style="font-weight: 700; margin-bottom: 6px;">
+          ${branch.name}
+        </h3>
+
+        <p style="font-size: 13px; margin-bottom: 8px;">
+          ${branch.address}
+        </p>
+
+        <a
+          href="${getMapsUrl(branch)}"
+          target="_blank"
+          style="
+            display: inline-block;
+            background: #14b8a6;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            text-decoration: none;
+          "
+        >
+          Buka Google Maps
+        </a>
+      </div>
+    `);
+
+    markers.push(marker);
+  });
+};
+
+onMounted(() => {
+  map = L.map("branch-page-map").setView([-2.5, 118.0], 5);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "&copy; OpenStreetMap contributors",
+  }).addTo(map);
+
+  renderMarkers();
+});
+
+// Ikut update kalau data cabang berubah (mis. lewat AdminBranch)
+watch(branches, renderMarkers, { deep: true });
+
+onBeforeUnmount(() => {
+  if (map) {
+    map.remove();
+    map = null;
+  }
+});
+</script>

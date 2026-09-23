@@ -4,11 +4,7 @@ import { useBranch } from "../../composables/useBranch";
 
 const router = useRouter();
 
-const {
-  search,
-  filteredBranches,
-  deleteBranch,
-} = useBranch();
+const { search, filteredBranches, deleteBranch } = useBranch();
 
 const openAddForm = () => {
   router.push("/admin/branch/create");
@@ -118,7 +114,7 @@ const removeBranch = (id: number) => {
               </th>
 
               <th class="px-4 py-4 text-left font-semibold text-slate-600">
-                Kota
+                Kota / Provinsi
               </th>
 
               <th class="px-4 py-4 text-left font-semibold text-slate-600">
@@ -147,8 +143,15 @@ const removeBranch = (id: number) => {
             >
               <td class="px-4 py-4">
                 <div class="flex items-center gap-3">
+                  <img
+                    v-if="branch.image"
+                    :src="branch.image"
+                    :alt="branch.name"
+                    class="h-10 w-10 shrink-0 rounded-xl object-cover"
+                  />
                   <div
-                    class="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-teal-600"
+                    v-else
+                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal-50 text-teal-600"
                   >
                     <i class="fas fa-hospital"></i>
                   </div>
@@ -166,7 +169,8 @@ const removeBranch = (id: number) => {
               </td>
 
               <td class="px-4 py-4 text-slate-600">
-                {{ branch.city }}
+                <p>{{ branch.city }}</p>
+                <p class="text-xs text-slate-400">{{ branch.province }}</p>
               </td>
 
               <td class="max-w-xs px-4 py-4 text-slate-600">
@@ -216,6 +220,5 @@ const removeBranch = (id: number) => {
         </table>
       </div>
     </div>
-
   </div>
 </template>
