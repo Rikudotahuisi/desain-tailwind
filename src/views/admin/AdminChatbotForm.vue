@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6 max-w-2xl">
+  <div>
     <div class="mb-6 flex items-center gap-3">
       <router-link
         to="/admin/chatbot"

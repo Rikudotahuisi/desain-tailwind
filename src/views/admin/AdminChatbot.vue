@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6">
+  <div>
     <!-- Header -->
     <div class="mb-6 flex items-center justify-between">
       <div>
