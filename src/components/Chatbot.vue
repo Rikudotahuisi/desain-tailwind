@@ -137,7 +137,7 @@
 
       <!-- ===== QUICK REPLY ===== -->
       <div
-        v-if="showQuickReplies && !isTyping"
+        v-if="showQuickReplies && !isTyping && quickReplies.length"
         class="flex-shrink-0 border-t border-slate-100 bg-white px-4 py-3"
       >
         <div class="flex flex-wrap gap-2">
@@ -186,7 +186,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, nextTick, onMounted, onBeforeUnmount } from "vue";
+import {
+  ref,
+  computed,
+  watch,
+  nextTick,
+  onMounted,
+  onBeforeUnmount,
+} from "vue";
+import { useChatbot } from "../composables/useChatbot";
+
+const { findResponse, getQuickReplies } = useChatbot();
 
 // ===== STATE =====
 const isOpen = ref(false);
@@ -218,93 +228,20 @@ const formatMessage = (text: string) => {
 const messages = ref<Message[]>([
   {
     sender: "bot",
-    text: "Halo! Selamat datang di **Assyifa Hospital**.\n\nSaya siap membantu Anda dengan:\n- Medical Check Up\n- Jadwal Dokter\n- Informasi Rumah Sakit\n- Booking Online\n- Kontak Kami\n\nSilakan pilih menu di bawah atau ketik pertanyaan Anda.",
+    text: "Halo! Selamat datang di **Assyifa Hospital**.\n\nSaya siap membantu Anda. Silakan pilih menu di bawah atau ketik pertanyaan Anda.",
   },
 ]);
 
-// ===== QUICK REPLIES =====
-const quickReplies = ref([
-  "Medical Check Up",
-  "Jadwal Dokter",
-  "Tentang Kami",
-  "Booking Online",
-  "Kontak",
-]);
+// ===== QUICK REPLIES (dinamis dari dashboard) =====
+const quickReplies = computed(() => getQuickReplies());
 
-// ===== RESPONSES SESUAI MENU =====
-const getResponseByMenu = (message: string): string => {
-  const lowerMsg = message.toLowerCase();
-
-  // Medical Check Up
-  if (
-    lowerMsg.includes("medical check up") ||
-    lowerMsg.includes("mcu") ||
-    lowerMsg.includes("check up")
-  ) {
-    return `**Medical Check Up**\n\nKami menyediakan berbagai paket MCU:\n\n- **Paket Basic** - Rp 350.000\n  Pemeriksaan kesehatan dasar\n\n- **Paket Premium** - Rp 750.000\n  Pemeriksaan lengkap + EKG & Rontgen\n\n- **Paket Executive** - Rp 1.250.000\n  Pemeriksaan menyeluruh + konsultasi spesialis\n\nHubungi 1600-MED untuk booking.\n\n[Lihat Paket MCU](https://www.whatdokewh.com/)`;
-  }
-
-  // Jadwal Dokter
-  if (
-    lowerMsg.includes("jadwal dokter") ||
-    lowerMsg.includes("dokter") ||
-    lowerMsg.includes("spesialis")
-  ) {
-    return `**Jadwal Dokter Spesialis**\n\nDokter tersedia di berbagai bidang:\n\n- **Jantung** - dr. Andi Pratama, Sp.JP\n  Rating 4.9 (12 tahun pengalaman)\n\n- **Kandungan** - dr. Siti Rahayu, Sp.OG\n  Rating 4.8 (10 tahun pengalaman)\n\n- **Anak** - dr. Maya Sari, Sp.A\n  Rating 4.9 (8 tahun pengalaman)\n\nLihat jadwal lengkap di halaman "Jadwal Dokter".\n\n[Jadwal Dokter](https://www.whatdokewh.com/)`;
-  }
-
-  // Tentang Kami
-  if (
-    lowerMsg.includes("tentang kami") ||
-    lowerMsg.includes("rumah sakit") ||
-    lowerMsg.includes("assyifa")
-  ) {
-    return `**Assyifa Hospital**\n\nAssyifa Hospital adalah fasilitas kesehatan terdaftar di bawah perusahaan **"Kodungallur Assyifa Pvt Ltd"**.\n\n**Komitmen Kami:**\n- 20+ tahun pengalaman\n- Layanan kesehatan ekonomis & komprehensif\n- 50.000+ pasien puas\n- 20+ spesialisasi\n\nJl. Kesehatan No. 123, Jakarta\nTelepon: 1600-MED (633)\n\n[Tentang Kami](https://www.whatdokewh.com/)\n[Activate Pad Web Dorkers](https://www.whatdokewh.com/)\n[Go to Settings to activate Windows.](https://www.whatdokewh.com/)`;
-  }
-
-  // Booking Online
-  if (
-    lowerMsg.includes("booking") ||
-    lowerMsg.includes("daftar") ||
-    lowerMsg.includes("janji")
-  ) {
-    return `**Booking Online**\n\nUntuk melakukan booking, Anda dapat:\n\n1. Klik tombol **"Booking"** di halaman yang tersedia\n2. Hubungi kami di **1600-MED**\n3. Chat WhatsApp: **0812-3456-7890**\n4. Datang langsung ke **Jl. Kesehatan No. 123, Jakarta**\n\nKami siap membantu Anda 24 jam!\n\n[Booking Online](https://www.whatdokewh.com/)`;
-  }
-
-  // Kontak
-  if (
-    lowerMsg.includes("kontak") ||
-    lowerMsg.includes("telepon") ||
-    lowerMsg.includes("hubungi") ||
-    lowerMsg.includes("call")
-  ) {
-    return `**Kontak Assyifa Hospital**\n\nJl. Kesehatan No. 123, Jakarta\nTelepon: 1600-MED (633)\nEmail: info@assyifahospital.com\nBuka: 24 Jam Nonstop\n\nChat WhatsApp: 0812-3456-7890\n\n[Website](https://www.whatdokewh.com/)\n[Medical Check Up](https://www.whatdokewh.com/)\n[Activate Pad Web Dorkers](https://www.whatdokewh.com/)`;
-  }
-
-  // Halo / Salam
-  if (
-    lowerMsg.includes("halo") ||
-    lowerMsg.includes("hai") ||
-    lowerMsg.includes("hi") ||
-    lowerMsg.includes("selamat") ||
-    lowerMsg.includes("pagi") ||
-    lowerMsg.includes("siang")
-  ) {
-    return `Halo! Selamat datang di **Assyifa Hospital**.\n\nAda yang bisa saya bantu hari ini?\n\nSilakan pilih menu di atas atau tanyakan apa saja tentang layanan kami.`;
-  }
-
-  // Terima kasih
-  if (
-    lowerMsg.includes("terima kasih") ||
-    lowerMsg.includes("makasih") ||
-    lowerMsg.includes("thank") ||
-    lowerMsg.includes("thanks")
-  ) {
-    return `Sama-sama! Senang bisa membantu Anda.\n\nJika ada pertanyaan lain, jangan ragu untuk bertanya ya. Semoga sehat selalu!`;
-  }
-
-  // Default - tidak dikenal
-  return `Maaf, saya belum memahami pertanyaan Anda.\n\n**Silakan pilih salah satu menu di atas** atau hubungi kami di **1600-MED** untuk bantuan lebih lanjut.\n\nMenu yang tersedia:\n- Medical Check Up\n- Jadwal Dokter\n- Tentang Kami\n- Booking Online\n- Kontak`;
+// ===== FALLBACK (jika keyword tidak dikenali) =====
+const getDefaultFallback = (): string => {
+  const menu = getQuickReplies();
+  const menuList = menu.length ? menu.map((m) => `- ${m}`).join("\n") : "";
+  return `Maaf, saya belum memahami pertanyaan Anda.\n\n**Silakan pilih salah satu menu di bawah** atau hubungi kami di **1600-MED** untuk bantuan lebih lanjut.${
+    menuList ? `\n\nMenu yang tersedia:\n${menuList}` : ""
+  }`;
 };
 
 // ===== FUNCTIONS =====
@@ -371,7 +308,8 @@ const sendMessage = () => {
   setTimeout(
     () => {
       isTyping.value = false;
-      const response = getResponseByMenu(text);
+      // Deteksi keyword dari data yang diatur di dashboard admin
+      const response = findResponse(text) ?? getDefaultFallback();
       messages.value.push({
         sender: "bot",
         text: response,

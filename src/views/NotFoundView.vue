@@ -25,6 +25,10 @@
         Halaman Tidak Ditemukan
       </h1>
 
+      <p class="mt-3 text-sm text-slate-400 sm:text-base">
+        Maaf, halaman yang kamu cari tidak ditemukan.
+      </p>
+
       <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
         <router-link
           to="/"
